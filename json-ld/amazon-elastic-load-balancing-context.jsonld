@@ -1,0 +1,118 @@
+{
+  "@context": {
+    "@version": 1.1,
+    "elb": "https://docs.aws.amazon.com/elasticloadbalancing/latest/APIReference/",
+    "schema": "https://schema.org/",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "dcterms": "http://purl.org/dc/terms/",
+
+    "LoadBalancer": {
+      "@id": "elb:LoadBalancer",
+      "@context": {
+        "loadBalancerArn": "elb:loadBalancerArn",
+        "loadBalancerName": "schema:name",
+        "dnsName": "elb:dnsName",
+        "canonicalHostedZoneId": "elb:canonicalHostedZoneId",
+        "createdTime": {
+          "@id": "dcterms:created",
+          "@type": "xsd:dateTime"
+        },
+        "scheme": "elb:scheme",
+        "vpcId": "elb:vpcId",
+        "state": "elb:state",
+        "type": "elb:type",
+        "ipAddressType": "elb:ipAddressType",
+        "availabilityZones": {
+          "@id": "elb:availabilityZones",
+          "@container": "@set"
+        },
+        "securityGroups": {
+          "@id": "elb:securityGroups",
+          "@container": "@set"
+        },
+        "tags": {
+          "@id": "elb:tags",
+          "@container": "@set"
+        }
+      }
+    },
+
+    "TargetGroup": {
+      "@id": "elb:TargetGroup",
+      "@context": {
+        "targetGroupArn": "elb:targetGroupArn",
+        "targetGroupName": "schema:name",
+        "protocol": "elb:protocol",
+        "port": "elb:port",
+        "vpcId": "elb:vpcId",
+        "targetType": "elb:targetType",
+        "healthCheckEnabled": "elb:healthCheckEnabled",
+        "healthCheckProtocol": "elb:healthCheckProtocol",
+        "healthCheckPort": "elb:healthCheckPort",
+        "healthCheckPath": "elb:healthCheckPath",
+        "healthyThresholdCount": "elb:healthyThresholdCount",
+        "unhealthyThresholdCount": "elb:unhealthyThresholdCount",
+        "loadBalancerArns": {
+          "@id": "elb:loadBalancerArns",
+          "@container": "@set"
+        }
+      }
+    },
+
+    "Listener": {
+      "@id": "elb:Listener",
+      "@context": {
+        "listenerArn": "elb:listenerArn",
+        "loadBalancerArn": "elb:loadBalancerArn",
+        "protocol": "elb:protocol",
+        "port": "elb:port",
+        "sslPolicy": "elb:sslPolicy",
+        "certificates": {
+          "@id": "elb:certificates",
+          "@container": "@set"
+        },
+        "defaultActions": {
+          "@id": "elb:defaultActions",
+          "@container": "@set"
+        }
+      }
+    },
+
+    "Rule": {
+      "@id": "elb:Rule",
+      "@context": {
+        "ruleArn": "elb:ruleArn",
+        "priority": "elb:priority",
+        "isDefault": "elb:isDefault",
+        "conditions": {
+          "@id": "elb:conditions",
+          "@container": "@set"
+        },
+        "actions": {
+          "@id": "elb:actions",
+          "@container": "@set"
+        }
+      }
+    },
+
+    "Action": {
+      "@id": "elb:Action",
+      "@context": {
+        "type": "elb:actionType",
+        "targetGroupArn": "elb:targetGroupArn",
+        "order": "elb:order",
+        "redirectConfig": "elb:redirectConfig",
+        "fixedResponseConfig": "elb:fixedResponseConfig"
+      }
+    },
+
+    "TargetHealth": {
+      "@id": "elb:TargetHealth",
+      "@context": {
+        "state": "elb:state",
+        "reason": "elb:reason",
+        "description": "schema:description"
+      }
+    }
+  }
+}

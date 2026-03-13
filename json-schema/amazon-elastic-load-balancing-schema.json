@@ -1,0 +1,265 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api-evangelist.com/schemas/amazon/elasticloadbalancing/load-balancer.json",
+  "title": "Amazon Elastic Load Balancer",
+  "description": "Represents an Amazon Elastic Load Balancer with its associated configuration, state, listeners, and target groups.",
+  "type": "object",
+  "required": ["loadBalancerArn", "loadBalancerName", "type", "scheme"],
+  "properties": {
+    "loadBalancerArn": {
+      "type": "string",
+      "description": "The Amazon Resource Name (ARN) of the load balancer",
+      "pattern": "^arn:aws:elasticloadbalancing:[a-z0-9-]+:[0-9]{12}:loadbalancer/.+$"
+    },
+    "loadBalancerName": {
+      "type": "string",
+      "description": "The name of the load balancer",
+      "maxLength": 32
+    },
+    "dnsName": {
+      "type": "string",
+      "description": "The public DNS name of the load balancer"
+    },
+    "canonicalHostedZoneId": {
+      "type": "string",
+      "description": "The ID of the Amazon Route 53 hosted zone associated with the load balancer"
+    },
+    "createdTime": {
+      "type": "string",
+      "format": "date-time",
+      "description": "The date and time the load balancer was created"
+    },
+    "scheme": {
+      "type": "string",
+      "description": "The scheme of the load balancer (internet-facing or internal)",
+      "enum": ["internet-facing", "internal"]
+    },
+    "vpcId": {
+      "type": "string",
+      "description": "The ID of the VPC for the load balancer",
+      "pattern": "^vpc-[a-f0-9]{8,17}$"
+    },
+    "state": {
+      "$ref": "#/$defs/LoadBalancerState"
+    },
+    "type": {
+      "type": "string",
+      "description": "The type of load balancer",
+      "enum": ["application", "network", "gateway"]
+    },
+    "availabilityZones": {
+      "type": "array",
+      "description": "The Availability Zones for the load balancer",
+      "items": {
+        "$ref": "#/$defs/AvailabilityZone"
+      }
+    },
+    "securityGroups": {
+      "type": "array",
+      "description": "The IDs of the security groups for the load balancer",
+      "items": {
+        "type": "string",
+        "pattern": "^sg-[a-f0-9]{8,17}$"
+      }
+    },
+    "ipAddressType": {
+      "type": "string",
+      "description": "The type of IP addresses used by the subnets for the load balancer",
+      "enum": ["ipv4", "dualstack"]
+    },
+    "customerOwnedIpv4Pool": {
+      "type": "string",
+      "description": "The ID of the customer-owned address pool"
+    },
+    "listeners": {
+      "type": "array",
+      "description": "The listeners configured for the load balancer",
+      "items": {
+        "$ref": "#/$defs/Listener"
+      }
+    },
+    "targetGroups": {
+      "type": "array",
+      "description": "The target groups associated with the load balancer",
+      "items": {
+        "$ref": "#/$defs/TargetGroup"
+      }
+    },
+    "tags": {
+      "type": "array",
+      "description": "Tags assigned to the load balancer",
+      "items": {
+        "$ref": "#/$defs/Tag"
+      }
+    }
+  },
+  "$defs": {
+    "LoadBalancerState": {
+      "type": "object",
+      "description": "Describes the state of a load balancer",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "The state code",
+          "enum": ["active", "provisioning", "active_impaired", "failed"]
+        },
+        "reason": {
+          "type": "string",
+          "description": "A description of the state"
+        }
+      }
+    },
+    "AvailabilityZone": {
+      "type": "object",
+      "description": "Describes an Availability Zone for a load balancer",
+      "properties": {
+        "zoneName": {
+          "type": "string",
+          "description": "The name of the Availability Zone"
+        },
+        "subnetId": {
+          "type": "string",
+          "description": "The ID of the subnet",
+          "pattern": "^subnet-[a-f0-9]{8,17}$"
+        },
+        "loadBalancerAddresses": {
+          "type": "array",
+          "description": "The static IP addresses associated with the load balancer",
+          "items": {
+            "type": "object",
+            "properties": {
+              "ipAddress": {
+                "type": "string",
+                "description": "The static IP address"
+              },
+              "allocationId": {
+                "type": "string",
+                "description": "The allocation ID of the Elastic IP address"
+              }
+            }
+          }
+        }
+      }
+    },
+    "Listener": {
+      "type": "object",
+      "description": "Describes a listener for a load balancer",
+      "properties": {
+        "listenerArn": {
+          "type": "string",
+          "description": "The ARN of the listener"
+        },
+        "protocol": {
+          "type": "string",
+          "description": "The protocol for connections from clients",
+          "enum": ["HTTP", "HTTPS", "TCP", "TLS", "UDP", "TCP_UDP", "GENEVE"]
+        },
+        "port": {
+          "type": "integer",
+          "description": "The port on which the load balancer is listening",
+          "minimum": 1,
+          "maximum": 65535
+        },
+        "sslPolicy": {
+          "type": "string",
+          "description": "The security policy that defines supported protocols and ciphers"
+        },
+        "certificates": {
+          "type": "array",
+          "description": "The SSL server certificates",
+          "items": {
+            "type": "object",
+            "properties": {
+              "certificateArn": {
+                "type": "string",
+                "description": "The ARN of the certificate"
+              }
+            }
+          }
+        },
+        "defaultActions": {
+          "type": "array",
+          "description": "The default actions for the listener",
+          "items": {
+            "$ref": "#/$defs/Action"
+          }
+        }
+      }
+    },
+    "TargetGroup": {
+      "type": "object",
+      "description": "Describes a target group",
+      "properties": {
+        "targetGroupArn": {
+          "type": "string",
+          "description": "The ARN of the target group"
+        },
+        "targetGroupName": {
+          "type": "string",
+          "description": "The name of the target group"
+        },
+        "protocol": {
+          "type": "string",
+          "description": "The protocol to use for routing traffic to the targets",
+          "enum": ["HTTP", "HTTPS", "TCP", "TLS", "UDP", "TCP_UDP", "GENEVE"]
+        },
+        "port": {
+          "type": "integer",
+          "description": "The port on which the targets are listening",
+          "minimum": 1,
+          "maximum": 65535
+        },
+        "targetType": {
+          "type": "string",
+          "description": "The type of target",
+          "enum": ["instance", "ip", "lambda", "alb"]
+        },
+        "healthCheckEnabled": {
+          "type": "boolean",
+          "description": "Whether health checks are enabled"
+        },
+        "healthCheckPath": {
+          "type": "string",
+          "description": "The destination for health checks"
+        }
+      }
+    },
+    "Action": {
+      "type": "object",
+      "description": "Describes an action for a listener or rule",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "The type of action",
+          "enum": ["forward", "authenticate-oidc", "authenticate-cognito", "redirect", "fixed-response"]
+        },
+        "targetGroupArn": {
+          "type": "string",
+          "description": "The ARN of the target group"
+        },
+        "order": {
+          "type": "integer",
+          "description": "The order for the action"
+        }
+      },
+      "required": ["type"]
+    },
+    "Tag": {
+      "type": "object",
+      "description": "Describes a resource tag",
+      "properties": {
+        "key": {
+          "type": "string",
+          "description": "The key of the tag",
+          "maxLength": 128
+        },
+        "value": {
+          "type": "string",
+          "description": "The value of the tag",
+          "maxLength": 256
+        }
+      },
+      "required": ["key"]
+    }
+  }
+}
