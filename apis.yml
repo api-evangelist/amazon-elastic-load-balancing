@@ -1,4 +1,4 @@
-name: Amazon Elastic Load Balancing API
+name: Amazon Elastic Load Balancing
 description: Amazon Elastic Load Balancing automatically distributes incoming application traffic across multiple targets, such as Amazon EC2 instances, containers, IP addresses, and Lambda functions, ensuring high availability and fault tolerance for your applications.
 image: https://a0.awsstatic.com/libra-css/images/logos/aws_logo_smile_1200x630.png
 url: https://aws.amazon.com/elasticloadbalancing/
