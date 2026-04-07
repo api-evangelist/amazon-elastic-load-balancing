@@ -23,16 +23,16 @@ servers:
         default: us-east-1
         description: AWS Region
 tags:
+  - name: Listeners
+    description: Operations for creating and managing listeners
   - name: Load Balancers
     description: Operations for creating and managing load balancers
+  - name: Rules
+    description: Operations for creating and managing listener rules
   - name: Target Groups
     description: Operations for creating and managing target groups
   - name: Targets
     description: Operations for registering and deregistering targets
-  - name: Listeners
-    description: Operations for creating and managing listeners
-  - name: Rules
-    description: Operations for creating and managing listener rules
 security:
   - sigv4Auth: []
 paths:
