@@ -39,7 +39,7 @@ paths:
   /?Action=CreateLoadBalancer:
     get:
       operationId: createLoadBalancer
-      summary: Create a load balancer
+      summary: Amazon Elastic Load Balancing Create a load balancer
       description: >-
         Creates an Application Load Balancer, Network Load Balancer, or
         Gateway Load Balancer. For more information, see the User Guide
@@ -116,7 +116,7 @@ paths:
   /?Action=DescribeLoadBalancers:
     get:
       operationId: describeLoadBalancers
-      summary: Describe load balancers
+      summary: Amazon Elastic Load Balancing Describe load balancers
       description: >-
         Describes the specified load balancers or all of your load
         balancers. Returns information about load balancer ARN, DNS name,
@@ -164,7 +164,7 @@ paths:
   /?Action=DeleteLoadBalancer:
     get:
       operationId: deleteLoadBalancer
-      summary: Delete a load balancer
+      summary: Amazon Elastic Load Balancing Delete a load balancer
       description: >-
         Deletes the specified Application Load Balancer, Network Load
         Balancer, or Gateway Load Balancer. Deleting a load balancer also
@@ -188,7 +188,7 @@ paths:
   /?Action=ModifyLoadBalancerAttributes:
     get:
       operationId: modifyLoadBalancerAttributes
-      summary: Modify load balancer attributes
+      summary: Amazon Elastic Load Balancing Modify load balancer attributes
       description: >-
         Modifies the specified attributes of the specified Application
         Load Balancer, Network Load Balancer, or Gateway Load Balancer.
@@ -221,7 +221,7 @@ paths:
   /?Action=CreateTargetGroup:
     get:
       operationId: createTargetGroup
-      summary: Create a target group
+      summary: Amazon Elastic Load Balancing Create a target group
       description: >-
         Creates a target group. Target groups are used to route requests
         to one or more registered targets. After creating a target group,
@@ -307,7 +307,7 @@ paths:
   /?Action=DescribeTargetGroups:
     get:
       operationId: describeTargetGroups
-      summary: Describe target groups
+      summary: Amazon Elastic Load Balancing Describe target groups
       description: >-
         Describes the specified target groups or all of your target groups.
         By default, all target groups are described. Alternatively, you
@@ -360,7 +360,7 @@ paths:
   /?Action=RegisterTargets:
     get:
       operationId: registerTargets
-      summary: Register targets with a target group
+      summary: Amazon Elastic Load Balancing Register targets with a target group
       description: >-
         Registers the specified targets with the specified target group.
         If the target is an EC2 instance, it must be in the running state
@@ -402,7 +402,7 @@ paths:
   /?Action=DeregisterTargets:
     get:
       operationId: deregisterTargets
-      summary: Deregister targets from a target group
+      summary: Amazon Elastic Load Balancing Deregister targets from a target group
       description: >-
         Deregisters the specified targets from the specified target group.
         After the targets are deregistered, they no longer receive traffic
@@ -437,7 +437,7 @@ paths:
   /?Action=DescribeTargetHealth:
     get:
       operationId: describeTargetHealth
-      summary: Describe target health
+      summary: Amazon Elastic Load Balancing Describe target health
       description: >-
         Describes the health of the specified targets or all of your
         targets registered with the specified target group.
@@ -474,7 +474,7 @@ paths:
   /?Action=CreateListener:
     get:
       operationId: createListener
-      summary: Create a listener
+      summary: Amazon Elastic Load Balancing Create a listener
       description: >-
         Creates a listener for the specified Application Load Balancer,
         Network Load Balancer, or Gateway Load Balancer. Listeners check
@@ -546,7 +546,7 @@ paths:
   /?Action=DescribeListeners:
     get:
       operationId: describeListeners
-      summary: Describe listeners
+      summary: Amazon Elastic Load Balancing Describe listeners
       description: >-
         Describes the specified listeners or the listeners for the
         specified Application Load Balancer, Network Load Balancer, or
@@ -592,7 +592,7 @@ paths:
   /?Action=CreateRule:
     get:
       operationId: createRule
-      summary: Create a listener rule
+      summary: Amazon Elastic Load Balancing Create a listener rule
       description: >-
         Creates a rule for the specified listener. The listener must be
         associated with an Application Load Balancer. Rules are evaluated
@@ -657,7 +657,7 @@ paths:
   /?Action=DescribeRules:
     get:
       operationId: describeRules
-      summary: Describe listener rules
+      summary: Amazon Elastic Load Balancing Describe listener rules
       description: >-
         Describes the specified rules or the rules for the specified
         listener. You must specify either a listener or one or more rules.
