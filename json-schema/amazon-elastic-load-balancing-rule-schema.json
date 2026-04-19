@@ -1,0 +1,48 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amazon-elastic-load-balancing/refs/heads/main/json-schema/amazon-elastic-load-balancing-rule-schema.json",
+  "title": "Rule",
+  "description": "Describes a rule",
+  "type": "object",
+  "properties": {
+    "ruleArn": {
+      "type": "string",
+      "description": "The Amazon Resource Name (ARN) of the rule"
+    },
+    "priority": {
+      "type": "string",
+      "description": "The priority of the rule"
+    },
+    "conditions": {
+      "type": "array",
+      "description": "The conditions for the rule",
+      "items": {
+        "type": "object",
+        "properties": {
+          "field": {
+            "type": "string",
+            "description": "The name of the field"
+          },
+          "values": {
+            "type": "array",
+            "description": "The condition values",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "actions": {
+      "type": "array",
+      "description": "The actions for the rule",
+      "items": {
+        "$ref": "#/components/schemas/Action"
+      }
+    },
+    "isDefault": {
+      "type": "boolean",
+      "description": "Whether this is the default rule"
+    }
+  }
+}

@@ -1,0 +1,56 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amazon-elastic-load-balancing/refs/heads/main/json-schema/amazon-elastic-load-balancing-describe-target-health-response-schema.json",
+  "title": "DescribeTargetHealthResponse",
+  "description": "Response from the DescribeTargetHealth action",
+  "type": "object",
+  "properties": {
+    "targetHealthDescriptions": {
+      "type": "array",
+      "description": "Information about the health of the targets",
+      "items": {
+        "type": "object",
+        "properties": {
+          "target": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string",
+                "description": "The ID of the target"
+              },
+              "port": {
+                "type": "integer",
+                "description": "The port on which the target is listening"
+              }
+            }
+          },
+          "targetHealth": {
+            "type": "object",
+            "properties": {
+              "state": {
+                "type": "string",
+                "description": "The state of the target",
+                "enum": [
+                  "initial",
+                  "healthy",
+                  "unhealthy",
+                  "unused",
+                  "draining",
+                  "unavailable"
+                ]
+              },
+              "reason": {
+                "type": "string",
+                "description": "The reason code"
+              },
+              "description": {
+                "type": "string",
+                "description": "A description of the target health"
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

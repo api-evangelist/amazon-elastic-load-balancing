@@ -1,0 +1,20 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amazon-elastic-load-balancing/refs/heads/main/json-schema/amazon-elastic-load-balancing-describe-target-groups-response-schema.json",
+  "title": "DescribeTargetGroupsResponse",
+  "description": "Response from the DescribeTargetGroups action",
+  "type": "object",
+  "properties": {
+    "targetGroups": {
+      "type": "array",
+      "description": "Information about the target groups",
+      "items": {
+        "$ref": "#/components/schemas/TargetGroup"
+      }
+    },
+    "nextMarker": {
+      "type": "string",
+      "description": "The marker to use for the next set of results"
+    }
+  }
+}

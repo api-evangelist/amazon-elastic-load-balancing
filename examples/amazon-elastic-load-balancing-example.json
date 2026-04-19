@@ -1,0 +1,21 @@
+{
+  "loadBalancerArn": "example-value",
+  "loadBalancerName": "example-value",
+  "dnsName": "example-value",
+  "canonicalHostedZoneId": "example-value",
+  "createdTime": "2025-01-15T00:00:00Z",
+  "scheme": "internet-facing",
+  "vpcId": "example-value",
+  "state": {
+    "code": "failed",
+    "reason": "example-value"
+  },
+  "type": "network",
+  "availabilityZones": [
+    {
+      "zoneName": {},
+      "subnetId": {},
+      "loadBalancerAddresses": {}
+    }
+  ]
+}

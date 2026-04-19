@@ -1,0 +1,80 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amazon-elastic-load-balancing/refs/heads/main/json-schema/amazon-elastic-load-balancing-action-schema.json",
+  "title": "Action",
+  "description": "Describes an action for a listener or rule",
+  "type": "object",
+  "properties": {
+    "type": {
+      "type": "string",
+      "description": "The type of action",
+      "enum": [
+        "forward",
+        "authenticate-oidc",
+        "authenticate-cognito",
+        "redirect",
+        "fixed-response"
+      ]
+    },
+    "targetGroupArn": {
+      "type": "string",
+      "description": "The ARN of the target group for forward actions"
+    },
+    "order": {
+      "type": "integer",
+      "description": "The order for the action"
+    },
+    "redirectConfig": {
+      "type": "object",
+      "description": "Configuration for redirect actions",
+      "properties": {
+        "protocol": {
+          "type": "string",
+          "description": "The protocol"
+        },
+        "port": {
+          "type": "string",
+          "description": "The port"
+        },
+        "host": {
+          "type": "string",
+          "description": "The hostname"
+        },
+        "path": {
+          "type": "string",
+          "description": "The absolute path"
+        },
+        "query": {
+          "type": "string",
+          "description": "The query parameters"
+        },
+        "statusCode": {
+          "type": "string",
+          "description": "The HTTP redirect code",
+          "enum": [
+            "HTTP_301",
+            "HTTP_302"
+          ]
+        }
+      }
+    },
+    "fixedResponseConfig": {
+      "type": "object",
+      "description": "Configuration for fixed-response actions",
+      "properties": {
+        "messageBody": {
+          "type": "string",
+          "description": "The message body"
+        },
+        "statusCode": {
+          "type": "string",
+          "description": "The HTTP response code"
+        },
+        "contentType": {
+          "type": "string",
+          "description": "The content type"
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,157 @@
+vocabulary: 1.0.0
+info:
+  provider: Amazon Elastic Load Balancing
+  description: Unified vocabulary and taxonomy for Amazon Elastic Load Balancing APIs and capabilities
+  created: '2026-04-19'
+  modified: '2026-04-19'
+operational:
+  apis:
+  - name: Amazon Elastic Load Balancing v2 API
+    namespace: elastic_load_balancing
+    version: '2015-12-01'
+    baseUrl: https://elasticloadbalancing.{region}.amazonaws.com
+    status: active
+  resources:
+  - name: Load Balancers
+    api: Amazon Elastic Load Balancing
+    actions:
+    - GET
+  - name: Target Groups
+    api: Amazon Elastic Load Balancing
+    actions:
+    - GET
+  - name: Targets
+    api: Amazon Elastic Load Balancing
+    actions:
+    - GET
+  - name: Listeners
+    api: Amazon Elastic Load Balancing
+    actions:
+    - GET
+  - name: Rules
+    api: Amazon Elastic Load Balancing
+    actions:
+    - GET
+  actions:
+  - verb: create
+    httpMethod: GET
+    pattern: read
+  - verb: describe
+    httpMethod: GET
+    pattern: read
+  - verb: delete
+    httpMethod: GET
+    pattern: read
+  - verb: modify
+    httpMethod: GET
+    pattern: read
+  - verb: regist
+    httpMethod: GET
+    pattern: read
+  - verb: deregi
+    httpMethod: GET
+    pattern: read
+  schemas:
+    core:
+    - name: CreateLoadBalancerResponse
+      description: Response from the CreateLoadBalancer action
+    - name: DescribeLoadBalancersResponse
+      description: Response from the DescribeLoadBalancers action
+    - name: CreateTargetGroupResponse
+      description: Response from the CreateTargetGroup action
+    - name: DescribeTargetGroupsResponse
+      description: Response from the DescribeTargetGroups action
+    - name: DescribeTargetHealthResponse
+      description: Response from the DescribeTargetHealth action
+    - name: CreateListenerResponse
+      description: Response from the CreateListener action
+    - name: DescribeListenersResponse
+      description: Response from the DescribeListeners action
+    - name: CreateRuleResponse
+      description: Response from the CreateRule action
+    - name: DescribeRulesResponse
+      description: Response from the DescribeRules action
+    - name: LoadBalancer
+      description: Describes a load balancer
+  parameters:
+    pagination:
+    - name: MaxResults
+      description: Maximum number of results to return
+    - name: NextToken
+      description: Pagination token for next page of results
+    identifiers:
+    - name: Id
+      description: Resource identifier
+    - name: Arn
+      description: Amazon Resource Name
+  enums:
+    states:
+    - Active
+    - Inactive
+    - Pending
+    - Terminated
+  authentication:
+  - name: sigv4Auth
+    type: apiKey
+capability:
+  workflows:
+  - name: Amazon Elastic Load Balancing Management
+    file: capabilities/amazon-elastic-load-balancing-capability.yaml
+    description: Unified capability for managing Amazon Elastic Load Balancing resources. Combines Amazon Elastic Load Balancing APIs for Cloud Architect workflows in Network Traffic Management.
+    toolCount: 13
+  personas:
+  - id: developer
+    name: Application Developer
+    description: Developers building applications using Amazon Elastic Load Balancing
+  - id: operator
+    name: Cloud Operator
+    description: Operations teams managing Amazon Elastic Load Balancing infrastructure
+  domains:
+  - name: Amazon Elastic Load Balancing
+    description: Distribute incoming traffic across multiple targets for high availability
+  namespaces:
+  - type: consumed
+    namespace: elastic_load_balancing
+  - type: rest
+    namespace: amazon-elastic-load-balancing-api
+  - type: mcp
+    namespace: amazon-elastic-load-balancing-mcp
+  binds:
+  - AWS_API_KEY
+  - AWS_REGION
+crossReference:
+- resource: Load Balancers
+  operations:
+  - create
+  - describe
+  - delete
+  workflows:
+  - Amazon Elastic Load Balancing Management
+- resource: Target Groups
+  operations:
+  - create
+  - describe
+  - delete
+  workflows:
+  - Amazon Elastic Load Balancing Management
+- resource: Targets
+  operations:
+  - create
+  - describe
+  - delete
+  workflows:
+  - Amazon Elastic Load Balancing Management
+- resource: Listeners
+  operations:
+  - create
+  - describe
+  - delete
+  workflows:
+  - Amazon Elastic Load Balancing Management
+- resource: Rules
+  operations:
+  - create
+  - describe
+  - delete
+  workflows:
+  - Amazon Elastic Load Balancing Management

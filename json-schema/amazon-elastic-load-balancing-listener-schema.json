@@ -1,0 +1,58 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amazon-elastic-load-balancing/refs/heads/main/json-schema/amazon-elastic-load-balancing-listener-schema.json",
+  "title": "Listener",
+  "description": "Describes a listener",
+  "type": "object",
+  "properties": {
+    "listenerArn": {
+      "type": "string",
+      "description": "The Amazon Resource Name (ARN) of the listener"
+    },
+    "loadBalancerArn": {
+      "type": "string",
+      "description": "The ARN of the load balancer"
+    },
+    "port": {
+      "type": "integer",
+      "description": "The port on which the load balancer is listening"
+    },
+    "protocol": {
+      "type": "string",
+      "description": "The protocol for connections from clients to the load balancer",
+      "enum": [
+        "HTTP",
+        "HTTPS",
+        "TCP",
+        "TLS",
+        "UDP",
+        "TCP_UDP",
+        "GENEVE"
+      ]
+    },
+    "certificates": {
+      "type": "array",
+      "description": "The default SSL server certificate",
+      "items": {
+        "type": "object",
+        "properties": {
+          "certificateArn": {
+            "type": "string",
+            "description": "The ARN of the certificate"
+          }
+        }
+      }
+    },
+    "sslPolicy": {
+      "type": "string",
+      "description": "The security policy that defines supported protocols and ciphers"
+    },
+    "defaultActions": {
+      "type": "array",
+      "description": "The default actions for the listener",
+      "items": {
+        "$ref": "#/components/schemas/Action"
+      }
+    }
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amazon-elastic-load-balancing/refs/heads/main/json-structure/amazon-elastic-load-balancing-create-listener-response-structure.json",
+  "name": "CreateListenerResponse",
+  "description": "Response from the CreateListener action",
+  "type": "object",
+  "properties": {
+    "listeners": {
+      "type": "array",
+      "description": "Information about the listener",
+      "items": {
+        "$ref": "#/components/schemas/Listener"
+      }
+    }
+  }
+}

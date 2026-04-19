@@ -1,0 +1,15 @@
+{
+  "targetHealthDescriptions": [
+    {
+      "target": {
+        "id": {},
+        "port": {}
+      },
+      "targetHealth": {
+        "state": {},
+        "reason": {},
+        "description": {}
+      }
+    }
+  ]
+}

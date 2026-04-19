@@ -1,0 +1,20 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amazon-elastic-load-balancing/refs/heads/main/json-structure/amazon-elastic-load-balancing-describe-load-balancers-response-structure.json",
+  "name": "DescribeLoadBalancersResponse",
+  "description": "Response from the DescribeLoadBalancers action",
+  "type": "object",
+  "properties": {
+    "loadBalancers": {
+      "type": "array",
+      "description": "Information about the load balancers",
+      "items": {
+        "$ref": "#/components/schemas/LoadBalancer"
+      }
+    },
+    "nextMarker": {
+      "type": "string",
+      "description": "The marker to use for the next set of results"
+    }
+  }
+}

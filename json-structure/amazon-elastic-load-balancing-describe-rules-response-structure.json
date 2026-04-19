@@ -1,0 +1,20 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amazon-elastic-load-balancing/refs/heads/main/json-structure/amazon-elastic-load-balancing-describe-rules-response-structure.json",
+  "name": "DescribeRulesResponse",
+  "description": "Response from the DescribeRules action",
+  "type": "object",
+  "properties": {
+    "rules": {
+      "type": "array",
+      "description": "Information about the rules",
+      "items": {
+        "$ref": "#/components/schemas/Rule"
+      }
+    },
+    "nextMarker": {
+      "type": "string",
+      "description": "The marker to use for the next set of results"
+    }
+  }
+}

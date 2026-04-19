@@ -1,0 +1,16 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amazon-elastic-load-balancing/refs/heads/main/json-structure/amazon-elastic-load-balancing-create-rule-response-structure.json",
+  "name": "CreateRuleResponse",
+  "description": "Response from the CreateRule action",
+  "type": "object",
+  "properties": {
+    "rules": {
+      "type": "array",
+      "description": "Information about the rule",
+      "items": {
+        "$ref": "#/components/schemas/Rule"
+      }
+    }
+  }
+}

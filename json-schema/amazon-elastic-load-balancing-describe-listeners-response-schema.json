@@ -1,0 +1,20 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amazon-elastic-load-balancing/refs/heads/main/json-schema/amazon-elastic-load-balancing-describe-listeners-response-schema.json",
+  "title": "DescribeListenersResponse",
+  "description": "Response from the DescribeListeners action",
+  "type": "object",
+  "properties": {
+    "listeners": {
+      "type": "array",
+      "description": "Information about the listeners",
+      "items": {
+        "$ref": "#/components/schemas/Listener"
+      }
+    },
+    "nextMarker": {
+      "type": "string",
+      "description": "The marker to use for the next set of results"
+    }
+  }
+}

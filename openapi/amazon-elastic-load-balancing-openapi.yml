@@ -16,90 +16,90 @@ externalDocs:
   description: Amazon Elastic Load Balancing API Reference
   url: https://docs.aws.amazon.com/elasticloadbalancing/latest/APIReference/
 servers:
-  - url: https://elasticloadbalancing.{region}.amazonaws.com
-    description: Amazon Elastic Load Balancing Regional Endpoint
-    variables:
-      region:
-        default: us-east-1
-        description: AWS Region
+- url: https://elasticloadbalancing.{region}.amazonaws.com
+  description: Amazon Elastic Load Balancing Regional Endpoint
+  variables:
+    region:
+      default: us-east-1
+      description: AWS Region
 tags:
-  - name: Listeners
-    description: Operations for creating and managing listeners
-  - name: Load Balancers
-    description: Operations for creating and managing load balancers
-  - name: Rules
-    description: Operations for creating and managing listener rules
-  - name: Target Groups
-    description: Operations for creating and managing target groups
-  - name: Targets
-    description: Operations for registering and deregistering targets
+- name: Listeners
+  description: Operations for creating and managing listeners
+- name: Load Balancers
+  description: Operations for creating and managing load balancers
+- name: Rules
+  description: Operations for creating and managing listener rules
+- name: Target Groups
+  description: Operations for creating and managing target groups
+- name: Targets
+  description: Operations for registering and deregistering targets
 security:
-  - sigv4Auth: []
+- sigv4Auth: []
 paths:
   /?Action=CreateLoadBalancer:
     get:
       operationId: createLoadBalancer
-      summary: Amazon Elastic Load Balancing Create a load balancer
+      summary: Amazon Elastic Load Balancing Create a Load Balancer
       description: >-
         Creates an Application Load Balancer, Network Load Balancer, or
         Gateway Load Balancer. For more information, see the User Guide
         for the specific load balancer type.
       tags:
-        - Load Balancers
+      - Load Balancers
       parameters:
-        - name: Name
-          in: query
-          required: true
-          description: >-
-            The name of the load balancer. Must be unique per region per
-            account, can have a maximum of 32 characters.
-          schema:
+      - name: Name
+        in: query
+        required: true
+        description: >-
+          The name of the load balancer. Must be unique per region per
+          account, can have a maximum of 32 characters.
+        schema:
+          type: string
+      - name: Subnets
+        in: query
+        description: >-
+          The IDs of the subnets. You can specify only one subnet per
+          Availability Zone.
+        schema:
+          type: array
+          items:
             type: string
-        - name: Subnets
-          in: query
-          description: >-
-            The IDs of the subnets. You can specify only one subnet per
-            Availability Zone.
-          schema:
-            type: array
-            items:
-              type: string
-        - name: SecurityGroups
-          in: query
-          description: The IDs of the security groups for the load balancer
-          schema:
-            type: array
-            items:
-              type: string
-        - name: Scheme
-          in: query
-          description: >-
-            The scheme for the load balancer. An internet-facing load
-            balancer routes requests from clients to targets over the
-            internet. An internal load balancer routes requests to targets
-            using private IP addresses.
-          schema:
+      - name: SecurityGroups
+        in: query
+        description: The IDs of the security groups for the load balancer
+        schema:
+          type: array
+          items:
             type: string
-            enum:
-              - internet-facing
-              - internal
-        - name: Type
-          in: query
-          description: The type of load balancer
-          schema:
-            type: string
-            enum:
-              - application
-              - network
-              - gateway
-        - name: IpAddressType
-          in: query
-          description: The type of IP addresses used by the subnets
-          schema:
-            type: string
-            enum:
-              - ipv4
-              - dualstack
+      - name: Scheme
+        in: query
+        description: >-
+          The scheme for the load balancer. An internet-facing load
+          balancer routes requests from clients to targets over the
+          internet. An internal load balancer routes requests to targets
+          using private IP addresses.
+        schema:
+          type: string
+          enum:
+          - internet-facing
+          - internal
+      - name: Type
+        in: query
+        description: The type of load balancer
+        schema:
+          type: string
+          enum:
+          - application
+          - network
+          - gateway
+      - name: IpAddressType
+        in: query
+        description: The type of IP addresses used by the subnets
+        schema:
+          type: string
+          enum:
+          - ipv4
+          - dualstack
       responses:
         '200':
           description: Successfully created load balancer
@@ -107,49 +107,58 @@ paths:
             application/xml:
               schema:
                 $ref: '#/components/schemas/CreateLoadBalancerResponse'
+              examples:
+                createLoadBalancer200Example:
+                  summary: Default createLoadBalancer 200 response
+                  x-microcks-default: true
+                  value:
+                    loadBalancers: []
         '400':
           description: Invalid request parameters
         '401':
           description: Authentication failure
         '403':
           description: Authorization failure
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /?Action=DescribeLoadBalancers:
     get:
       operationId: describeLoadBalancers
-      summary: Amazon Elastic Load Balancing Describe load balancers
+      summary: Amazon Elastic Load Balancing Describe Load Balancers
       description: >-
         Describes the specified load balancers or all of your load
         balancers. Returns information about load balancer ARN, DNS name,
         scheme, VPC, availability zones, type, and state.
       tags:
-        - Load Balancers
+      - Load Balancers
       parameters:
-        - name: LoadBalancerArns
-          in: query
-          description: The Amazon Resource Names (ARN) of the load balancers
-          schema:
-            type: array
-            items:
-              type: string
-        - name: Names
-          in: query
-          description: The names of the load balancers
-          schema:
-            type: array
-            items:
-              type: string
-        - name: Marker
-          in: query
-          description: The marker for the next set of results
-          schema:
+      - name: LoadBalancerArns
+        in: query
+        description: The Amazon Resource Names (ARN) of the load balancers
+        schema:
+          type: array
+          items:
             type: string
-        - name: PageSize
-          in: query
-          description: The maximum number of results to return
-          schema:
-            type: integer
-            minimum: 1
-            maximum: 400
+      - name: Names
+        in: query
+        description: The names of the load balancers
+        schema:
+          type: array
+          items:
+            type: string
+      - name: Marker
+        in: query
+        description: The marker for the next set of results
+        schema:
+          type: string
+      - name: PageSize
+        in: query
+        description: The maximum number of results to return
+        schema:
+          type: integer
+          minimum: 1
+          maximum: 400
       responses:
         '200':
           description: Successfully described load balancers
@@ -157,27 +166,37 @@ paths:
             application/xml:
               schema:
                 $ref: '#/components/schemas/DescribeLoadBalancersResponse'
+              examples:
+                describeLoadBalancers200Example:
+                  summary: Default describeLoadBalancers 200 response
+                  x-microcks-default: true
+                  value:
+                    loadBalancers: []
+                    nextMarker: example
         '400':
           description: Invalid request parameters
         '401':
           description: Authentication failure
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /?Action=DeleteLoadBalancer:
     get:
       operationId: deleteLoadBalancer
-      summary: Amazon Elastic Load Balancing Delete a load balancer
+      summary: Amazon Elastic Load Balancing Delete a Load Balancer
       description: >-
         Deletes the specified Application Load Balancer, Network Load
         Balancer, or Gateway Load Balancer. Deleting a load balancer also
         deletes its listeners.
       tags:
-        - Load Balancers
+      - Load Balancers
       parameters:
-        - name: LoadBalancerArn
-          in: query
-          required: true
-          description: The Amazon Resource Name (ARN) of the load balancer
-          schema:
-            type: string
+      - name: LoadBalancerArn
+        in: query
+        required: true
+        description: The Amazon Resource Name (ARN) of the load balancer
+        schema:
+          type: string
       responses:
         '200':
           description: Successfully deleted load balancer
@@ -185,32 +204,35 @@ paths:
           description: Invalid request parameters
         '401':
           description: Authentication failure
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /?Action=ModifyLoadBalancerAttributes:
     get:
       operationId: modifyLoadBalancerAttributes
-      summary: Amazon Elastic Load Balancing Modify load balancer attributes
+      summary: Amazon Elastic Load Balancing Modify Load Balancer Attributes
       description: >-
         Modifies the specified attributes of the specified Application
         Load Balancer, Network Load Balancer, or Gateway Load Balancer.
       tags:
-        - Load Balancers
+      - Load Balancers
       parameters:
-        - name: LoadBalancerArn
-          in: query
-          required: true
-          description: The Amazon Resource Name (ARN) of the load balancer
-          schema:
-            type: string
-        - name: Attributes.member.1.Key
-          in: query
-          description: The name of the attribute
-          schema:
-            type: string
-        - name: Attributes.member.1.Value
-          in: query
-          description: The value of the attribute
-          schema:
-            type: string
+      - name: LoadBalancerArn
+        in: query
+        required: true
+        description: The Amazon Resource Name (ARN) of the load balancer
+        schema:
+          type: string
+      - name: Attributes.member.1.Key
+        in: query
+        description: The name of the attribute
+        schema:
+          type: string
+      - name: Attributes.member.1.Value
+        in: query
+        description: The value of the attribute
+        schema:
+          type: string
       responses:
         '200':
           description: Successfully modified load balancer attributes
@@ -218,81 +240,84 @@ paths:
           description: Invalid request parameters
         '401':
           description: Authentication failure
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /?Action=CreateTargetGroup:
     get:
       operationId: createTargetGroup
-      summary: Amazon Elastic Load Balancing Create a target group
+      summary: Amazon Elastic Load Balancing Create a Target Group
       description: >-
         Creates a target group. Target groups are used to route requests
         to one or more registered targets. After creating a target group,
         you can register targets and create listeners or rules to route
         traffic to the target group.
       tags:
-        - Target Groups
+      - Target Groups
       parameters:
-        - name: Name
-          in: query
-          required: true
-          description: >-
-            The name of the target group. Must be unique per region per
-            account.
-          schema:
-            type: string
-        - name: Protocol
-          in: query
-          description: The protocol to use for routing traffic to the targets
-          schema:
-            type: string
-            enum:
-              - HTTP
-              - HTTPS
-              - TCP
-              - TLS
-              - UDP
-              - TCP_UDP
-              - GENEVE
-        - name: Port
-          in: query
-          description: The port on which the targets receive traffic
-          schema:
-            type: integer
-            minimum: 1
-            maximum: 65535
-        - name: VpcId
-          in: query
-          description: The identifier of the VPC for the targets
-          schema:
-            type: string
-        - name: HealthCheckProtocol
-          in: query
-          description: The protocol to use for health checks
-          schema:
-            type: string
-            enum:
-              - HTTP
-              - HTTPS
-              - TCP
-              - TLS
-        - name: HealthCheckPort
-          in: query
-          description: The port to use for health checks
-          schema:
-            type: string
-        - name: HealthCheckPath
-          in: query
-          description: The destination for health checks on the targets
-          schema:
-            type: string
-        - name: TargetType
-          in: query
-          description: The type of target to register with the target group
-          schema:
-            type: string
-            enum:
-              - instance
-              - ip
-              - lambda
-              - alb
+      - name: Name
+        in: query
+        required: true
+        description: >-
+          The name of the target group. Must be unique per region per
+          account.
+        schema:
+          type: string
+      - name: Protocol
+        in: query
+        description: The protocol to use for routing traffic to the targets
+        schema:
+          type: string
+          enum:
+          - HTTP
+          - HTTPS
+          - TCP
+          - TLS
+          - UDP
+          - TCP_UDP
+          - GENEVE
+      - name: Port
+        in: query
+        description: The port on which the targets receive traffic
+        schema:
+          type: integer
+          minimum: 1
+          maximum: 65535
+      - name: VpcId
+        in: query
+        description: The identifier of the VPC for the targets
+        schema:
+          type: string
+      - name: HealthCheckProtocol
+        in: query
+        description: The protocol to use for health checks
+        schema:
+          type: string
+          enum:
+          - HTTP
+          - HTTPS
+          - TCP
+          - TLS
+      - name: HealthCheckPort
+        in: query
+        description: The port to use for health checks
+        schema:
+          type: string
+      - name: HealthCheckPath
+        in: query
+        description: The destination for health checks on the targets
+        schema:
+          type: string
+      - name: TargetType
+        in: query
+        description: The type of target to register with the target group
+        schema:
+          type: string
+          enum:
+          - instance
+          - ip
+          - lambda
+          - alb
       responses:
         '200':
           description: Successfully created target group
@@ -300,52 +325,61 @@ paths:
             application/xml:
               schema:
                 $ref: '#/components/schemas/CreateTargetGroupResponse'
+              examples:
+                createTargetGroup200Example:
+                  summary: Default createTargetGroup 200 response
+                  x-microcks-default: true
+                  value:
+                    targetGroups: []
         '400':
           description: Invalid request parameters
         '401':
           description: Authentication failure
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /?Action=DescribeTargetGroups:
     get:
       operationId: describeTargetGroups
-      summary: Amazon Elastic Load Balancing Describe target groups
+      summary: Amazon Elastic Load Balancing Describe Target Groups
       description: >-
         Describes the specified target groups or all of your target groups.
         By default, all target groups are described. Alternatively, you
         can specify target group ARNs or names.
       tags:
-        - Target Groups
+      - Target Groups
       parameters:
-        - name: LoadBalancerArn
-          in: query
-          description: The ARN of the load balancer
-          schema:
+      - name: LoadBalancerArn
+        in: query
+        description: The ARN of the load balancer
+        schema:
+          type: string
+      - name: TargetGroupArns
+        in: query
+        description: The ARNs of the target groups
+        schema:
+          type: array
+          items:
             type: string
-        - name: TargetGroupArns
-          in: query
-          description: The ARNs of the target groups
-          schema:
-            type: array
-            items:
-              type: string
-        - name: Names
-          in: query
-          description: The names of the target groups
-          schema:
-            type: array
-            items:
-              type: string
-        - name: Marker
-          in: query
-          description: The marker for the next set of results
-          schema:
+      - name: Names
+        in: query
+        description: The names of the target groups
+        schema:
+          type: array
+          items:
             type: string
-        - name: PageSize
-          in: query
-          description: The maximum number of results to return
-          schema:
-            type: integer
-            minimum: 1
-            maximum: 400
+      - name: Marker
+        in: query
+        description: The marker for the next set of results
+        schema:
+          type: string
+      - name: PageSize
+        in: query
+        description: The maximum number of results to return
+        schema:
+          type: integer
+          minimum: 1
+          maximum: 400
       responses:
         '200':
           description: Successfully described target groups
@@ -353,45 +387,55 @@ paths:
             application/xml:
               schema:
                 $ref: '#/components/schemas/DescribeTargetGroupsResponse'
+              examples:
+                describeTargetGroups200Example:
+                  summary: Default describeTargetGroups 200 response
+                  x-microcks-default: true
+                  value:
+                    targetGroups: []
+                    nextMarker: example
         '400':
           description: Invalid request parameters
         '401':
           description: Authentication failure
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /?Action=RegisterTargets:
     get:
       operationId: registerTargets
-      summary: Amazon Elastic Load Balancing Register targets with a target group
+      summary: Amazon Elastic Load Balancing Register Targets with a Target Group
       description: >-
         Registers the specified targets with the specified target group.
         If the target is an EC2 instance, it must be in the running state
         when you register it.
       tags:
-        - Targets
+      - Targets
       parameters:
-        - name: TargetGroupArn
-          in: query
-          required: true
-          description: The ARN of the target group
-          schema:
-            type: string
-        - name: Targets.member.1.Id
-          in: query
-          required: true
-          description: The ID of the target (instance ID, IP address, or Lambda ARN)
-          schema:
-            type: string
-        - name: Targets.member.1.Port
-          in: query
-          description: The port on which the target is listening
-          schema:
-            type: integer
-            minimum: 1
-            maximum: 65535
-        - name: Targets.member.1.AvailabilityZone
-          in: query
-          description: The Availability Zone where the target is located
-          schema:
-            type: string
+      - name: TargetGroupArn
+        in: query
+        required: true
+        description: The ARN of the target group
+        schema:
+          type: string
+      - name: Targets.member.1.Id
+        in: query
+        required: true
+        description: The ID of the target (instance ID, IP address, or Lambda ARN)
+        schema:
+          type: string
+      - name: Targets.member.1.Port
+        in: query
+        description: The port on which the target is listening
+        schema:
+          type: integer
+          minimum: 1
+          maximum: 65535
+      - name: Targets.member.1.AvailabilityZone
+        in: query
+        description: The Availability Zone where the target is located
+        schema:
+          type: string
       responses:
         '200':
           description: Successfully registered targets
@@ -399,34 +443,37 @@ paths:
           description: Invalid request parameters
         '401':
           description: Authentication failure
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /?Action=DeregisterTargets:
     get:
       operationId: deregisterTargets
-      summary: Amazon Elastic Load Balancing Deregister targets from a target group
+      summary: Amazon Elastic Load Balancing Deregister Targets from a Target Group
       description: >-
         Deregisters the specified targets from the specified target group.
         After the targets are deregistered, they no longer receive traffic
         from the load balancer.
       tags:
-        - Targets
+      - Targets
       parameters:
-        - name: TargetGroupArn
-          in: query
-          required: true
-          description: The ARN of the target group
-          schema:
-            type: string
-        - name: Targets.member.1.Id
-          in: query
-          required: true
-          description: The ID of the target
-          schema:
-            type: string
-        - name: Targets.member.1.Port
-          in: query
-          description: The port on which the target is listening
-          schema:
-            type: integer
+      - name: TargetGroupArn
+        in: query
+        required: true
+        description: The ARN of the target group
+        schema:
+          type: string
+      - name: Targets.member.1.Id
+        in: query
+        required: true
+        description: The ID of the target
+        schema:
+          type: string
+      - name: Targets.member.1.Port
+        in: query
+        description: The port on which the target is listening
+        schema:
+          type: integer
       responses:
         '200':
           description: Successfully deregistered targets
@@ -434,32 +481,35 @@ paths:
           description: Invalid request parameters
         '401':
           description: Authentication failure
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /?Action=DescribeTargetHealth:
     get:
       operationId: describeTargetHealth
-      summary: Amazon Elastic Load Balancing Describe target health
+      summary: Amazon Elastic Load Balancing Describe Target Health
       description: >-
         Describes the health of the specified targets or all of your
         targets registered with the specified target group.
       tags:
-        - Targets
+      - Targets
       parameters:
-        - name: TargetGroupArn
-          in: query
-          required: true
-          description: The ARN of the target group
-          schema:
-            type: string
-        - name: Targets.member.1.Id
-          in: query
-          description: The ID of the target
-          schema:
-            type: string
-        - name: Targets.member.1.Port
-          in: query
-          description: The port on which the target is listening
-          schema:
-            type: integer
+      - name: TargetGroupArn
+        in: query
+        required: true
+        description: The ARN of the target group
+        schema:
+          type: string
+      - name: Targets.member.1.Id
+        in: query
+        description: The ID of the target
+        schema:
+          type: string
+      - name: Targets.member.1.Port
+        in: query
+        description: The port on which the target is listening
+        schema:
+          type: integer
       responses:
         '200':
           description: Successfully described target health
@@ -467,71 +517,80 @@ paths:
             application/xml:
               schema:
                 $ref: '#/components/schemas/DescribeTargetHealthResponse'
+              examples:
+                describeTargetHealth200Example:
+                  summary: Default describeTargetHealth 200 response
+                  x-microcks-default: true
+                  value:
+                    targetHealthDescriptions: []
         '400':
           description: Invalid request parameters
         '401':
           description: Authentication failure
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /?Action=CreateListener:
     get:
       operationId: createListener
-      summary: Amazon Elastic Load Balancing Create a listener
+      summary: Amazon Elastic Load Balancing Create a Listener
       description: >-
         Creates a listener for the specified Application Load Balancer,
         Network Load Balancer, or Gateway Load Balancer. Listeners check
         for connection requests from clients using the protocol and port
         that you configure.
       tags:
-        - Listeners
+      - Listeners
       parameters:
-        - name: LoadBalancerArn
-          in: query
-          required: true
-          description: The ARN of the load balancer
-          schema:
-            type: string
-        - name: Protocol
-          in: query
-          description: The protocol for connections from clients to the load balancer
-          schema:
-            type: string
-            enum:
-              - HTTP
-              - HTTPS
-              - TCP
-              - TLS
-              - UDP
-              - TCP_UDP
-              - GENEVE
-        - name: Port
-          in: query
-          required: true
-          description: The port on which the load balancer is listening
-          schema:
-            type: integer
-            minimum: 1
-            maximum: 65535
-        - name: SslPolicy
-          in: query
-          description: The security policy that defines which protocols and ciphers are supported
-          schema:
-            type: string
-        - name: DefaultActions.member.1.Type
-          in: query
-          required: true
-          description: The type of action
-          schema:
-            type: string
-            enum:
-              - forward
-              - authenticate-oidc
-              - authenticate-cognito
-              - redirect
-              - fixed-response
-        - name: DefaultActions.member.1.TargetGroupArn
-          in: query
-          description: The ARN of the target group for forward actions
-          schema:
-            type: string
+      - name: LoadBalancerArn
+        in: query
+        required: true
+        description: The ARN of the load balancer
+        schema:
+          type: string
+      - name: Protocol
+        in: query
+        description: The protocol for connections from clients to the load balancer
+        schema:
+          type: string
+          enum:
+          - HTTP
+          - HTTPS
+          - TCP
+          - TLS
+          - UDP
+          - TCP_UDP
+          - GENEVE
+      - name: Port
+        in: query
+        required: true
+        description: The port on which the load balancer is listening
+        schema:
+          type: integer
+          minimum: 1
+          maximum: 65535
+      - name: SslPolicy
+        in: query
+        description: The security policy that defines which protocols and ciphers are supported
+        schema:
+          type: string
+      - name: DefaultActions.member.1.Type
+        in: query
+        required: true
+        description: The type of action
+        schema:
+          type: string
+          enum:
+          - forward
+          - authenticate-oidc
+          - authenticate-cognito
+          - redirect
+          - fixed-response
+      - name: DefaultActions.member.1.TargetGroupArn
+        in: query
+        description: The ARN of the target group for forward actions
+        schema:
+          type: string
       responses:
         '200':
           description: Successfully created listener
@@ -539,45 +598,54 @@ paths:
             application/xml:
               schema:
                 $ref: '#/components/schemas/CreateListenerResponse'
+              examples:
+                createListener200Example:
+                  summary: Default createListener 200 response
+                  x-microcks-default: true
+                  value:
+                    listeners: []
         '400':
           description: Invalid request parameters
         '401':
           description: Authentication failure
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /?Action=DescribeListeners:
     get:
       operationId: describeListeners
-      summary: Amazon Elastic Load Balancing Describe listeners
+      summary: Amazon Elastic Load Balancing Describe Listeners
       description: >-
         Describes the specified listeners or the listeners for the
         specified Application Load Balancer, Network Load Balancer, or
         Gateway Load Balancer.
       tags:
-        - Listeners
+      - Listeners
       parameters:
-        - name: LoadBalancerArn
-          in: query
-          description: The ARN of the load balancer
-          schema:
+      - name: LoadBalancerArn
+        in: query
+        description: The ARN of the load balancer
+        schema:
+          type: string
+      - name: ListenerArns
+        in: query
+        description: The ARNs of the listeners
+        schema:
+          type: array
+          items:
             type: string
-        - name: ListenerArns
-          in: query
-          description: The ARNs of the listeners
-          schema:
-            type: array
-            items:
-              type: string
-        - name: Marker
-          in: query
-          description: The marker for the next set of results
-          schema:
-            type: string
-        - name: PageSize
-          in: query
-          description: The maximum number of results to return
-          schema:
-            type: integer
-            minimum: 1
-            maximum: 400
+      - name: Marker
+        in: query
+        description: The marker for the next set of results
+        schema:
+          type: string
+      - name: PageSize
+        in: query
+        description: The maximum number of results to return
+        schema:
+          type: integer
+          minimum: 1
+          maximum: 400
       responses:
         '200':
           description: Successfully described listeners
@@ -585,64 +653,74 @@ paths:
             application/xml:
               schema:
                 $ref: '#/components/schemas/DescribeListenersResponse'
+              examples:
+                describeListeners200Example:
+                  summary: Default describeListeners 200 response
+                  x-microcks-default: true
+                  value:
+                    listeners: []
+                    nextMarker: example
         '400':
           description: Invalid request parameters
         '401':
           description: Authentication failure
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /?Action=CreateRule:
     get:
       operationId: createRule
-      summary: Amazon Elastic Load Balancing Create a listener rule
+      summary: Amazon Elastic Load Balancing Create a Listener Rule
       description: >-
         Creates a rule for the specified listener. The listener must be
         associated with an Application Load Balancer. Rules are evaluated
         in priority order, from the lowest value to the highest value.
       tags:
-        - Rules
+      - Rules
       parameters:
-        - name: ListenerArn
-          in: query
-          required: true
-          description: The ARN of the listener
-          schema:
+      - name: ListenerArn
+        in: query
+        required: true
+        description: The ARN of the listener
+        schema:
+          type: string
+      - name: Priority
+        in: query
+        required: true
+        description: The rule priority. Must be unique within the listener.
+        schema:
+          type: integer
+          minimum: 1
+          maximum: 50000
+      - name: Conditions.member.1.Field
+        in: query
+        description: The name of the field (host-header, path-pattern, etc.)
+        schema:
+          type: string
+      - name: Conditions.member.1.Values
+        in: query
+        description: The condition values
+        schema:
+          type: array
+          items:
             type: string
-        - name: Priority
-          in: query
-          required: true
-          description: The rule priority. Must be unique within the listener.
-          schema:
-            type: integer
-            minimum: 1
-            maximum: 50000
-        - name: Conditions.member.1.Field
-          in: query
-          description: The name of the field (host-header, path-pattern, etc.)
-          schema:
-            type: string
-        - name: Conditions.member.1.Values
-          in: query
-          description: The condition values
-          schema:
-            type: array
-            items:
-              type: string
-        - name: Actions.member.1.Type
-          in: query
-          required: true
-          description: The type of action
-          schema:
-            type: string
-            enum:
-              - forward
-              - authenticate-oidc
-              - authenticate-cognito
-              - redirect
-              - fixed-response
-        - name: Actions.member.1.TargetGroupArn
-          in: query
-          description: The ARN of the target group for forward actions
-          schema:
-            type: string
+      - name: Actions.member.1.Type
+        in: query
+        required: true
+        description: The type of action
+        schema:
+          type: string
+          enum:
+          - forward
+          - authenticate-oidc
+          - authenticate-cognito
+          - redirect
+          - fixed-response
+      - name: Actions.member.1.TargetGroupArn
+        in: query
+        description: The ARN of the target group for forward actions
+        schema:
+          type: string
       responses:
         '200':
           description: Successfully created rule
@@ -650,44 +728,53 @@ paths:
             application/xml:
               schema:
                 $ref: '#/components/schemas/CreateRuleResponse'
+              examples:
+                createRule200Example:
+                  summary: Default createRule 200 response
+                  x-microcks-default: true
+                  value:
+                    rules: []
         '400':
           description: Invalid request parameters
         '401':
           description: Authentication failure
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /?Action=DescribeRules:
     get:
       operationId: describeRules
-      summary: Amazon Elastic Load Balancing Describe listener rules
+      summary: Amazon Elastic Load Balancing Describe Listener Rules
       description: >-
         Describes the specified rules or the rules for the specified
         listener. You must specify either a listener or one or more rules.
       tags:
-        - Rules
+      - Rules
       parameters:
-        - name: ListenerArn
-          in: query
-          description: The ARN of the listener
-          schema:
+      - name: ListenerArn
+        in: query
+        description: The ARN of the listener
+        schema:
+          type: string
+      - name: RuleArns
+        in: query
+        description: The ARNs of the rules
+        schema:
+          type: array
+          items:
             type: string
-        - name: RuleArns
-          in: query
-          description: The ARNs of the rules
-          schema:
-            type: array
-            items:
-              type: string
-        - name: Marker
-          in: query
-          description: The marker for the next set of results
-          schema:
-            type: string
-        - name: PageSize
-          in: query
-          description: The maximum number of results to return
-          schema:
-            type: integer
-            minimum: 1
-            maximum: 400
+      - name: Marker
+        in: query
+        description: The marker for the next set of results
+        schema:
+          type: string
+      - name: PageSize
+        in: query
+        description: The maximum number of results to return
+        schema:
+          type: integer
+          minimum: 1
+          maximum: 400
       responses:
         '200':
           description: Successfully described rules
@@ -695,10 +782,20 @@ paths:
             application/xml:
               schema:
                 $ref: '#/components/schemas/DescribeRulesResponse'
+              examples:
+                describeRules200Example:
+                  summary: Default describeRules 200 response
+                  x-microcks-default: true
+                  value:
+                    rules: []
+                    nextMarker: example
         '400':
           description: Invalid request parameters
         '401':
           description: Authentication failure
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
 components:
   securitySchemes:
     sigv4Auth:
@@ -775,12 +872,12 @@ components:
                     type: string
                     description: The state of the target
                     enum:
-                      - initial
-                      - healthy
-                      - unhealthy
-                      - unused
-                      - draining
-                      - unavailable
+                    - initial
+                    - healthy
+                    - unhealthy
+                    - unused
+                    - draining
+                    - unavailable
                   reason:
                     type: string
                     description: The reason code
@@ -853,8 +950,8 @@ components:
           type: string
           description: The scheme of the load balancer
           enum:
-            - internet-facing
-            - internal
+          - internet-facing
+          - internal
         vpcId:
           type: string
           description: The ID of the VPC for the load balancer
@@ -866,10 +963,10 @@ components:
               type: string
               description: The state code
               enum:
-                - active
-                - provisioning
-                - active_impaired
-                - failed
+              - active
+              - provisioning
+              - active_impaired
+              - failed
             reason:
               type: string
               description: A description of the state
@@ -877,9 +974,9 @@ components:
           type: string
           description: The type of load balancer
           enum:
-            - application
-            - network
-            - gateway
+          - application
+          - network
+          - gateway
         availabilityZones:
           type: array
           description: The subnets for the load balancer
@@ -901,8 +998,8 @@ components:
           type: string
           description: The type of IP addresses used by the subnets
           enum:
-            - ipv4
-            - dualstack
+          - ipv4
+          - dualstack
     TargetGroup:
       type: object
       description: Describes a target group
@@ -917,13 +1014,13 @@ components:
           type: string
           description: The protocol to use for routing traffic to the targets
           enum:
-            - HTTP
-            - HTTPS
-            - TCP
-            - TLS
-            - UDP
-            - TCP_UDP
-            - GENEVE
+          - HTTP
+          - HTTPS
+          - TCP
+          - TLS
+          - UDP
+          - TCP_UDP
+          - GENEVE
         port:
           type: integer
           description: The port on which the targets are listening
@@ -958,10 +1055,10 @@ components:
           type: string
           description: The type of target
           enum:
-            - instance
-            - ip
-            - lambda
-            - alb
+          - instance
+          - ip
+          - lambda
+          - alb
         loadBalancerArns:
           type: array
           description: The ARNs of the load balancers that route traffic to this target group
@@ -984,13 +1081,13 @@ components:
           type: string
           description: The protocol for connections from clients to the load balancer
           enum:
-            - HTTP
-            - HTTPS
-            - TCP
-            - TLS
-            - UDP
-            - TCP_UDP
-            - GENEVE
+          - HTTP
+          - HTTPS
+          - TCP
+          - TLS
+          - UDP
+          - TCP_UDP
+          - GENEVE
         certificates:
           type: array
           description: The default SSL server certificate
@@ -1048,11 +1145,11 @@ components:
           type: string
           description: The type of action
           enum:
-            - forward
-            - authenticate-oidc
-            - authenticate-cognito
-            - redirect
-            - fixed-response
+          - forward
+          - authenticate-oidc
+          - authenticate-cognito
+          - redirect
+          - fixed-response
         targetGroupArn:
           type: string
           description: The ARN of the target group for forward actions
@@ -1082,8 +1179,8 @@ components:
               type: string
               description: The HTTP redirect code
               enum:
-                - HTTP_301
-                - HTTP_302
+              - HTTP_301
+              - HTTP_302
         fixedResponseConfig:
           type: object
           description: Configuration for fixed-response actions

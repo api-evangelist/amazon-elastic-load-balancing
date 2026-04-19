@@ -1,0 +1,18 @@
+{
+  "type": "authenticate-cognito",
+  "targetGroupArn": "example-value",
+  "order": 62,
+  "redirectConfig": {
+    "protocol": "example-value",
+    "port": "example-value",
+    "host": "example-value",
+    "path": "example-value",
+    "query": "example-value",
+    "statusCode": "HTTP_302"
+  },
+  "fixedResponseConfig": {
+    "messageBody": "example-value",
+    "statusCode": "example-value",
+    "contentType": "example-value"
+  }
+}

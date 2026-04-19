@@ -1,0 +1,87 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amazon-elastic-load-balancing/refs/heads/main/json-structure/amazon-elastic-load-balancing-target-group-structure.json",
+  "name": "TargetGroup",
+  "description": "Describes a target group",
+  "type": "object",
+  "properties": {
+    "targetGroupArn": {
+      "type": "string",
+      "description": "The Amazon Resource Name (ARN) of the target group"
+    },
+    "targetGroupName": {
+      "type": "string",
+      "description": "The name of the target group"
+    },
+    "protocol": {
+      "type": "string",
+      "description": "The protocol to use for routing traffic to the targets",
+      "enum": [
+        "HTTP",
+        "HTTPS",
+        "TCP",
+        "TLS",
+        "UDP",
+        "TCP_UDP",
+        "GENEVE"
+      ]
+    },
+    "port": {
+      "type": "int32",
+      "description": "The port on which the targets are listening"
+    },
+    "vpcId": {
+      "type": "string",
+      "description": "The ID of the VPC for the targets"
+    },
+    "healthCheckProtocol": {
+      "type": "string",
+      "description": "The protocol to use for health checks"
+    },
+    "healthCheckPort": {
+      "type": "string",
+      "description": "The port to use for health checks"
+    },
+    "healthCheckEnabled": {
+      "type": "boolean",
+      "description": "Whether health checks are enabled"
+    },
+    "healthCheckIntervalSeconds": {
+      "type": "int32",
+      "description": "The approximate interval between health checks"
+    },
+    "healthCheckTimeoutSeconds": {
+      "type": "int32",
+      "description": "The amount of time to wait for a health check response"
+    },
+    "healthyThresholdCount": {
+      "type": "int32",
+      "description": "The number of consecutive health checks required to consider a target healthy"
+    },
+    "unhealthyThresholdCount": {
+      "type": "int32",
+      "description": "The number of consecutive health check failures required to consider a target unhealthy"
+    },
+    "healthCheckPath": {
+      "type": "string",
+      "description": "The destination for health checks on the targets"
+    },
+    "targetType": {
+      "type": "string",
+      "description": "The type of target",
+      "enum": [
+        "instance",
+        "ip",
+        "lambda",
+        "alb"
+      ]
+    },
+    "loadBalancerArns": {
+      "type": "array",
+      "description": "The ARNs of the load balancers that route traffic to this target group",
+      "items": {
+        "type": "string"
+      }
+    }
+  }
+}

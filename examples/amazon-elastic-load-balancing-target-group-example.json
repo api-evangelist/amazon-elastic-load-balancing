@@ -1,0 +1,12 @@
+{
+  "targetGroupArn": "example-value",
+  "targetGroupName": "example-value",
+  "protocol": "TCP_UDP",
+  "port": 46,
+  "vpcId": "example-value",
+  "healthCheckProtocol": "example-value",
+  "healthCheckPort": "example-value",
+  "healthCheckEnabled": true,
+  "healthCheckIntervalSeconds": 82,
+  "healthCheckTimeoutSeconds": 90
+}

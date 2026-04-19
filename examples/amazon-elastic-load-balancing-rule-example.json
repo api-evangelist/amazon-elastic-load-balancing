@@ -1,0 +1,16 @@
+{
+  "ruleArn": "example-value",
+  "priority": "example-value",
+  "conditions": [
+    {
+      "field": "example-value",
+      "values": [
+        {}
+      ]
+    }
+  ],
+  "actions": [
+    {}
+  ],
+  "isDefault": true
+}

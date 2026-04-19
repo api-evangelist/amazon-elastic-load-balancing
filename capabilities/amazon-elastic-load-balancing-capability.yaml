@@ -1,0 +1,278 @@
+naftiko: 1.0.0-alpha1
+info:
+  label: Amazon Elastic Load Balancing Management
+  description: Unified capability for managing Amazon Elastic Load Balancing resources. Combines Amazon Elastic Load Balancing APIs for Cloud Architect workflows in Network Traffic Management.
+  tags:
+  - Amazon Web Services
+  - Load Balancing
+  - Networking
+  created: '2026-04-19'
+  modified: '2026-04-19'
+binds:
+- namespace: env
+  keys:
+    AWS_API_KEY: AWS_API_KEY
+    AWS_REGION: AWS_REGION
+capability:
+  consumes:
+  - import: elastic_load_balancing
+    location: ./shared/elastic-load-balancing.yaml
+  exposes:
+  - type: rest
+    port: 8182
+    namespace: amazon-elastic-load-balancing-workflow-api
+    description: Unified REST API for Amazon Elastic Load Balancing management.
+    resources:
+    - path: /v1/createLoadBalancer
+      name: createLoadBalancer
+      description: Amazon Elastic Load Balancing Create a Load Balancer
+      operations:
+      - method: GET
+        name: createLoadBalancer
+        description: Amazon Elastic Load Balancing Create a Load Balancer
+        call: api.createLoadBalancer
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/describeLoadBalancers
+      name: describeLoadBalancers
+      description: Amazon Elastic Load Balancing Describe Load Balancers
+      operations:
+      - method: GET
+        name: describeLoadBalancers
+        description: Amazon Elastic Load Balancing Describe Load Balancers
+        call: api.describeLoadBalancers
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/deleteLoadBalancer
+      name: deleteLoadBalancer
+      description: Amazon Elastic Load Balancing Delete a Load Balancer
+      operations:
+      - method: GET
+        name: deleteLoadBalancer
+        description: Amazon Elastic Load Balancing Delete a Load Balancer
+        call: api.deleteLoadBalancer
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/modifyLoadBalancerAttributes
+      name: modifyLoadBalancerAttributes
+      description: Amazon Elastic Load Balancing Modify Load Balancer Attributes
+      operations:
+      - method: GET
+        name: modifyLoadBalancerAttributes
+        description: Amazon Elastic Load Balancing Modify Load Balancer Attributes
+        call: api.modifyLoadBalancerAttributes
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/createTargetGroup
+      name: createTargetGroup
+      description: Amazon Elastic Load Balancing Create a Target Group
+      operations:
+      - method: GET
+        name: createTargetGroup
+        description: Amazon Elastic Load Balancing Create a Target Group
+        call: api.createTargetGroup
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/describeTargetGroups
+      name: describeTargetGroups
+      description: Amazon Elastic Load Balancing Describe Target Groups
+      operations:
+      - method: GET
+        name: describeTargetGroups
+        description: Amazon Elastic Load Balancing Describe Target Groups
+        call: api.describeTargetGroups
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/registerTargets
+      name: registerTargets
+      description: Amazon Elastic Load Balancing Register Targets with a Target Group
+      operations:
+      - method: GET
+        name: registerTargets
+        description: Amazon Elastic Load Balancing Register Targets with a Target Group
+        call: api.registerTargets
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/deregisterTargets
+      name: deregisterTargets
+      description: Amazon Elastic Load Balancing Deregister Targets from a Target Group
+      operations:
+      - method: GET
+        name: deregisterTargets
+        description: Amazon Elastic Load Balancing Deregister Targets from a Target Group
+        call: api.deregisterTargets
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/describeTargetHealth
+      name: describeTargetHealth
+      description: Amazon Elastic Load Balancing Describe Target Health
+      operations:
+      - method: GET
+        name: describeTargetHealth
+        description: Amazon Elastic Load Balancing Describe Target Health
+        call: api.describeTargetHealth
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/createListener
+      name: createListener
+      description: Amazon Elastic Load Balancing Create a Listener
+      operations:
+      - method: GET
+        name: createListener
+        description: Amazon Elastic Load Balancing Create a Listener
+        call: api.createListener
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/describeListeners
+      name: describeListeners
+      description: Amazon Elastic Load Balancing Describe Listeners
+      operations:
+      - method: GET
+        name: describeListeners
+        description: Amazon Elastic Load Balancing Describe Listeners
+        call: api.describeListeners
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/createRule
+      name: createRule
+      description: Amazon Elastic Load Balancing Create a Listener Rule
+      operations:
+      - method: GET
+        name: createRule
+        description: Amazon Elastic Load Balancing Create a Listener Rule
+        call: api.createRule
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/describeRules
+      name: describeRules
+      description: Amazon Elastic Load Balancing Describe Listener Rules
+      operations:
+      - method: GET
+        name: describeRules
+        description: Amazon Elastic Load Balancing Describe Listener Rules
+        call: api.describeRules
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    port: 9192
+    namespace: amazon-elastic-load-balancing-mcp
+    transport: http
+    description: MCP server for AI-assisted Amazon Elastic Load Balancing management.
+    tools:
+    - name: createLoadBalancer
+      description: Amazon Elastic Load Balancing Create a Load Balancer
+      hints:
+        readOnly: true
+      call: api.createLoadBalancer
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: describeLoadBalancers
+      description: Amazon Elastic Load Balancing Describe Load Balancers
+      hints:
+        readOnly: true
+      call: api.describeLoadBalancers
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: deleteLoadBalancer
+      description: Amazon Elastic Load Balancing Delete a Load Balancer
+      hints:
+        readOnly: true
+      call: api.deleteLoadBalancer
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: modifyLoadBalancerAttributes
+      description: Amazon Elastic Load Balancing Modify Load Balancer Attributes
+      hints:
+        readOnly: true
+      call: api.modifyLoadBalancerAttributes
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: createTargetGroup
+      description: Amazon Elastic Load Balancing Create a Target Group
+      hints:
+        readOnly: true
+      call: api.createTargetGroup
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: describeTargetGroups
+      description: Amazon Elastic Load Balancing Describe Target Groups
+      hints:
+        readOnly: true
+      call: api.describeTargetGroups
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: registerTargets
+      description: Amazon Elastic Load Balancing Register Targets with a Target Group
+      hints:
+        readOnly: true
+      call: api.registerTargets
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: deregisterTargets
+      description: Amazon Elastic Load Balancing Deregister Targets from a Target Group
+      hints:
+        readOnly: true
+      call: api.deregisterTargets
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: describeTargetHealth
+      description: Amazon Elastic Load Balancing Describe Target Health
+      hints:
+        readOnly: true
+      call: api.describeTargetHealth
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: createListener
+      description: Amazon Elastic Load Balancing Create a Listener
+      hints:
+        readOnly: true
+      call: api.createListener
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: describeListeners
+      description: Amazon Elastic Load Balancing Describe Listeners
+      hints:
+        readOnly: true
+      call: api.describeListeners
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: createRule
+      description: Amazon Elastic Load Balancing Create a Listener Rule
+      hints:
+        readOnly: true
+      call: api.createRule
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: describeRules
+      description: Amazon Elastic Load Balancing Describe Listener Rules
+      hints:
+        readOnly: true
+      call: api.describeRules
+      outputParameters:
+      - type: object
+        mapping: $.

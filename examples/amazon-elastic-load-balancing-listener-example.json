@@ -1,0 +1,15 @@
+{
+  "listenerArn": "example-value",
+  "loadBalancerArn": "example-value",
+  "port": 13,
+  "protocol": "UDP",
+  "certificates": [
+    {
+      "certificateArn": "example-value"
+    }
+  ],
+  "sslPolicy": "example-value",
+  "defaultActions": [
+    {}
+  ]
+}
