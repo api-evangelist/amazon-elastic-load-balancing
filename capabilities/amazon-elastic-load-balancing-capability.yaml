@@ -1,278 +1,972 @@
-naftiko: 1.0.0-alpha1
+naftiko: 1.0.0-alpha2
 info:
-  label: Amazon Elastic Load Balancing Management
-  description: Unified capability for managing Amazon Elastic Load Balancing resources. Combines Amazon Elastic Load Balancing APIs for Cloud Architect workflows in Network Traffic Management.
+  label: Amazon Elastic Load Balancing v2 API
+  description: Amazon Elastic Load Balancing automatically distributes incoming application traffic across multiple targets,
+    such as Amazon EC2 instances, containers, IP addresses, and Lambda functions. It supports Application Load Balancers,
+    Network Load Balancers, and Gateway Load Balancers.
   tags:
-  - Amazon Web Services
-  - Load Balancing
-  - Networking
-  created: '2026-04-19'
-  modified: '2026-04-19'
-binds:
-- namespace: env
-  keys:
-    AWS_API_KEY: AWS_API_KEY
-    AWS_REGION: AWS_REGION
+  - Amazon
+  - Elastic
+  - Load
+  - Balancing
+  - API
+  created: '2026-05-06'
+  modified: '2026-05-06'
 capability:
   consumes:
-  - import: elastic_load_balancing
-    location: ./shared/elastic-load-balancing.yaml
+  - type: http
+    namespace: amazon-elastic-load-balancing
+    baseUri: https://elasticloadbalancing.us-east-1.amazonaws.com
+    description: Amazon Elastic Load Balancing v2 API HTTP API.
+    authentication:
+      type: apikey
+      in: header
+      name: Authorization
+      value: '{{AMAZON_ELASTIC_LOAD_BALANCING_TOKEN}}'
+    resources:
+    - name: action-createloadbalancer
+      path: /?Action=CreateLoadBalancer
+      operations:
+      - name: createloadbalancer
+        method: GET
+        description: Amazon Elastic Load Balancing Create a Load Balancer
+        inputParameters:
+        - name: Name
+          in: query
+          type: string
+          required: true
+          description: The name of the load balancer. Must be unique per region per account, can have a maximum of 32 characters.
+        - name: Subnets
+          in: query
+          type: array
+          description: The IDs of the subnets. You can specify only one subnet per Availability Zone.
+        - name: SecurityGroups
+          in: query
+          type: array
+          description: The IDs of the security groups for the load balancer
+        - name: Scheme
+          in: query
+          type: string
+          description: The scheme for the load balancer. An internet-facing load balancer routes requests from clients to
+            targets over the internet. An internal load balancer routes r
+        - name: Type
+          in: query
+          type: string
+          description: The type of load balancer
+        - name: IpAddressType
+          in: query
+          type: string
+          description: The type of IP addresses used by the subnets
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: action-describeloadbalancers
+      path: /?Action=DescribeLoadBalancers
+      operations:
+      - name: describeloadbalancers
+        method: GET
+        description: Amazon Elastic Load Balancing Describe Load Balancers
+        inputParameters:
+        - name: LoadBalancerArns
+          in: query
+          type: array
+          description: The Amazon Resource Names (ARN) of the load balancers
+        - name: Names
+          in: query
+          type: array
+          description: The names of the load balancers
+        - name: Marker
+          in: query
+          type: string
+          description: The marker for the next set of results
+        - name: PageSize
+          in: query
+          type: integer
+          description: The maximum number of results to return
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: action-deleteloadbalancer
+      path: /?Action=DeleteLoadBalancer
+      operations:
+      - name: deleteloadbalancer
+        method: GET
+        description: Amazon Elastic Load Balancing Delete a Load Balancer
+        inputParameters:
+        - name: LoadBalancerArn
+          in: query
+          type: string
+          required: true
+          description: The Amazon Resource Name (ARN) of the load balancer
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: action-modifyloadbalancerattributes
+      path: /?Action=ModifyLoadBalancerAttributes
+      operations:
+      - name: modifyloadbalancerattributes
+        method: GET
+        description: Amazon Elastic Load Balancing Modify Load Balancer Attributes
+        inputParameters:
+        - name: LoadBalancerArn
+          in: query
+          type: string
+          required: true
+          description: The Amazon Resource Name (ARN) of the load balancer
+        - name: Attributes.member.1.Key
+          in: query
+          type: string
+          description: The name of the attribute
+        - name: Attributes.member.1.Value
+          in: query
+          type: string
+          description: The value of the attribute
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: action-createtargetgroup
+      path: /?Action=CreateTargetGroup
+      operations:
+      - name: createtargetgroup
+        method: GET
+        description: Amazon Elastic Load Balancing Create a Target Group
+        inputParameters:
+        - name: Name
+          in: query
+          type: string
+          required: true
+          description: The name of the target group. Must be unique per region per account.
+        - name: Protocol
+          in: query
+          type: string
+          description: The protocol to use for routing traffic to the targets
+        - name: Port
+          in: query
+          type: integer
+          description: The port on which the targets receive traffic
+        - name: VpcId
+          in: query
+          type: string
+          description: The identifier of the VPC for the targets
+        - name: HealthCheckProtocol
+          in: query
+          type: string
+          description: The protocol to use for health checks
+        - name: HealthCheckPort
+          in: query
+          type: string
+          description: The port to use for health checks
+        - name: HealthCheckPath
+          in: query
+          type: string
+          description: The destination for health checks on the targets
+        - name: TargetType
+          in: query
+          type: string
+          description: The type of target to register with the target group
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: action-describetargetgroups
+      path: /?Action=DescribeTargetGroups
+      operations:
+      - name: describetargetgroups
+        method: GET
+        description: Amazon Elastic Load Balancing Describe Target Groups
+        inputParameters:
+        - name: LoadBalancerArn
+          in: query
+          type: string
+          description: The ARN of the load balancer
+        - name: TargetGroupArns
+          in: query
+          type: array
+          description: The ARNs of the target groups
+        - name: Names
+          in: query
+          type: array
+          description: The names of the target groups
+        - name: Marker
+          in: query
+          type: string
+          description: The marker for the next set of results
+        - name: PageSize
+          in: query
+          type: integer
+          description: The maximum number of results to return
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: action-registertargets
+      path: /?Action=RegisterTargets
+      operations:
+      - name: registertargets
+        method: GET
+        description: Amazon Elastic Load Balancing Register Targets with a Target Group
+        inputParameters:
+        - name: TargetGroupArn
+          in: query
+          type: string
+          required: true
+          description: The ARN of the target group
+        - name: Targets.member.1.Id
+          in: query
+          type: string
+          required: true
+          description: The ID of the target (instance ID, IP address, or Lambda ARN)
+        - name: Targets.member.1.Port
+          in: query
+          type: integer
+          description: The port on which the target is listening
+        - name: Targets.member.1.AvailabilityZone
+          in: query
+          type: string
+          description: The Availability Zone where the target is located
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: action-deregistertargets
+      path: /?Action=DeregisterTargets
+      operations:
+      - name: deregistertargets
+        method: GET
+        description: Amazon Elastic Load Balancing Deregister Targets from a Target Group
+        inputParameters:
+        - name: TargetGroupArn
+          in: query
+          type: string
+          required: true
+          description: The ARN of the target group
+        - name: Targets.member.1.Id
+          in: query
+          type: string
+          required: true
+          description: The ID of the target
+        - name: Targets.member.1.Port
+          in: query
+          type: integer
+          description: The port on which the target is listening
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: action-describetargethealth
+      path: /?Action=DescribeTargetHealth
+      operations:
+      - name: describetargethealth
+        method: GET
+        description: Amazon Elastic Load Balancing Describe Target Health
+        inputParameters:
+        - name: TargetGroupArn
+          in: query
+          type: string
+          required: true
+          description: The ARN of the target group
+        - name: Targets.member.1.Id
+          in: query
+          type: string
+          description: The ID of the target
+        - name: Targets.member.1.Port
+          in: query
+          type: integer
+          description: The port on which the target is listening
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: action-createlistener
+      path: /?Action=CreateListener
+      operations:
+      - name: createlistener
+        method: GET
+        description: Amazon Elastic Load Balancing Create a Listener
+        inputParameters:
+        - name: LoadBalancerArn
+          in: query
+          type: string
+          required: true
+          description: The ARN of the load balancer
+        - name: Protocol
+          in: query
+          type: string
+          description: The protocol for connections from clients to the load balancer
+        - name: Port
+          in: query
+          type: integer
+          required: true
+          description: The port on which the load balancer is listening
+        - name: SslPolicy
+          in: query
+          type: string
+          description: The security policy that defines which protocols and ciphers are supported
+        - name: DefaultActions.member.1.Type
+          in: query
+          type: string
+          required: true
+          description: The type of action
+        - name: DefaultActions.member.1.TargetGroupArn
+          in: query
+          type: string
+          description: The ARN of the target group for forward actions
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: action-describelisteners
+      path: /?Action=DescribeListeners
+      operations:
+      - name: describelisteners
+        method: GET
+        description: Amazon Elastic Load Balancing Describe Listeners
+        inputParameters:
+        - name: LoadBalancerArn
+          in: query
+          type: string
+          description: The ARN of the load balancer
+        - name: ListenerArns
+          in: query
+          type: array
+          description: The ARNs of the listeners
+        - name: Marker
+          in: query
+          type: string
+          description: The marker for the next set of results
+        - name: PageSize
+          in: query
+          type: integer
+          description: The maximum number of results to return
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: action-createrule
+      path: /?Action=CreateRule
+      operations:
+      - name: createrule
+        method: GET
+        description: Amazon Elastic Load Balancing Create a Listener Rule
+        inputParameters:
+        - name: ListenerArn
+          in: query
+          type: string
+          required: true
+          description: The ARN of the listener
+        - name: Priority
+          in: query
+          type: integer
+          required: true
+          description: The rule priority. Must be unique within the listener.
+        - name: Conditions.member.1.Field
+          in: query
+          type: string
+          description: The name of the field (host-header, path-pattern, etc.)
+        - name: Conditions.member.1.Values
+          in: query
+          type: array
+          description: The condition values
+        - name: Actions.member.1.Type
+          in: query
+          type: string
+          required: true
+          description: The type of action
+        - name: Actions.member.1.TargetGroupArn
+          in: query
+          type: string
+          description: The ARN of the target group for forward actions
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: action-describerules
+      path: /?Action=DescribeRules
+      operations:
+      - name: describerules
+        method: GET
+        description: Amazon Elastic Load Balancing Describe Listener Rules
+        inputParameters:
+        - name: ListenerArn
+          in: query
+          type: string
+          description: The ARN of the listener
+        - name: RuleArns
+          in: query
+          type: array
+          description: The ARNs of the rules
+        - name: Marker
+          in: query
+          type: string
+          description: The marker for the next set of results
+        - name: PageSize
+          in: query
+          type: integer
+          description: The maximum number of results to return
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
   exposes:
   - type: rest
-    port: 8182
-    namespace: amazon-elastic-load-balancing-workflow-api
-    description: Unified REST API for Amazon Elastic Load Balancing management.
+    port: 8080
+    namespace: amazon-elastic-load-balancing-rest
+    description: REST adapter for Amazon Elastic Load Balancing v2 API.
     resources:
-    - path: /v1/createLoadBalancer
-      name: createLoadBalancer
-      description: Amazon Elastic Load Balancing Create a Load Balancer
+    - path: /?Action=CreateLoadBalancer
+      name: createloadbalancer
       operations:
       - method: GET
-        name: createLoadBalancer
+        name: createloadbalancer
         description: Amazon Elastic Load Balancing Create a Load Balancer
-        call: api.createLoadBalancer
+        call: amazon-elastic-load-balancing.createloadbalancer
         outputParameters:
         - type: object
           mapping: $.
-    - path: /v1/describeLoadBalancers
-      name: describeLoadBalancers
-      description: Amazon Elastic Load Balancing Describe Load Balancers
+    - path: /?Action=DescribeLoadBalancers
+      name: describeloadbalancers
       operations:
       - method: GET
-        name: describeLoadBalancers
+        name: describeloadbalancers
         description: Amazon Elastic Load Balancing Describe Load Balancers
-        call: api.describeLoadBalancers
+        call: amazon-elastic-load-balancing.describeloadbalancers
         outputParameters:
         - type: object
           mapping: $.
-    - path: /v1/deleteLoadBalancer
-      name: deleteLoadBalancer
-      description: Amazon Elastic Load Balancing Delete a Load Balancer
+    - path: /?Action=DeleteLoadBalancer
+      name: deleteloadbalancer
       operations:
       - method: GET
-        name: deleteLoadBalancer
+        name: deleteloadbalancer
         description: Amazon Elastic Load Balancing Delete a Load Balancer
-        call: api.deleteLoadBalancer
+        call: amazon-elastic-load-balancing.deleteloadbalancer
         outputParameters:
         - type: object
           mapping: $.
-    - path: /v1/modifyLoadBalancerAttributes
-      name: modifyLoadBalancerAttributes
-      description: Amazon Elastic Load Balancing Modify Load Balancer Attributes
+    - path: /?Action=ModifyLoadBalancerAttributes
+      name: modifyloadbalancerattributes
       operations:
       - method: GET
-        name: modifyLoadBalancerAttributes
+        name: modifyloadbalancerattributes
         description: Amazon Elastic Load Balancing Modify Load Balancer Attributes
-        call: api.modifyLoadBalancerAttributes
+        call: amazon-elastic-load-balancing.modifyloadbalancerattributes
         outputParameters:
         - type: object
           mapping: $.
-    - path: /v1/createTargetGroup
-      name: createTargetGroup
-      description: Amazon Elastic Load Balancing Create a Target Group
+    - path: /?Action=CreateTargetGroup
+      name: createtargetgroup
       operations:
       - method: GET
-        name: createTargetGroup
+        name: createtargetgroup
         description: Amazon Elastic Load Balancing Create a Target Group
-        call: api.createTargetGroup
+        call: amazon-elastic-load-balancing.createtargetgroup
         outputParameters:
         - type: object
           mapping: $.
-    - path: /v1/describeTargetGroups
-      name: describeTargetGroups
-      description: Amazon Elastic Load Balancing Describe Target Groups
+    - path: /?Action=DescribeTargetGroups
+      name: describetargetgroups
       operations:
       - method: GET
-        name: describeTargetGroups
+        name: describetargetgroups
         description: Amazon Elastic Load Balancing Describe Target Groups
-        call: api.describeTargetGroups
+        call: amazon-elastic-load-balancing.describetargetgroups
         outputParameters:
         - type: object
           mapping: $.
-    - path: /v1/registerTargets
-      name: registerTargets
-      description: Amazon Elastic Load Balancing Register Targets with a Target Group
+    - path: /?Action=RegisterTargets
+      name: registertargets
       operations:
       - method: GET
-        name: registerTargets
+        name: registertargets
         description: Amazon Elastic Load Balancing Register Targets with a Target Group
-        call: api.registerTargets
+        call: amazon-elastic-load-balancing.registertargets
         outputParameters:
         - type: object
           mapping: $.
-    - path: /v1/deregisterTargets
-      name: deregisterTargets
-      description: Amazon Elastic Load Balancing Deregister Targets from a Target Group
+    - path: /?Action=DeregisterTargets
+      name: deregistertargets
       operations:
       - method: GET
-        name: deregisterTargets
+        name: deregistertargets
         description: Amazon Elastic Load Balancing Deregister Targets from a Target Group
-        call: api.deregisterTargets
+        call: amazon-elastic-load-balancing.deregistertargets
         outputParameters:
         - type: object
           mapping: $.
-    - path: /v1/describeTargetHealth
-      name: describeTargetHealth
-      description: Amazon Elastic Load Balancing Describe Target Health
+    - path: /?Action=DescribeTargetHealth
+      name: describetargethealth
       operations:
       - method: GET
-        name: describeTargetHealth
+        name: describetargethealth
         description: Amazon Elastic Load Balancing Describe Target Health
-        call: api.describeTargetHealth
+        call: amazon-elastic-load-balancing.describetargethealth
         outputParameters:
         - type: object
           mapping: $.
-    - path: /v1/createListener
-      name: createListener
-      description: Amazon Elastic Load Balancing Create a Listener
+    - path: /?Action=CreateListener
+      name: createlistener
       operations:
       - method: GET
-        name: createListener
+        name: createlistener
         description: Amazon Elastic Load Balancing Create a Listener
-        call: api.createListener
+        call: amazon-elastic-load-balancing.createlistener
         outputParameters:
         - type: object
           mapping: $.
-    - path: /v1/describeListeners
-      name: describeListeners
-      description: Amazon Elastic Load Balancing Describe Listeners
+    - path: /?Action=DescribeListeners
+      name: describelisteners
       operations:
       - method: GET
-        name: describeListeners
+        name: describelisteners
         description: Amazon Elastic Load Balancing Describe Listeners
-        call: api.describeListeners
+        call: amazon-elastic-load-balancing.describelisteners
         outputParameters:
         - type: object
           mapping: $.
-    - path: /v1/createRule
-      name: createRule
-      description: Amazon Elastic Load Balancing Create a Listener Rule
+    - path: /?Action=CreateRule
+      name: createrule
       operations:
       - method: GET
-        name: createRule
+        name: createrule
         description: Amazon Elastic Load Balancing Create a Listener Rule
-        call: api.createRule
+        call: amazon-elastic-load-balancing.createrule
         outputParameters:
         - type: object
           mapping: $.
-    - path: /v1/describeRules
-      name: describeRules
-      description: Amazon Elastic Load Balancing Describe Listener Rules
+    - path: /?Action=DescribeRules
+      name: describerules
       operations:
       - method: GET
-        name: describeRules
+        name: describerules
         description: Amazon Elastic Load Balancing Describe Listener Rules
-        call: api.describeRules
+        call: amazon-elastic-load-balancing.describerules
         outputParameters:
         - type: object
           mapping: $.
   - type: mcp
-    port: 9192
+    port: 9090
     namespace: amazon-elastic-load-balancing-mcp
     transport: http
-    description: MCP server for AI-assisted Amazon Elastic Load Balancing management.
+    description: MCP adapter for Amazon Elastic Load Balancing v2 API for AI agent use.
     tools:
-    - name: createLoadBalancer
+    - name: createloadbalancer
       description: Amazon Elastic Load Balancing Create a Load Balancer
       hints:
         readOnly: true
-      call: api.createLoadBalancer
+        destructive: false
+        idempotent: true
+      call: amazon-elastic-load-balancing.createloadbalancer
+      with:
+        Name: tools.Name
+        Subnets: tools.Subnets
+        SecurityGroups: tools.SecurityGroups
+        Scheme: tools.Scheme
+        Type: tools.Type
+        IpAddressType: tools.IpAddressType
+      inputParameters:
+      - name: Name
+        type: string
+        description: The name of the load balancer. Must be unique per region per account, can have a maximum of 32 characters.
+        required: true
+      - name: Subnets
+        type: array
+        description: The IDs of the subnets. You can specify only one subnet per Availability Zone.
+      - name: SecurityGroups
+        type: array
+        description: The IDs of the security groups for the load balancer
+      - name: Scheme
+        type: string
+        description: The scheme for the load balancer. An internet-facing load balancer routes requests from clients to targets
+          over the internet. An internal load balancer routes r
+      - name: Type
+        type: string
+        description: The type of load balancer
+      - name: IpAddressType
+        type: string
+        description: The type of IP addresses used by the subnets
       outputParameters:
       - type: object
         mapping: $.
-    - name: describeLoadBalancers
+    - name: describeloadbalancers
       description: Amazon Elastic Load Balancing Describe Load Balancers
       hints:
         readOnly: true
-      call: api.describeLoadBalancers
+        destructive: false
+        idempotent: true
+      call: amazon-elastic-load-balancing.describeloadbalancers
+      with:
+        LoadBalancerArns: tools.LoadBalancerArns
+        Names: tools.Names
+        Marker: tools.Marker
+        PageSize: tools.PageSize
+      inputParameters:
+      - name: LoadBalancerArns
+        type: array
+        description: The Amazon Resource Names (ARN) of the load balancers
+      - name: Names
+        type: array
+        description: The names of the load balancers
+      - name: Marker
+        type: string
+        description: The marker for the next set of results
+      - name: PageSize
+        type: integer
+        description: The maximum number of results to return
       outputParameters:
       - type: object
         mapping: $.
-    - name: deleteLoadBalancer
+    - name: deleteloadbalancer
       description: Amazon Elastic Load Balancing Delete a Load Balancer
       hints:
         readOnly: true
-      call: api.deleteLoadBalancer
+        destructive: false
+        idempotent: true
+      call: amazon-elastic-load-balancing.deleteloadbalancer
+      with:
+        LoadBalancerArn: tools.LoadBalancerArn
+      inputParameters:
+      - name: LoadBalancerArn
+        type: string
+        description: The Amazon Resource Name (ARN) of the load balancer
+        required: true
       outputParameters:
       - type: object
         mapping: $.
-    - name: modifyLoadBalancerAttributes
+    - name: modifyloadbalancerattributes
       description: Amazon Elastic Load Balancing Modify Load Balancer Attributes
       hints:
         readOnly: true
-      call: api.modifyLoadBalancerAttributes
+        destructive: false
+        idempotent: true
+      call: amazon-elastic-load-balancing.modifyloadbalancerattributes
+      with:
+        LoadBalancerArn: tools.LoadBalancerArn
+        Attributes.member.1.Key: tools.Attributes.member.1.Key
+        Attributes.member.1.Value: tools.Attributes.member.1.Value
+      inputParameters:
+      - name: LoadBalancerArn
+        type: string
+        description: The Amazon Resource Name (ARN) of the load balancer
+        required: true
+      - name: Attributes.member.1.Key
+        type: string
+        description: The name of the attribute
+      - name: Attributes.member.1.Value
+        type: string
+        description: The value of the attribute
       outputParameters:
       - type: object
         mapping: $.
-    - name: createTargetGroup
+    - name: createtargetgroup
       description: Amazon Elastic Load Balancing Create a Target Group
       hints:
         readOnly: true
-      call: api.createTargetGroup
+        destructive: false
+        idempotent: true
+      call: amazon-elastic-load-balancing.createtargetgroup
+      with:
+        Name: tools.Name
+        Protocol: tools.Protocol
+        Port: tools.Port
+        VpcId: tools.VpcId
+        HealthCheckProtocol: tools.HealthCheckProtocol
+        HealthCheckPort: tools.HealthCheckPort
+        HealthCheckPath: tools.HealthCheckPath
+        TargetType: tools.TargetType
+      inputParameters:
+      - name: Name
+        type: string
+        description: The name of the target group. Must be unique per region per account.
+        required: true
+      - name: Protocol
+        type: string
+        description: The protocol to use for routing traffic to the targets
+      - name: Port
+        type: integer
+        description: The port on which the targets receive traffic
+      - name: VpcId
+        type: string
+        description: The identifier of the VPC for the targets
+      - name: HealthCheckProtocol
+        type: string
+        description: The protocol to use for health checks
+      - name: HealthCheckPort
+        type: string
+        description: The port to use for health checks
+      - name: HealthCheckPath
+        type: string
+        description: The destination for health checks on the targets
+      - name: TargetType
+        type: string
+        description: The type of target to register with the target group
       outputParameters:
       - type: object
         mapping: $.
-    - name: describeTargetGroups
+    - name: describetargetgroups
       description: Amazon Elastic Load Balancing Describe Target Groups
       hints:
         readOnly: true
-      call: api.describeTargetGroups
+        destructive: false
+        idempotent: true
+      call: amazon-elastic-load-balancing.describetargetgroups
+      with:
+        LoadBalancerArn: tools.LoadBalancerArn
+        TargetGroupArns: tools.TargetGroupArns
+        Names: tools.Names
+        Marker: tools.Marker
+        PageSize: tools.PageSize
+      inputParameters:
+      - name: LoadBalancerArn
+        type: string
+        description: The ARN of the load balancer
+      - name: TargetGroupArns
+        type: array
+        description: The ARNs of the target groups
+      - name: Names
+        type: array
+        description: The names of the target groups
+      - name: Marker
+        type: string
+        description: The marker for the next set of results
+      - name: PageSize
+        type: integer
+        description: The maximum number of results to return
       outputParameters:
       - type: object
         mapping: $.
-    - name: registerTargets
+    - name: registertargets
       description: Amazon Elastic Load Balancing Register Targets with a Target Group
       hints:
         readOnly: true
-      call: api.registerTargets
+        destructive: false
+        idempotent: true
+      call: amazon-elastic-load-balancing.registertargets
+      with:
+        TargetGroupArn: tools.TargetGroupArn
+        Targets.member.1.Id: tools.Targets.member.1.Id
+        Targets.member.1.Port: tools.Targets.member.1.Port
+        Targets.member.1.AvailabilityZone: tools.Targets.member.1.AvailabilityZone
+      inputParameters:
+      - name: TargetGroupArn
+        type: string
+        description: The ARN of the target group
+        required: true
+      - name: Targets.member.1.Id
+        type: string
+        description: The ID of the target (instance ID, IP address, or Lambda ARN)
+        required: true
+      - name: Targets.member.1.Port
+        type: integer
+        description: The port on which the target is listening
+      - name: Targets.member.1.AvailabilityZone
+        type: string
+        description: The Availability Zone where the target is located
       outputParameters:
       - type: object
         mapping: $.
-    - name: deregisterTargets
+    - name: deregistertargets
       description: Amazon Elastic Load Balancing Deregister Targets from a Target Group
       hints:
         readOnly: true
-      call: api.deregisterTargets
+        destructive: false
+        idempotent: true
+      call: amazon-elastic-load-balancing.deregistertargets
+      with:
+        TargetGroupArn: tools.TargetGroupArn
+        Targets.member.1.Id: tools.Targets.member.1.Id
+        Targets.member.1.Port: tools.Targets.member.1.Port
+      inputParameters:
+      - name: TargetGroupArn
+        type: string
+        description: The ARN of the target group
+        required: true
+      - name: Targets.member.1.Id
+        type: string
+        description: The ID of the target
+        required: true
+      - name: Targets.member.1.Port
+        type: integer
+        description: The port on which the target is listening
       outputParameters:
       - type: object
         mapping: $.
-    - name: describeTargetHealth
+    - name: describetargethealth
       description: Amazon Elastic Load Balancing Describe Target Health
       hints:
         readOnly: true
-      call: api.describeTargetHealth
+        destructive: false
+        idempotent: true
+      call: amazon-elastic-load-balancing.describetargethealth
+      with:
+        TargetGroupArn: tools.TargetGroupArn
+        Targets.member.1.Id: tools.Targets.member.1.Id
+        Targets.member.1.Port: tools.Targets.member.1.Port
+      inputParameters:
+      - name: TargetGroupArn
+        type: string
+        description: The ARN of the target group
+        required: true
+      - name: Targets.member.1.Id
+        type: string
+        description: The ID of the target
+      - name: Targets.member.1.Port
+        type: integer
+        description: The port on which the target is listening
       outputParameters:
       - type: object
         mapping: $.
-    - name: createListener
+    - name: createlistener
       description: Amazon Elastic Load Balancing Create a Listener
       hints:
         readOnly: true
-      call: api.createListener
+        destructive: false
+        idempotent: true
+      call: amazon-elastic-load-balancing.createlistener
+      with:
+        LoadBalancerArn: tools.LoadBalancerArn
+        Protocol: tools.Protocol
+        Port: tools.Port
+        SslPolicy: tools.SslPolicy
+        DefaultActions.member.1.Type: tools.DefaultActions.member.1.Type
+        DefaultActions.member.1.TargetGroupArn: tools.DefaultActions.member.1.TargetGroupArn
+      inputParameters:
+      - name: LoadBalancerArn
+        type: string
+        description: The ARN of the load balancer
+        required: true
+      - name: Protocol
+        type: string
+        description: The protocol for connections from clients to the load balancer
+      - name: Port
+        type: integer
+        description: The port on which the load balancer is listening
+        required: true
+      - name: SslPolicy
+        type: string
+        description: The security policy that defines which protocols and ciphers are supported
+      - name: DefaultActions.member.1.Type
+        type: string
+        description: The type of action
+        required: true
+      - name: DefaultActions.member.1.TargetGroupArn
+        type: string
+        description: The ARN of the target group for forward actions
       outputParameters:
       - type: object
         mapping: $.
-    - name: describeListeners
+    - name: describelisteners
       description: Amazon Elastic Load Balancing Describe Listeners
       hints:
         readOnly: true
-      call: api.describeListeners
+        destructive: false
+        idempotent: true
+      call: amazon-elastic-load-balancing.describelisteners
+      with:
+        LoadBalancerArn: tools.LoadBalancerArn
+        ListenerArns: tools.ListenerArns
+        Marker: tools.Marker
+        PageSize: tools.PageSize
+      inputParameters:
+      - name: LoadBalancerArn
+        type: string
+        description: The ARN of the load balancer
+      - name: ListenerArns
+        type: array
+        description: The ARNs of the listeners
+      - name: Marker
+        type: string
+        description: The marker for the next set of results
+      - name: PageSize
+        type: integer
+        description: The maximum number of results to return
       outputParameters:
       - type: object
         mapping: $.
-    - name: createRule
+    - name: createrule
       description: Amazon Elastic Load Balancing Create a Listener Rule
       hints:
         readOnly: true
-      call: api.createRule
+        destructive: false
+        idempotent: true
+      call: amazon-elastic-load-balancing.createrule
+      with:
+        ListenerArn: tools.ListenerArn
+        Priority: tools.Priority
+        Conditions.member.1.Field: tools.Conditions.member.1.Field
+        Conditions.member.1.Values: tools.Conditions.member.1.Values
+        Actions.member.1.Type: tools.Actions.member.1.Type
+        Actions.member.1.TargetGroupArn: tools.Actions.member.1.TargetGroupArn
+      inputParameters:
+      - name: ListenerArn
+        type: string
+        description: The ARN of the listener
+        required: true
+      - name: Priority
+        type: integer
+        description: The rule priority. Must be unique within the listener.
+        required: true
+      - name: Conditions.member.1.Field
+        type: string
+        description: The name of the field (host-header, path-pattern, etc.)
+      - name: Conditions.member.1.Values
+        type: array
+        description: The condition values
+      - name: Actions.member.1.Type
+        type: string
+        description: The type of action
+        required: true
+      - name: Actions.member.1.TargetGroupArn
+        type: string
+        description: The ARN of the target group for forward actions
       outputParameters:
       - type: object
         mapping: $.
-    - name: describeRules
+    - name: describerules
       description: Amazon Elastic Load Balancing Describe Listener Rules
       hints:
         readOnly: true
-      call: api.describeRules
+        destructive: false
+        idempotent: true
+      call: amazon-elastic-load-balancing.describerules
+      with:
+        ListenerArn: tools.ListenerArn
+        RuleArns: tools.RuleArns
+        Marker: tools.Marker
+        PageSize: tools.PageSize
+      inputParameters:
+      - name: ListenerArn
+        type: string
+        description: The ARN of the listener
+      - name: RuleArns
+        type: array
+        description: The ARNs of the rules
+      - name: Marker
+        type: string
+        description: The marker for the next set of results
+      - name: PageSize
+        type: integer
+        description: The maximum number of results to return
       outputParameters:
       - type: object
         mapping: $.
+binds:
+- namespace: env
+  keys:
+    AMAZON_ELASTIC_LOAD_BALANCING_TOKEN: AMAZON_ELASTIC_LOAD_BALANCING_TOKEN
