@@ -1,0 +1,189 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Amazon Elastic Load Balancing v2 API — Target Groups
+  description: 'Amazon Elastic Load Balancing v2 API — Target Groups. 2 operations. Lead operation: Amazon Elastic Load Balancing
+    Create a Target Group. Self-contained Naftiko capability covering one Amazon Elastic Load Balancing business surface.'
+  tags:
+  - Amazon Elastic Load Balancing
+  - Target Groups
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    AMAZON_ELASTIC_LOAD_BALANCING_API_KEY: AMAZON_ELASTIC_LOAD_BALANCING_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: amazon-elastic-load-balancing-target-groups
+    baseUri: https://elasticloadbalancing.{region}.amazonaws.com
+    description: Amazon Elastic Load Balancing v2 API — Target Groups business capability. Self-contained, no shared references.
+    resources:
+    - name: ?Action=CreateTargetGroup
+      path: /?Action=CreateTargetGroup
+      operations:
+      - name: createtargetgroup
+        method: GET
+        description: Amazon Elastic Load Balancing Create a Target Group
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: Name
+          in: query
+          type: string
+          description: The name of the target group. Must be unique per region per account.
+          required: true
+        - name: Protocol
+          in: query
+          type: string
+          description: The protocol to use for routing traffic to the targets
+        - name: Port
+          in: query
+          type: integer
+          description: The port on which the targets receive traffic
+        - name: VpcId
+          in: query
+          type: string
+          description: The identifier of the VPC for the targets
+        - name: HealthCheckProtocol
+          in: query
+          type: string
+          description: The protocol to use for health checks
+        - name: HealthCheckPort
+          in: query
+          type: string
+          description: The port to use for health checks
+        - name: HealthCheckPath
+          in: query
+          type: string
+          description: The destination for health checks on the targets
+        - name: TargetType
+          in: query
+          type: string
+          description: The type of target to register with the target group
+    - name: ?Action=DescribeTargetGroups
+      path: /?Action=DescribeTargetGroups
+      operations:
+      - name: describetargetgroups
+        method: GET
+        description: Amazon Elastic Load Balancing Describe Target Groups
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: LoadBalancerArn
+          in: query
+          type: string
+          description: The ARN of the load balancer
+        - name: TargetGroupArns
+          in: query
+          type: array
+          description: The ARNs of the target groups
+        - name: Names
+          in: query
+          type: array
+          description: The names of the target groups
+        - name: Marker
+          in: query
+          type: string
+          description: The marker for the next set of results
+        - name: PageSize
+          in: query
+          type: integer
+          description: The maximum number of results to return
+    authentication:
+      type: apikey
+      key: Authorization
+      value: '{{env.AMAZON_ELASTIC_LOAD_BALANCING_API_KEY}}'
+      placement: header
+  exposes:
+  - type: rest
+    namespace: amazon-elastic-load-balancing-target-groups-rest
+    port: 8080
+    description: REST adapter for Amazon Elastic Load Balancing v2 API — Target Groups. One Spectral-compliant resource per
+      consumed operation, prefixed with /v1.
+    resources:
+    - path: /v1/action-createtargetgroup
+      name: action-createtargetgroup
+      description: REST surface for ?Action=CreateTargetGroup.
+      operations:
+      - method: GET
+        name: createtargetgroup
+        description: Amazon Elastic Load Balancing Create a Target Group
+        call: amazon-elastic-load-balancing-target-groups.createtargetgroup
+        with:
+          Name: rest.Name
+          Protocol: rest.Protocol
+          Port: rest.Port
+          VpcId: rest.VpcId
+          HealthCheckProtocol: rest.HealthCheckProtocol
+          HealthCheckPort: rest.HealthCheckPort
+          HealthCheckPath: rest.HealthCheckPath
+          TargetType: rest.TargetType
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/action-describetargetgroups
+      name: action-describetargetgroups
+      description: REST surface for ?Action=DescribeTargetGroups.
+      operations:
+      - method: GET
+        name: describetargetgroups
+        description: Amazon Elastic Load Balancing Describe Target Groups
+        call: amazon-elastic-load-balancing-target-groups.describetargetgroups
+        with:
+          LoadBalancerArn: rest.LoadBalancerArn
+          TargetGroupArns: rest.TargetGroupArns
+          Names: rest.Names
+          Marker: rest.Marker
+          PageSize: rest.PageSize
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: amazon-elastic-load-balancing-target-groups-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Amazon Elastic Load Balancing v2 API — Target Groups. One tool per consumed operation, routed
+      inline through this capability's consumes block.
+    tools:
+    - name: amazon-elastic-load-balancing-create
+      description: Amazon Elastic Load Balancing Create a Target Group
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: amazon-elastic-load-balancing-target-groups.createtargetgroup
+      with:
+        Name: tools.Name
+        Protocol: tools.Protocol
+        Port: tools.Port
+        VpcId: tools.VpcId
+        HealthCheckProtocol: tools.HealthCheckProtocol
+        HealthCheckPort: tools.HealthCheckPort
+        HealthCheckPath: tools.HealthCheckPath
+        TargetType: tools.TargetType
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: amazon-elastic-load-balancing-describe
+      description: Amazon Elastic Load Balancing Describe Target Groups
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: amazon-elastic-load-balancing-target-groups.describetargetgroups
+      with:
+        LoadBalancerArn: tools.LoadBalancerArn
+        TargetGroupArns: tools.TargetGroupArns
+        Names: tools.Names
+        Marker: tools.Marker
+        PageSize: tools.PageSize
+      outputParameters:
+      - type: object
+        mapping: $.

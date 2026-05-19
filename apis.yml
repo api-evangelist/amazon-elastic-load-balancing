@@ -1,10 +1,11 @@
 name: Amazon Elastic Load Balancing
-description: Amazon Elastic Load Balancing automatically distributes incoming application traffic across multiple targets, such as Amazon EC2 instances, containers, IP addresses, and Lambda functions,
-  ensuring high availability and fault tolerance for your applications.
+description: Amazon Elastic Load Balancing automatically distributes incoming application traffic across multiple targets,
+  such as Amazon EC2 instances, containers, IP addresses, and Lambda functions, ensuring high availability and fault tolerance
+  for your applications.
 image: https://a0.awsstatic.com/libra-css/images/logos/aws_logo_smile_1200x630.png
 url: https://aws.amazon.com/elasticloadbalancing/
 created: '2024-01-15'
-modified: '2026-04-19'
+modified: '2026-05-19'
 specificationVersion: '0.19'
 tags:
 - Amazon Web Services
@@ -15,7 +16,8 @@ tags:
 - Scalability
 apis:
 - name: Elastic Load Balancing v2 API
-  description: API for managing Application Load Balancers (ALB), Network Load Balancers (NLB), and Gateway Load Balancers (GLB) with advanced routing and target group management.
+  description: API for managing Application Load Balancers (ALB), Network Load Balancers (NLB), and Gateway Load Balancers
+    (GLB) with advanced routing and target group management.
   humanURL: https://aws.amazon.com/elasticloadbalancing/
   baseURL: https://elasticloadbalancing.amazonaws.com
   tags:
@@ -45,6 +47,16 @@ apis:
     url: json-schema/amazon-elastic-load-balancing-create-load-balancer-response-schema.json
   - type: JSONLD
     url: json-ld/amazon-elastic-load-balancing-context.jsonld
+  - type: NaftikoCapability
+    url: capabilities/amazon-elastic-load-balancing-listeners.yaml
+  - type: NaftikoCapability
+    url: capabilities/amazon-elastic-load-balancing-load-balancers.yaml
+  - type: NaftikoCapability
+    url: capabilities/amazon-elastic-load-balancing-rules.yaml
+  - type: NaftikoCapability
+    url: capabilities/amazon-elastic-load-balancing-target-groups.yaml
+  - type: NaftikoCapability
+    url: capabilities/amazon-elastic-load-balancing-targets.yaml
 common:
 - type: Portal
   url: https://aws.amazon.com/
@@ -86,10 +98,6 @@ common:
   url: https://aws.amazon.com/contact-us/
 - type: SpectralRules
   url: rules/amazon-elastic-load-balancing-spectral-rules.yml
-- type: NaftikoCapability
-  url: capabilities/amazon-elastic-load-balancing-capability.yaml
-- type: NaftikoCapability
-  url: capabilities/shared/api.yaml
 - type: Vocabulary
   url: vocabulary/amazon-elastic-load-balancing-vocabulary.yaml
 - type: Features
@@ -129,15 +137,15 @@ common:
 - type: Integrations
   url: https://aws.amazon.com/marketplace
 integrations:
-  - name: Sign in
-  - name: Agent Mode
-  - name: 'Why AWS Marketplace?'
-  - name: Get started in AWS Marketplace
-  - name: Industry
-  - name: Resources
-  - name: Become a Channel Partner
-  - name: Sell in AWS Marketplace
-  - name: Manage Your Account
+- name: Sign in
+- name: Agent Mode
+- name: Why AWS Marketplace?
+- name: Get started in AWS Marketplace
+- name: Industry
+- name: Resources
+- name: Become a Channel Partner
+- name: Sell in AWS Marketplace
+- name: Manage Your Account
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
