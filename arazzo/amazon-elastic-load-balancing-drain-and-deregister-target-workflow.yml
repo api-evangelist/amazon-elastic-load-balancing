@@ -1,0 +1,110 @@
+arazzo: 1.0.1
+info:
+  title: Amazon Elastic Load Balancing Drain and Deregister a Target
+  summary: Confirm a target exists, deregister it, then poll until it has drained.
+  description: >-
+    Safely removes a target from a target group. It first reads the target's
+    current health to confirm it is registered, then deregisters it, and finally
+    polls target health and branches: while the target is still draining it
+    loops back and checks again, and once the target is no longer reported it
+    ends. Each step spells out its request inline so the flow can be read and
+    executed without opening the underlying OpenAPI description. The Elastic
+    Load Balancing v2 API uses the AWS query protocol, so every operation is a
+    GET whose inputs are carried as query parameters rather than a request body.
+  version: 1.0.0
+sourceDescriptions:
+- name: elbv2Api
+  url: ../openapi/amazon-elastic-load-balancing-openapi.yml
+  type: openapi
+workflows:
+- workflowId: drain-and-deregister-target
+  summary: Deregister a target and poll until it finishes draining.
+  description: >-
+    Chains describeTargetHealth, deregisterTargets, and a describeTargetHealth
+    poll loop so a target is gracefully removed and the drain is observed to
+    completion.
+  inputs:
+    type: object
+    required:
+    - targetGroupArn
+    - targetId
+    properties:
+      targetGroupArn:
+        type: string
+        description: The ARN of the target group to deregister from.
+      targetId:
+        type: string
+        description: The ID of the target to deregister.
+      targetPort:
+        type: integer
+        description: The port the target is listening on.
+        default: 80
+  steps:
+  - stepId: confirmRegistered
+    description: Read the target's current health to confirm it is registered.
+    operationId: describeTargetHealth
+    parameters:
+    - name: TargetGroupArn
+      in: query
+      value: $inputs.targetGroupArn
+    - name: Targets.member.1.Id
+      in: query
+      value: $inputs.targetId
+    - name: Targets.member.1.Port
+      in: query
+      value: $inputs.targetPort
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      initialState: $response.body#/targetHealthDescriptions/0/targetHealth/state
+  - stepId: deregisterTarget
+    description: Deregister the target so the load balancer begins draining it.
+    operationId: deregisterTargets
+    parameters:
+    - name: TargetGroupArn
+      in: query
+      value: $inputs.targetGroupArn
+    - name: Targets.member.1.Id
+      in: query
+      value: $inputs.targetId
+    - name: Targets.member.1.Port
+      in: query
+      value: $inputs.targetPort
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      deregistered: $statusCode
+  - stepId: pollDrain
+    description: >-
+      Poll the target's health and retry while it is still draining, ending once
+      it is no longer in the draining state.
+    operationId: describeTargetHealth
+    parameters:
+    - name: TargetGroupArn
+      in: query
+      value: $inputs.targetGroupArn
+    - name: Targets.member.1.Id
+      in: query
+      value: $inputs.targetId
+    - name: Targets.member.1.Port
+      in: query
+      value: $inputs.targetPort
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      drainState: $response.body#/targetHealthDescriptions/0/targetHealth/state
+    onSuccess:
+    - name: stillDraining
+      type: retry
+      stepId: pollDrain
+      retryAfter: 15
+      retryLimit: 20
+      criteria:
+      - context: $response.body
+        condition: $.targetHealthDescriptions[0].targetHealth.state == "draining"
+        type: jsonpath
+    - name: drainComplete
+      type: end
+  outputs:
+    initialState: $steps.confirmRegistered.outputs.initialState
+    drainState: $steps.pollDrain.outputs.drainState

@@ -1,0 +1,86 @@
+arazzo: 1.0.1
+info:
+  title: Amazon Elastic Load Balancing Audit Load Balancer Configuration
+  summary: Walk a load balancer's listeners and target groups to inventory its routing.
+  description: >-
+    Produces a read-only inventory of a load balancer's routing configuration.
+    It resolves the load balancer by name, lists its listeners, reads the
+    target groups attached to it, and reads the health of those target groups'
+    members so an operator can audit the full topology in a single run. Each
+    step spells out its request inline so the flow can be read and executed
+    without opening the underlying OpenAPI description. The Elastic Load
+    Balancing v2 API uses the AWS query protocol, so every operation is a GET
+    whose inputs are carried as query parameters rather than a request body.
+  version: 1.0.0
+sourceDescriptions:
+- name: elbv2Api
+  url: ../openapi/amazon-elastic-load-balancing-openapi.yml
+  type: openapi
+workflows:
+- workflowId: audit-load-balancer-configuration
+  summary: Inventory a load balancer's listeners, target groups, and target health.
+  description: >-
+    Chains describeLoadBalancers, describeListeners, describeTargetGroups, and
+    describeTargetHealth so the full routing topology of a named load balancer
+    is gathered for review.
+  inputs:
+    type: object
+    required:
+    - loadBalancerName
+    properties:
+      loadBalancerName:
+        type: string
+        description: The name of the load balancer to audit.
+  steps:
+  - stepId: findLoadBalancer
+    description: Resolve the load balancer ARN from its name.
+    operationId: describeLoadBalancers
+    parameters:
+    - name: Names
+      in: query
+      value: $inputs.loadBalancerName
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      loadBalancerArn: $response.body#/loadBalancers/0/loadBalancerArn
+      stateCode: $response.body#/loadBalancers/0/state/code
+  - stepId: listListeners
+    description: List the listeners attached to the load balancer.
+    operationId: describeListeners
+    parameters:
+    - name: LoadBalancerArn
+      in: query
+      value: $steps.findLoadBalancer.outputs.loadBalancerArn
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      listeners: $response.body#/listeners
+  - stepId: listTargetGroups
+    description: List the target groups attached to the load balancer.
+    operationId: describeTargetGroups
+    parameters:
+    - name: LoadBalancerArn
+      in: query
+      value: $steps.findLoadBalancer.outputs.loadBalancerArn
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      targetGroups: $response.body#/targetGroups
+      firstTargetGroupArn: $response.body#/targetGroups/0/targetGroupArn
+  - stepId: listTargetHealth
+    description: Read the health of the members in the first attached target group.
+    operationId: describeTargetHealth
+    parameters:
+    - name: TargetGroupArn
+      in: query
+      value: $steps.listTargetGroups.outputs.firstTargetGroupArn
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      targetHealthDescriptions: $response.body#/targetHealthDescriptions
+  outputs:
+    loadBalancerArn: $steps.findLoadBalancer.outputs.loadBalancerArn
+    stateCode: $steps.findLoadBalancer.outputs.stateCode
+    listeners: $steps.listListeners.outputs.listeners
+    targetGroups: $steps.listTargetGroups.outputs.targetGroups
+    targetHealthDescriptions: $steps.listTargetHealth.outputs.targetHealthDescriptions

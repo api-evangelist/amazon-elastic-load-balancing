@@ -1,0 +1,130 @@
+arazzo: 1.0.1
+info:
+  title: Amazon Elastic Load Balancing Poll Target Health Until Healthy
+  summary: Register a target then poll its health until it reaches the healthy state.
+  description: >-
+    Registers a target with an existing target group and then polls
+    describeTargetHealth, branching on the reported state. While the target is
+    still in the initial state the flow loops back and checks again; once the
+    target reports healthy the flow ends successfully, and if it reports
+    unhealthy the flow ends in failure. Each step spells out its request inline
+    so the flow can be read and executed without opening the underlying OpenAPI
+    description. The Elastic Load Balancing v2 API uses the AWS query protocol,
+    so every operation is a GET whose inputs are carried as query parameters
+    rather than a request body.
+  version: 1.0.0
+sourceDescriptions:
+- name: elbv2Api
+  url: ../openapi/amazon-elastic-load-balancing-openapi.yml
+  type: openapi
+workflows:
+- workflowId: poll-target-health-until-healthy
+  summary: Register a target and poll its health, branching on the reported state.
+  description: >-
+    Chains registerTargets with a describeTargetHealth poll loop that retries
+    while the target is initializing, ends when it becomes healthy, and fails
+    fast if it becomes unhealthy.
+  inputs:
+    type: object
+    required:
+    - targetGroupArn
+    - targetId
+    properties:
+      targetGroupArn:
+        type: string
+        description: The ARN of the existing target group to register into.
+      targetId:
+        type: string
+        description: The ID of the target to register and monitor.
+      targetPort:
+        type: integer
+        description: The port the target is listening on.
+        default: 80
+  steps:
+  - stepId: registerTargets
+    description: Register the target with the target group to begin health checks.
+    operationId: registerTargets
+    parameters:
+    - name: TargetGroupArn
+      in: query
+      value: $inputs.targetGroupArn
+    - name: Targets.member.1.Id
+      in: query
+      value: $inputs.targetId
+    - name: Targets.member.1.Port
+      in: query
+      value: $inputs.targetPort
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      registered: $statusCode
+  - stepId: checkHealth
+    description: >-
+      Poll the health of the registered target and branch on its reported
+      state, retrying while it is still initializing.
+    operationId: describeTargetHealth
+    parameters:
+    - name: TargetGroupArn
+      in: query
+      value: $inputs.targetGroupArn
+    - name: Targets.member.1.Id
+      in: query
+      value: $inputs.targetId
+    - name: Targets.member.1.Port
+      in: query
+      value: $inputs.targetPort
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      healthState: $response.body#/targetHealthDescriptions/0/targetHealth/state
+      reason: $response.body#/targetHealthDescriptions/0/targetHealth/reason
+    onSuccess:
+    - name: targetHealthy
+      type: end
+      criteria:
+      - context: $response.body
+        condition: $.targetHealthDescriptions[0].targetHealth.state == "healthy"
+        type: jsonpath
+    - name: targetUnhealthy
+      type: goto
+      stepId: reportUnhealthy
+      criteria:
+      - context: $response.body
+        condition: $.targetHealthDescriptions[0].targetHealth.state == "unhealthy"
+        type: jsonpath
+    - name: stillInitializing
+      type: retry
+      stepId: checkHealth
+      retryAfter: 15
+      retryLimit: 20
+      criteria:
+      - context: $response.body
+        condition: $.targetHealthDescriptions[0].targetHealth.state == "initial"
+        type: jsonpath
+  - stepId: reportUnhealthy
+    description: >-
+      Confirm the unhealthy state by reading target health one last time so the
+      failure reason is captured in the workflow outputs.
+    operationId: describeTargetHealth
+    parameters:
+    - name: TargetGroupArn
+      in: query
+      value: $inputs.targetGroupArn
+    - name: Targets.member.1.Id
+      in: query
+      value: $inputs.targetId
+    - name: Targets.member.1.Port
+      in: query
+      value: $inputs.targetPort
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      healthState: $response.body#/targetHealthDescriptions/0/targetHealth/state
+      reason: $response.body#/targetHealthDescriptions/0/targetHealth/reason
+      description: $response.body#/targetHealthDescriptions/0/targetHealth/description
+    onSuccess:
+    - name: failOut
+      type: end
+  outputs:
+    healthState: $steps.checkHealth.outputs.healthState
+    unhealthyReason: $steps.reportUnhealthy.outputs.reason

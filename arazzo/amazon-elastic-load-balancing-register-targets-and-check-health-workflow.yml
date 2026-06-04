@@ -1,0 +1,108 @@
+arazzo: 1.0.1
+info:
+  title: Amazon Elastic Load Balancing Register Targets and Check Health
+  summary: Create a target group, register a target, then read back its health state.
+  description: >-
+    A focused flow for onboarding a backend target into a load balancer. It
+    creates an HTTP target group, registers the supplied target with it, and
+    immediately reads the target health so the caller can see the initial
+    state. Each step spells out its request inline so the flow can be read and
+    executed without opening the underlying OpenAPI description. The Elastic
+    Load Balancing v2 API uses the AWS query protocol, so every operation is a
+    GET whose inputs are carried as query parameters rather than a request body.
+  version: 1.0.0
+sourceDescriptions:
+- name: elbv2Api
+  url: ../openapi/amazon-elastic-load-balancing-openapi.yml
+  type: openapi
+workflows:
+- workflowId: register-targets-and-check-health
+  summary: Create a target group, register a target, and describe its health.
+  description: >-
+    Chains createTargetGroup, registerTargets, and describeTargetHealth so a
+    newly created target group is populated and its health surfaced in one run.
+  inputs:
+    type: object
+    required:
+    - targetGroupName
+    - vpcId
+    - targetId
+    properties:
+      targetGroupName:
+        type: string
+        description: The unique name for the target group.
+      vpcId:
+        type: string
+        description: The ID of the VPC for the target group.
+      protocol:
+        type: string
+        description: The protocol for routing traffic to the targets.
+        default: HTTP
+      port:
+        type: integer
+        description: The port the targets receive traffic on.
+        default: 80
+      targetId:
+        type: string
+        description: The ID of the target to register (instance ID, IP, or Lambda ARN).
+  steps:
+  - stepId: createTargetGroup
+    description: Create the target group that will hold the registered target.
+    operationId: createTargetGroup
+    parameters:
+    - name: Name
+      in: query
+      value: $inputs.targetGroupName
+    - name: Protocol
+      in: query
+      value: $inputs.protocol
+    - name: Port
+      in: query
+      value: $inputs.port
+    - name: VpcId
+      in: query
+      value: $inputs.vpcId
+    - name: HealthCheckProtocol
+      in: query
+      value: $inputs.protocol
+    - name: TargetType
+      in: query
+      value: instance
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      targetGroupArn: $response.body#/targetGroups/0/targetGroupArn
+  - stepId: registerTargets
+    description: Register the supplied target with the new target group.
+    operationId: registerTargets
+    parameters:
+    - name: TargetGroupArn
+      in: query
+      value: $steps.createTargetGroup.outputs.targetGroupArn
+    - name: Targets.member.1.Id
+      in: query
+      value: $inputs.targetId
+    - name: Targets.member.1.Port
+      in: query
+      value: $inputs.port
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      registered: $statusCode
+  - stepId: describeTargetHealth
+    description: Read back the health of the registered target.
+    operationId: describeTargetHealth
+    parameters:
+    - name: TargetGroupArn
+      in: query
+      value: $steps.createTargetGroup.outputs.targetGroupArn
+    - name: Targets.member.1.Id
+      in: query
+      value: $inputs.targetId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      healthState: $response.body#/targetHealthDescriptions/0/targetHealth/state
+  outputs:
+    targetGroupArn: $steps.createTargetGroup.outputs.targetGroupArn
+    healthState: $steps.describeTargetHealth.outputs.healthState

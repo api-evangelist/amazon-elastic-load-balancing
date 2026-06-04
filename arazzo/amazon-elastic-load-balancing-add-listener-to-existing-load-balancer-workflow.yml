@@ -1,0 +1,98 @@
+arazzo: 1.0.1
+info:
+  title: Amazon Elastic Load Balancing Add a Listener to an Existing Load Balancer
+  summary: Look up a load balancer by name and attach a new forwarding listener.
+  description: >-
+    Resolves an existing load balancer by name, then attaches a new listener
+    that forwards to a supplied target group, and finally lists the load
+    balancer's listeners to confirm the addition. This is the common flow for
+    exposing an additional port (for example adding HTTPS alongside HTTP) on a
+    load balancer that already exists. Each step spells out its request inline
+    so the flow can be read and executed without opening the underlying OpenAPI
+    description. The Elastic Load Balancing v2 API uses the AWS query protocol,
+    so every operation is a GET whose inputs are carried as query parameters
+    rather than a request body.
+  version: 1.0.0
+sourceDescriptions:
+- name: elbv2Api
+  url: ../openapi/amazon-elastic-load-balancing-openapi.yml
+  type: openapi
+workflows:
+- workflowId: add-listener-to-existing-load-balancer
+  summary: Resolve a load balancer by name and create a forwarding listener on it.
+  description: >-
+    Chains describeLoadBalancers, createListener, and describeListeners so a new
+    listener is added to an existing load balancer and the resulting listener
+    set is confirmed.
+  inputs:
+    type: object
+    required:
+    - loadBalancerName
+    - listenerPort
+    - targetGroupArn
+    properties:
+      loadBalancerName:
+        type: string
+        description: The name of the existing load balancer to add a listener to.
+      protocol:
+        type: string
+        description: The protocol for client connections to the listener.
+        default: HTTP
+      listenerPort:
+        type: integer
+        description: The port the new listener accepts connections on.
+      targetGroupArn:
+        type: string
+        description: The ARN of the target group the listener forwards to.
+  steps:
+  - stepId: findLoadBalancer
+    description: Resolve the load balancer ARN from its name.
+    operationId: describeLoadBalancers
+    parameters:
+    - name: Names
+      in: query
+      value: $inputs.loadBalancerName
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      loadBalancerArn: $response.body#/loadBalancers/0/loadBalancerArn
+  - stepId: createListener
+    description: >-
+      Attach the new listener to the resolved load balancer, forwarding to the
+      supplied target group.
+    operationId: createListener
+    parameters:
+    - name: LoadBalancerArn
+      in: query
+      value: $steps.findLoadBalancer.outputs.loadBalancerArn
+    - name: Protocol
+      in: query
+      value: $inputs.protocol
+    - name: Port
+      in: query
+      value: $inputs.listenerPort
+    - name: DefaultActions.member.1.Type
+      in: query
+      value: forward
+    - name: DefaultActions.member.1.TargetGroupArn
+      in: query
+      value: $inputs.targetGroupArn
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      listenerArn: $response.body#/listeners/0/listenerArn
+  - stepId: describeListeners
+    description: List the load balancer's listeners to confirm the new one is present.
+    operationId: describeListeners
+    parameters:
+    - name: LoadBalancerArn
+      in: query
+      value: $steps.findLoadBalancer.outputs.loadBalancerArn
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      listeners: $response.body#/listeners
+  outputs:
+    loadBalancerArn: $steps.findLoadBalancer.outputs.loadBalancerArn
+    listenerArn: $steps.createListener.outputs.listenerArn
+    listeners: $steps.describeListeners.outputs.listeners

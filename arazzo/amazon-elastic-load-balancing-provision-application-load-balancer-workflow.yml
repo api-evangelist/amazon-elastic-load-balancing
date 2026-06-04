@@ -1,0 +1,171 @@
+arazzo: 1.0.1
+info:
+  title: Amazon Elastic Load Balancing Provision an Application Load Balancer
+  summary: Stand up an Application Load Balancer with a target group, listener, and registered targets.
+  description: >-
+    The canonical end-to-end provisioning flow for an Application Load
+    Balancer. It creates the load balancer across the supplied subnets,
+    creates an HTTP target group in the same VPC, attaches an HTTP listener
+    whose default action forwards to that target group, and finally registers
+    the initial targets with the group. Each step spells out its request
+    inline so the flow can be read and executed without opening the underlying
+    OpenAPI description. Because the Elastic Load Balancing v2 API uses the AWS
+    query protocol, every operation is a GET whose inputs are carried as query
+    parameters rather than a request body.
+  version: 1.0.0
+sourceDescriptions:
+- name: elbv2Api
+  url: ../openapi/amazon-elastic-load-balancing-openapi.yml
+  type: openapi
+workflows:
+- workflowId: provision-application-load-balancer
+  summary: Create an ALB, a target group, an HTTP listener, and register targets.
+  description: >-
+    Chains createLoadBalancer, createTargetGroup, createListener, and
+    registerTargets so a single run produces a fully wired, traffic-ready
+    Application Load Balancer.
+  inputs:
+    type: object
+    required:
+    - loadBalancerName
+    - subnetId
+    - targetGroupName
+    - vpcId
+    - targetId
+    properties:
+      loadBalancerName:
+        type: string
+        description: The unique name for the load balancer (max 32 characters).
+      subnetId:
+        type: string
+        description: The ID of a subnet to place the load balancer in.
+      securityGroupId:
+        type: string
+        description: The ID of a security group for the load balancer.
+      targetGroupName:
+        type: string
+        description: The unique name for the target group.
+      vpcId:
+        type: string
+        description: The ID of the VPC for the target group and targets.
+      listenerPort:
+        type: integer
+        description: The port the listener accepts client connections on.
+        default: 80
+      targetPort:
+        type: integer
+        description: The port the targets receive traffic on.
+        default: 80
+      targetId:
+        type: string
+        description: The ID of the first target (instance ID, IP, or Lambda ARN).
+  steps:
+  - stepId: createLoadBalancer
+    description: >-
+      Create an internet-facing Application Load Balancer in the supplied
+      subnet and security group.
+    operationId: createLoadBalancer
+    parameters:
+    - name: Name
+      in: query
+      value: $inputs.loadBalancerName
+    - name: Subnets
+      in: query
+      value: $inputs.subnetId
+    - name: SecurityGroups
+      in: query
+      value: $inputs.securityGroupId
+    - name: Scheme
+      in: query
+      value: internet-facing
+    - name: Type
+      in: query
+      value: application
+    - name: IpAddressType
+      in: query
+      value: ipv4
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      loadBalancerArn: $response.body#/loadBalancers/0/loadBalancerArn
+      dnsName: $response.body#/loadBalancers/0/dnsName
+  - stepId: createTargetGroup
+    description: >-
+      Create an HTTP target group in the same VPC with an HTTP health check on
+      the root path.
+    operationId: createTargetGroup
+    parameters:
+    - name: Name
+      in: query
+      value: $inputs.targetGroupName
+    - name: Protocol
+      in: query
+      value: HTTP
+    - name: Port
+      in: query
+      value: $inputs.targetPort
+    - name: VpcId
+      in: query
+      value: $inputs.vpcId
+    - name: HealthCheckProtocol
+      in: query
+      value: HTTP
+    - name: HealthCheckPath
+      in: query
+      value: /
+    - name: TargetType
+      in: query
+      value: instance
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      targetGroupArn: $response.body#/targetGroups/0/targetGroupArn
+  - stepId: createListener
+    description: >-
+      Attach an HTTP listener whose default action forwards traffic to the new
+      target group.
+    operationId: createListener
+    parameters:
+    - name: LoadBalancerArn
+      in: query
+      value: $steps.createLoadBalancer.outputs.loadBalancerArn
+    - name: Protocol
+      in: query
+      value: HTTP
+    - name: Port
+      in: query
+      value: $inputs.listenerPort
+    - name: DefaultActions.member.1.Type
+      in: query
+      value: forward
+    - name: DefaultActions.member.1.TargetGroupArn
+      in: query
+      value: $steps.createTargetGroup.outputs.targetGroupArn
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      listenerArn: $response.body#/listeners/0/listenerArn
+  - stepId: registerTargets
+    description: >-
+      Register the initial target with the target group so the load balancer
+      can begin routing traffic to it.
+    operationId: registerTargets
+    parameters:
+    - name: TargetGroupArn
+      in: query
+      value: $steps.createTargetGroup.outputs.targetGroupArn
+    - name: Targets.member.1.Id
+      in: query
+      value: $inputs.targetId
+    - name: Targets.member.1.Port
+      in: query
+      value: $inputs.targetPort
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      registered: $statusCode
+  outputs:
+    loadBalancerArn: $steps.createLoadBalancer.outputs.loadBalancerArn
+    dnsName: $steps.createLoadBalancer.outputs.dnsName
+    targetGroupArn: $steps.createTargetGroup.outputs.targetGroupArn
+    listenerArn: $steps.createListener.outputs.listenerArn

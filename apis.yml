@@ -58,6 +58,42 @@ apis:
   - type: NaftikoCapability
     url: capabilities/amazon-elastic-load-balancing-targets.yaml
 common:
+- type: ArazzoWorkflows
+  url: arazzo/
+  workflows:
+  - url: arazzo/amazon-elastic-load-balancing-add-host-based-routing-rule-workflow.yml
+    name: Amazon Elastic Load Balancing Add a Host-Based Routing Rule
+    summary: Create a target group and attach a host-header rule to an existing listener.
+  - url: arazzo/amazon-elastic-load-balancing-add-listener-to-existing-load-balancer-workflow.yml
+    name: Amazon Elastic Load Balancing Add a Listener to an Existing Load Balancer
+    summary: Look up a load balancer by name and attach a new forwarding listener.
+  - url: arazzo/amazon-elastic-load-balancing-add-path-maintenance-rule-workflow.yml
+    name: Amazon Elastic Load Balancing Add a Path-Based Maintenance Rule
+    summary: Attach a path-pattern fixed-response rule to a listener and confirm it.
+  - url: arazzo/amazon-elastic-load-balancing-audit-load-balancer-configuration-workflow.yml
+    name: Amazon Elastic Load Balancing Audit Load Balancer Configuration
+    summary: Walk a load balancer's listeners and target groups to inventory its routing.
+  - url: arazzo/amazon-elastic-load-balancing-decommission-load-balancer-workflow.yml
+    name: Amazon Elastic Load Balancing Decommission a Load Balancer
+    summary: Resolve a load balancer by name, inventory its listeners, then delete it.
+  - url: arazzo/amazon-elastic-load-balancing-drain-and-deregister-target-workflow.yml
+    name: Amazon Elastic Load Balancing Drain and Deregister a Target
+    summary: Confirm a target exists, deregister it, then poll until it has drained.
+  - url: arazzo/amazon-elastic-load-balancing-poll-target-health-until-healthy-workflow.yml
+    name: Amazon Elastic Load Balancing Poll Target Health Until Healthy
+    summary: Register a target then poll its health until it reaches the healthy state.
+  - url: arazzo/amazon-elastic-load-balancing-provision-application-load-balancer-workflow.yml
+    name: Amazon Elastic Load Balancing Provision an Application Load Balancer
+    summary: Stand up an Application Load Balancer with a target group, listener, and registered targets.
+  - url: arazzo/amazon-elastic-load-balancing-provision-network-load-balancer-workflow.yml
+    name: Amazon Elastic Load Balancing Provision a Network Load Balancer
+    summary: Stand up a TCP Network Load Balancer with a target group, listener, and registered targets.
+  - url: arazzo/amazon-elastic-load-balancing-register-targets-and-check-health-workflow.yml
+    name: Amazon Elastic Load Balancing Register Targets and Check Health
+    summary: Create a target group, register a target, then read back its health state.
+  - url: arazzo/amazon-elastic-load-balancing-tune-load-balancer-attributes-workflow.yml
+    name: Amazon Elastic Load Balancing Tune Load Balancer Attributes
+    summary: Resolve a load balancer by name and apply an attribute change.
 - type: Portal
   url: https://aws.amazon.com/
 - type: DeveloperPortal

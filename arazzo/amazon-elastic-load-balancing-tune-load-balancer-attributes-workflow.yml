@@ -1,0 +1,83 @@
+arazzo: 1.0.1
+info:
+  title: Amazon Elastic Load Balancing Tune Load Balancer Attributes
+  summary: Resolve a load balancer by name and apply an attribute change.
+  description: >-
+    Resolves a load balancer by name and then modifies one of its attributes,
+    such as enabling deletion protection or adjusting the idle timeout, and
+    reads the load balancer back to confirm it is still active. Each step spells
+    out its request inline so the flow can be read and executed without opening
+    the underlying OpenAPI description. The Elastic Load Balancing v2 API uses
+    the AWS query protocol, so every operation is a GET whose inputs are carried
+    as query parameters rather than a request body.
+  version: 1.0.0
+sourceDescriptions:
+- name: elbv2Api
+  url: ../openapi/amazon-elastic-load-balancing-openapi.yml
+  type: openapi
+workflows:
+- workflowId: tune-load-balancer-attributes
+  summary: Find a load balancer by name and set one of its attributes.
+  description: >-
+    Chains describeLoadBalancers, modifyLoadBalancerAttributes, and a confirming
+    describeLoadBalancers so a single attribute is changed on a named load
+    balancer and the result verified.
+  inputs:
+    type: object
+    required:
+    - loadBalancerName
+    - attributeKey
+    - attributeValue
+    properties:
+      loadBalancerName:
+        type: string
+        description: The name of the load balancer to modify.
+      attributeKey:
+        type: string
+        description: The attribute name (e.g. idle_timeout.timeout_seconds).
+      attributeValue:
+        type: string
+        description: The attribute value to set.
+  steps:
+  - stepId: findLoadBalancer
+    description: Resolve the load balancer ARN from its name.
+    operationId: describeLoadBalancers
+    parameters:
+    - name: Names
+      in: query
+      value: $inputs.loadBalancerName
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      loadBalancerArn: $response.body#/loadBalancers/0/loadBalancerArn
+  - stepId: modifyAttributes
+    description: Apply the supplied attribute key/value to the resolved load balancer.
+    operationId: modifyLoadBalancerAttributes
+    parameters:
+    - name: LoadBalancerArn
+      in: query
+      value: $steps.findLoadBalancer.outputs.loadBalancerArn
+    - name: Attributes.member.1.Key
+      in: query
+      value: $inputs.attributeKey
+    - name: Attributes.member.1.Value
+      in: query
+      value: $inputs.attributeValue
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      modified: $statusCode
+  - stepId: confirmActive
+    description: Read the load balancer back to confirm it remains active after the change.
+    operationId: describeLoadBalancers
+    parameters:
+    - name: LoadBalancerArns
+      in: query
+      value: $steps.findLoadBalancer.outputs.loadBalancerArn
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      stateCode: $response.body#/loadBalancers/0/state/code
+  outputs:
+    loadBalancerArn: $steps.findLoadBalancer.outputs.loadBalancerArn
+    stateCode: $steps.confirmActive.outputs.stateCode

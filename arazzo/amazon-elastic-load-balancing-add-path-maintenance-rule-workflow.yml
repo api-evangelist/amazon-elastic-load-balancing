@@ -1,0 +1,81 @@
+arazzo: 1.0.1
+info:
+  title: Amazon Elastic Load Balancing Add a Path-Based Maintenance Rule
+  summary: Attach a path-pattern fixed-response rule to a listener and confirm it.
+  description: >-
+    Adds a path-based maintenance page to an existing listener without any
+    backend. It creates a listener rule whose path-pattern condition matches a
+    supplied URL path and whose action returns a fixed HTTP response, then reads
+    the listener's rules back to confirm the rule is in place. This is the
+    common pattern for serving a 503 maintenance page on a specific path. Each
+    step spells out its request inline so the flow can be read and executed
+    without opening the underlying OpenAPI description. The Elastic Load
+    Balancing v2 API uses the AWS query protocol, so every operation is a GET
+    whose inputs are carried as query parameters rather than a request body.
+  version: 1.0.0
+sourceDescriptions:
+- name: elbv2Api
+  url: ../openapi/amazon-elastic-load-balancing-openapi.yml
+  type: openapi
+workflows:
+- workflowId: add-path-maintenance-rule
+  summary: Create a path-pattern fixed-response rule and confirm it on the listener.
+  description: >-
+    Chains createRule and describeRules so a fixed-response maintenance rule is
+    attached to a listener path and verified.
+  inputs:
+    type: object
+    required:
+    - listenerArn
+    - pathPattern
+    - priority
+    properties:
+      listenerArn:
+        type: string
+        description: The ARN of the listener to attach the rule to.
+      pathPattern:
+        type: string
+        description: The path pattern to match (e.g. /maintenance/*).
+      priority:
+        type: integer
+        description: The unique rule priority within the listener (1-50000).
+  steps:
+  - stepId: createRule
+    description: >-
+      Create a path-pattern rule whose fixed-response action returns a static
+      maintenance response for matching requests.
+    operationId: createRule
+    parameters:
+    - name: ListenerArn
+      in: query
+      value: $inputs.listenerArn
+    - name: Priority
+      in: query
+      value: $inputs.priority
+    - name: Conditions.member.1.Field
+      in: query
+      value: path-pattern
+    - name: Conditions.member.1.Values
+      in: query
+      value: $inputs.pathPattern
+    - name: Actions.member.1.Type
+      in: query
+      value: fixed-response
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      ruleArn: $response.body#/rules/0/ruleArn
+  - stepId: describeRules
+    description: Read the listener's rules back to confirm the maintenance rule is present.
+    operationId: describeRules
+    parameters:
+    - name: ListenerArn
+      in: query
+      value: $inputs.listenerArn
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      rules: $response.body#/rules
+  outputs:
+    ruleArn: $steps.createRule.outputs.ruleArn
+    rules: $steps.describeRules.outputs.rules

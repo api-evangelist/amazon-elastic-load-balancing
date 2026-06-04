@@ -1,0 +1,126 @@
+arazzo: 1.0.1
+info:
+  title: Amazon Elastic Load Balancing Add a Host-Based Routing Rule
+  summary: Create a target group and attach a host-header rule to an existing listener.
+  description: >-
+    Adds host-based routing to an existing Application Load Balancer listener.
+    It creates a new HTTP target group for the backend that should serve a
+    specific hostname, then creates a listener rule that forwards requests whose
+    host header matches the supplied value to that target group, and finally
+    reads the listener's rules back to confirm the new rule landed. Each step
+    spells out its request inline so the flow can be read and executed without
+    opening the underlying OpenAPI description. The Elastic Load Balancing v2
+    API uses the AWS query protocol, so every operation is a GET whose inputs
+    are carried as query parameters rather than a request body.
+  version: 1.0.0
+sourceDescriptions:
+- name: elbv2Api
+  url: ../openapi/amazon-elastic-load-balancing-openapi.yml
+  type: openapi
+workflows:
+- workflowId: add-host-based-routing-rule
+  summary: Create a target group and a host-header forwarding rule on a listener.
+  description: >-
+    Chains createTargetGroup, createRule, and describeRules so a hostname is
+    routed to a dedicated backend and the resulting rule set is confirmed.
+  inputs:
+    type: object
+    required:
+    - listenerArn
+    - targetGroupName
+    - vpcId
+    - hostHeader
+    - priority
+    properties:
+      listenerArn:
+        type: string
+        description: The ARN of the existing listener to attach the rule to.
+      targetGroupName:
+        type: string
+        description: The unique name for the new target group.
+      vpcId:
+        type: string
+        description: The ID of the VPC for the target group.
+      port:
+        type: integer
+        description: The port the targets receive traffic on.
+        default: 80
+      hostHeader:
+        type: string
+        description: The host header value to match (e.g. api.example.com).
+      priority:
+        type: integer
+        description: The unique rule priority within the listener (1-50000).
+  steps:
+  - stepId: createTargetGroup
+    description: Create the HTTP target group that the host-based rule will forward to.
+    operationId: createTargetGroup
+    parameters:
+    - name: Name
+      in: query
+      value: $inputs.targetGroupName
+    - name: Protocol
+      in: query
+      value: HTTP
+    - name: Port
+      in: query
+      value: $inputs.port
+    - name: VpcId
+      in: query
+      value: $inputs.vpcId
+    - name: HealthCheckProtocol
+      in: query
+      value: HTTP
+    - name: HealthCheckPath
+      in: query
+      value: /
+    - name: TargetType
+      in: query
+      value: instance
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      targetGroupArn: $response.body#/targetGroups/0/targetGroupArn
+  - stepId: createRule
+    description: >-
+      Create a host-header condition rule that forwards matching requests to the
+      new target group at the supplied priority.
+    operationId: createRule
+    parameters:
+    - name: ListenerArn
+      in: query
+      value: $inputs.listenerArn
+    - name: Priority
+      in: query
+      value: $inputs.priority
+    - name: Conditions.member.1.Field
+      in: query
+      value: host-header
+    - name: Conditions.member.1.Values
+      in: query
+      value: $inputs.hostHeader
+    - name: Actions.member.1.Type
+      in: query
+      value: forward
+    - name: Actions.member.1.TargetGroupArn
+      in: query
+      value: $steps.createTargetGroup.outputs.targetGroupArn
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      ruleArn: $response.body#/rules/0/ruleArn
+  - stepId: describeRules
+    description: Read the listener's rules back to confirm the new rule is present.
+    operationId: describeRules
+    parameters:
+    - name: ListenerArn
+      in: query
+      value: $inputs.listenerArn
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      rules: $response.body#/rules
+  outputs:
+    targetGroupArn: $steps.createTargetGroup.outputs.targetGroupArn
+    ruleArn: $steps.createRule.outputs.ruleArn
+    rules: $steps.describeRules.outputs.rules
