@@ -1,0 +1,3318 @@
+{
+  "info": {
+    "_postman_id": "6586e269-72d8-446b-9f02-0b64e1634a36",
+    "name": "Amazon Elastic Load Balancing v2 API",
+    "description": "Amazon Elastic Load Balancing automatically distributes incoming application traffic across multiple targets, such as Amazon EC2 instances, containers, IP addresses, and Lambda functions. It supports Application Load Balancers, Network Load Balancers, and Gateway Load Balancers.\n\nContact Support:\n Name: Amazon Web Services",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-06-05T15:03:39.000Z",
+    "updatedAt": "2026-06-05T15:03:39.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-6586e269-72d8-446b-9f02-0b64e1634a36"
+  },
+  "item": [
+    {
+      "name": "?Action=CreateLoadBalancer",
+      "item": [
+        {
+          "name": "Amazon Elastic Load Balancing Create a Load Balancer",
+          "id": "5f3cd050-545c-408e-b9d6-44a5f0bbc2cb",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/xml"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/?Action=CreateLoadBalancer&Name=<string>&Subnets=<string>&Subnets=<string>&SecurityGroups=<string>&SecurityGroups=<string>&Scheme=internal&Type=network&IpAddressType=dualstack",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                ""
+              ],
+              "query": [
+                {
+                  "key": "Action",
+                  "value": "CreateLoadBalancer"
+                },
+                {
+                  "description": "(Required) The name of the load balancer. Must be unique per region per account, can have a maximum of 32 characters.",
+                  "key": "Name",
+                  "value": "<string>"
+                },
+                {
+                  "description": "The IDs of the subnets. You can specify only one subnet per Availability Zone.",
+                  "key": "Subnets",
+                  "value": "<string>"
+                },
+                {
+                  "description": "The IDs of the subnets. You can specify only one subnet per Availability Zone.",
+                  "key": "Subnets",
+                  "value": "<string>"
+                },
+                {
+                  "description": "The IDs of the security groups for the load balancer",
+                  "key": "SecurityGroups",
+                  "value": "<string>"
+                },
+                {
+                  "description": "The IDs of the security groups for the load balancer",
+                  "key": "SecurityGroups",
+                  "value": "<string>"
+                },
+                {
+                  "description": "The scheme for the load balancer. An internet-facing load balancer routes requests from clients to targets over the internet. An internal load balancer routes requests to targets using private IP addresses.",
+                  "key": "Scheme",
+                  "value": "internal"
+                },
+                {
+                  "description": "The type of load balancer",
+                  "key": "Type",
+                  "value": "network"
+                },
+                {
+                  "description": "The type of IP addresses used by the subnets",
+                  "key": "IpAddressType",
+                  "value": "dualstack"
+                }
+              ]
+            },
+            "description": "Creates an Application Load Balancer, Network Load Balancer, or Gateway Load Balancer. For more information, see the User Guide for the specific load balancer type."
+          },
+          "response": [
+            {
+              "id": "a15c4699-0595-46d2-a689-e03be2b15011",
+              "name": "Successfully created load balancer",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/xml"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/?Name=<string>&Subnets=<string>&SecurityGroups=<string>&Scheme=internal&Type=network&IpAddressType=dualstack",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    ""
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) The name of the load balancer. Must be unique per region per account, can have a maximum of 32 characters.",
+                      "key": "Name",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "The IDs of the subnets. You can specify only one subnet per Availability Zone.",
+                      "key": "Subnets",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "The IDs of the security groups for the load balancer",
+                      "key": "SecurityGroups",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "The scheme for the load balancer. An internet-facing load balancer routes requests from clients to targets over the internet. An internal load balancer routes requests to targets using private IP addresses.",
+                      "key": "Scheme",
+                      "value": "internal"
+                    },
+                    {
+                      "description": "The type of load balancer",
+                      "key": "Type",
+                      "value": "network"
+                    },
+                    {
+                      "description": "The type of IP addresses used by the subnets",
+                      "key": "IpAddressType",
+                      "value": "dualstack"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "xml",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/xml"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<element>\n  <loadBalancers>\n    <loadBalancerArn>(string)</loadBalancerArn>\n    <dnsName>(string)</dnsName>\n    <canonicalHostedZoneId>(string)</canonicalHostedZoneId>\n    <createdTime>(string)</createdTime>\n    <loadBalancerName>(string)</loadBalancerName>\n    <scheme>(string)</scheme>\n    <vpcId>(string)</vpcId>\n    <state>\n      <code>(string)</code>\n      <reason>(string)</reason>\n    </state>\n    <type>(string)</type>\n    <availabilityZones>\n      <zoneName>(string)</zoneName>\n      <subnetId>(string)</subnetId>\n    </availabilityZones>\n    <availabilityZones>\n      <zoneName>(string)</zoneName>\n      <subnetId>(string)</subnetId>\n    </availabilityZones>\n    <securityGroups>(string)</securityGroups>\n    <securityGroups>(string)</securityGroups>\n    <ipAddressType>(string)</ipAddressType>\n  </loadBalancers>\n  <loadBalancers>\n    <loadBalancerArn>(string)</loadBalancerArn>\n    <dnsName>(string)</dnsName>\n    <canonicalHostedZoneId>(string)</canonicalHostedZoneId>\n    <createdTime>(string)</createdTime>\n    <loadBalancerName>(string)</loadBalancerName>\n    <scheme>(string)</scheme>\n    <vpcId>(string)</vpcId>\n    <state>\n      <code>(string)</code>\n      <reason>(string)</reason>\n    </state>\n    <type>(string)</type>\n    <availabilityZones>\n      <zoneName>(string)</zoneName>\n      <subnetId>(string)</subnetId>\n    </availabilityZones>\n    <availabilityZones>\n      <zoneName>(string)</zoneName>\n      <subnetId>(string)</subnetId>\n    </availabilityZones>\n    <securityGroups>(string)</securityGroups>\n    <securityGroups>(string)</securityGroups>\n    <ipAddressType>(string)</ipAddressType>\n  </loadBalancers>\n</element>",
+              "createdAt": "2026-06-05T15:03:39.000Z",
+              "updatedAt": "2026-06-05T15:03:39.000Z",
+              "uid": "35240-a15c4699-0595-46d2-a689-e03be2b15011"
+            },
+            {
+              "id": "72aaa1ce-3b62-4723-be8c-91c57d6bf475",
+              "name": "Invalid request parameters",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/?Name=<string>&Subnets=<string>&SecurityGroups=<string>&Scheme=internal&Type=network&IpAddressType=dualstack",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    ""
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) The name of the load balancer. Must be unique per region per account, can have a maximum of 32 characters.",
+                      "key": "Name",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "The IDs of the subnets. You can specify only one subnet per Availability Zone.",
+                      "key": "Subnets",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "The IDs of the security groups for the load balancer",
+                      "key": "SecurityGroups",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "The scheme for the load balancer. An internet-facing load balancer routes requests from clients to targets over the internet. An internal load balancer routes requests to targets using private IP addresses.",
+                      "key": "Scheme",
+                      "value": "internal"
+                    },
+                    {
+                      "description": "The type of load balancer",
+                      "key": "Type",
+                      "value": "network"
+                    },
+                    {
+                      "description": "The type of IP addresses used by the subnets",
+                      "key": "IpAddressType",
+                      "value": "dualstack"
+                    }
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": "text",
+              "header": [],
+              "cookie": [],
+              "responseTime": null,
+              "body": null,
+              "createdAt": "2026-06-05T15:03:39.000Z",
+              "updatedAt": "2026-06-05T15:03:39.000Z",
+              "uid": "35240-72aaa1ce-3b62-4723-be8c-91c57d6bf475"
+            },
+            {
+              "id": "006daea1-23c9-44f8-a096-16ce6172472a",
+              "name": "Authentication failure",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/?Name=<string>&Subnets=<string>&SecurityGroups=<string>&Scheme=internal&Type=network&IpAddressType=dualstack",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    ""
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) The name of the load balancer. Must be unique per region per account, can have a maximum of 32 characters.",
+                      "key": "Name",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "The IDs of the subnets. You can specify only one subnet per Availability Zone.",
+                      "key": "Subnets",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "The IDs of the security groups for the load balancer",
+                      "key": "SecurityGroups",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "The scheme for the load balancer. An internet-facing load balancer routes requests from clients to targets over the internet. An internal load balancer routes requests to targets using private IP addresses.",
+                      "key": "Scheme",
+                      "value": "internal"
+                    },
+                    {
+                      "description": "The type of load balancer",
+                      "key": "Type",
+                      "value": "network"
+                    },
+                    {
+                      "description": "The type of IP addresses used by the subnets",
+                      "key": "IpAddressType",
+                      "value": "dualstack"
+                    }
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "_postman_previewlanguage": "text",
+              "header": [],
+              "cookie": [],
+              "responseTime": null,
+              "body": null,
+              "createdAt": "2026-06-05T15:03:39.000Z",
+              "updatedAt": "2026-06-05T15:03:39.000Z",
+              "uid": "35240-006daea1-23c9-44f8-a096-16ce6172472a"
+            },
+            {
+              "id": "1aaffdde-6cd9-4766-83fb-18c717cc767d",
+              "name": "Authorization failure",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/?Name=<string>&Subnets=<string>&SecurityGroups=<string>&Scheme=internal&Type=network&IpAddressType=dualstack",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    ""
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) The name of the load balancer. Must be unique per region per account, can have a maximum of 32 characters.",
+                      "key": "Name",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "The IDs of the subnets. You can specify only one subnet per Availability Zone.",
+                      "key": "Subnets",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "The IDs of the security groups for the load balancer",
+                      "key": "SecurityGroups",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "The scheme for the load balancer. An internet-facing load balancer routes requests from clients to targets over the internet. An internal load balancer routes requests to targets using private IP addresses.",
+                      "key": "Scheme",
+                      "value": "internal"
+                    },
+                    {
+                      "description": "The type of load balancer",
+                      "key": "Type",
+                      "value": "network"
+                    },
+                    {
+                      "description": "The type of IP addresses used by the subnets",
+                      "key": "IpAddressType",
+                      "value": "dualstack"
+                    }
+                  ]
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "_postman_previewlanguage": "text",
+              "header": [],
+              "cookie": [],
+              "responseTime": null,
+              "body": null,
+              "createdAt": "2026-06-05T15:03:39.000Z",
+              "updatedAt": "2026-06-05T15:03:39.000Z",
+              "uid": "35240-1aaffdde-6cd9-4766-83fb-18c717cc767d"
+            }
+          ],
+          "createdAt": "2026-06-05T15:03:39.000Z",
+          "updatedAt": "2026-06-05T15:03:39.000Z",
+          "uid": "35240-5f3cd050-545c-408e-b9d6-44a5f0bbc2cb"
+        }
+      ],
+      "id": "0be793e6-6eaa-4f43-9f9f-4c775a8f268d",
+      "createdAt": "2026-06-05T15:03:39.000Z",
+      "updatedAt": "2026-06-05T15:03:39.000Z",
+      "uid": "35240-0be793e6-6eaa-4f43-9f9f-4c775a8f268d"
+    },
+    {
+      "name": "?Action=DescribeLoadBalancers",
+      "item": [
+        {
+          "name": "Amazon Elastic Load Balancing Describe Load Balancers",
+          "id": "ecb2dcff-beb1-45e4-9ff2-26de30257f9d",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/xml"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/?Action=DescribeLoadBalancers&LoadBalancerArns=<string>&LoadBalancerArns=<string>&Names=<string>&Names=<string>&Marker=<string>&PageSize=<integer>",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                ""
+              ],
+              "query": [
+                {
+                  "key": "Action",
+                  "value": "DescribeLoadBalancers"
+                },
+                {
+                  "description": "The Amazon Resource Names (ARN) of the load balancers",
+                  "key": "LoadBalancerArns",
+                  "value": "<string>"
+                },
+                {
+                  "description": "The Amazon Resource Names (ARN) of the load balancers",
+                  "key": "LoadBalancerArns",
+                  "value": "<string>"
+                },
+                {
+                  "description": "The names of the load balancers",
+                  "key": "Names",
+                  "value": "<string>"
+                },
+                {
+                  "description": "The names of the load balancers",
+                  "key": "Names",
+                  "value": "<string>"
+                },
+                {
+                  "description": "The marker for the next set of results",
+                  "key": "Marker",
+                  "value": "<string>"
+                },
+                {
+                  "description": "The maximum number of results to return",
+                  "key": "PageSize",
+                  "value": "<integer>"
+                }
+              ]
+            },
+            "description": "Describes the specified load balancers or all of your load balancers. Returns information about load balancer ARN, DNS name, scheme, VPC, availability zones, type, and state."
+          },
+          "response": [
+            {
+              "id": "3ff91d47-6a7a-415b-a19f-44076c2f9b83",
+              "name": "Successfully described load balancers",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/xml"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/?LoadBalancerArns=<string>&Names=<string>&Marker=<string>&PageSize=<integer>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    ""
+                  ],
+                  "query": [
+                    {
+                      "description": "The Amazon Resource Names (ARN) of the load balancers",
+                      "key": "LoadBalancerArns",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "The names of the load balancers",
+                      "key": "Names",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "The marker for the next set of results",
+                      "key": "Marker",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "The maximum number of results to return",
+                      "key": "PageSize",
+                      "value": "<integer>"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "xml",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/xml"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<element>\n  <loadBalancers>\n    <loadBalancerArn>(string)</loadBalancerArn>\n    <dnsName>(string)</dnsName>\n    <canonicalHostedZoneId>(string)</canonicalHostedZoneId>\n    <createdTime>(string)</createdTime>\n    <loadBalancerName>(string)</loadBalancerName>\n    <scheme>(string)</scheme>\n    <vpcId>(string)</vpcId>\n    <state>\n      <code>(string)</code>\n      <reason>(string)</reason>\n    </state>\n    <type>(string)</type>\n    <availabilityZones>\n      <zoneName>(string)</zoneName>\n      <subnetId>(string)</subnetId>\n    </availabilityZones>\n    <availabilityZones>\n      <zoneName>(string)</zoneName>\n      <subnetId>(string)</subnetId>\n    </availabilityZones>\n    <securityGroups>(string)</securityGroups>\n    <securityGroups>(string)</securityGroups>\n    <ipAddressType>(string)</ipAddressType>\n  </loadBalancers>\n  <loadBalancers>\n    <loadBalancerArn>(string)</loadBalancerArn>\n    <dnsName>(string)</dnsName>\n    <canonicalHostedZoneId>(string)</canonicalHostedZoneId>\n    <createdTime>(string)</createdTime>\n    <loadBalancerName>(string)</loadBalancerName>\n    <scheme>(string)</scheme>\n    <vpcId>(string)</vpcId>\n    <state>\n      <code>(string)</code>\n      <reason>(string)</reason>\n    </state>\n    <type>(string)</type>\n    <availabilityZones>\n      <zoneName>(string)</zoneName>\n      <subnetId>(string)</subnetId>\n    </availabilityZones>\n    <availabilityZones>\n      <zoneName>(string)</zoneName>\n      <subnetId>(string)</subnetId>\n    </availabilityZones>\n    <securityGroups>(string)</securityGroups>\n    <securityGroups>(string)</securityGroups>\n    <ipAddressType>(string)</ipAddressType>\n  </loadBalancers>\n  <nextMarker>(string)</nextMarker>\n</element>",
+              "createdAt": "2026-06-05T15:03:39.000Z",
+              "updatedAt": "2026-06-05T15:03:39.000Z",
+              "uid": "35240-3ff91d47-6a7a-415b-a19f-44076c2f9b83"
+            },
+            {
+              "id": "3684c961-874a-4355-86e7-5ee31dbd577e",
+              "name": "Invalid request parameters",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/?LoadBalancerArns=<string>&Names=<string>&Marker=<string>&PageSize=<integer>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    ""
+                  ],
+                  "query": [
+                    {
+                      "description": "The Amazon Resource Names (ARN) of the load balancers",
+                      "key": "LoadBalancerArns",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "The names of the load balancers",
+                      "key": "Names",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "The marker for the next set of results",
+                      "key": "Marker",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "The maximum number of results to return",
+                      "key": "PageSize",
+                      "value": "<integer>"
+                    }
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": "text",
+              "header": [],
+              "cookie": [],
+              "responseTime": null,
+              "body": null,
+              "createdAt": "2026-06-05T15:03:39.000Z",
+              "updatedAt": "2026-06-05T15:03:39.000Z",
+              "uid": "35240-3684c961-874a-4355-86e7-5ee31dbd577e"
+            },
+            {
+              "id": "4157f25d-29cb-46cc-be25-a6df8e8fb3e6",
+              "name": "Authentication failure",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/?LoadBalancerArns=<string>&Names=<string>&Marker=<string>&PageSize=<integer>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    ""
+                  ],
+                  "query": [
+                    {
+                      "description": "The Amazon Resource Names (ARN) of the load balancers",
+                      "key": "LoadBalancerArns",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "The names of the load balancers",
+                      "key": "Names",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "The marker for the next set of results",
+                      "key": "Marker",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "The maximum number of results to return",
+                      "key": "PageSize",
+                      "value": "<integer>"
+                    }
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "_postman_previewlanguage": "text",
+              "header": [],
+              "cookie": [],
+              "responseTime": null,
+              "body": null,
+              "createdAt": "2026-06-05T15:03:39.000Z",
+              "updatedAt": "2026-06-05T15:03:39.000Z",
+              "uid": "35240-4157f25d-29cb-46cc-be25-a6df8e8fb3e6"
+            }
+          ],
+          "createdAt": "2026-06-05T15:03:39.000Z",
+          "updatedAt": "2026-06-05T15:03:39.000Z",
+          "uid": "35240-ecb2dcff-beb1-45e4-9ff2-26de30257f9d"
+        }
+      ],
+      "id": "d64e0925-5d1d-48ec-ad43-9a0e25114c49",
+      "createdAt": "2026-06-05T15:03:39.000Z",
+      "updatedAt": "2026-06-05T15:03:39.000Z",
+      "uid": "35240-d64e0925-5d1d-48ec-ad43-9a0e25114c49"
+    },
+    {
+      "name": "?Action=DeleteLoadBalancer",
+      "item": [
+        {
+          "name": "Amazon Elastic Load Balancing Delete a Load Balancer",
+          "id": "73820648-fe38-4cbd-841b-7a2f02b52ecf",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/?Action=DeleteLoadBalancer&LoadBalancerArn=<string>",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                ""
+              ],
+              "query": [
+                {
+                  "key": "Action",
+                  "value": "DeleteLoadBalancer"
+                },
+                {
+                  "description": "(Required) The Amazon Resource Name (ARN) of the load balancer",
+                  "key": "LoadBalancerArn",
+                  "value": "<string>"
+                }
+              ]
+            },
+            "description": "Deletes the specified Application Load Balancer, Network Load Balancer, or Gateway Load Balancer. Deleting a load balancer also deletes its listeners."
+          },
+          "response": [
+            {
+              "id": "2b0bbe5e-f924-4a69-a061-4b586d177086",
+              "name": "Successfully deleted load balancer",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/?LoadBalancerArn=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    ""
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) The Amazon Resource Name (ARN) of the load balancer",
+                      "key": "LoadBalancerArn",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "text",
+              "header": [],
+              "cookie": [],
+              "responseTime": null,
+              "body": null,
+              "createdAt": "2026-06-05T15:03:39.000Z",
+              "updatedAt": "2026-06-05T15:03:39.000Z",
+              "uid": "35240-2b0bbe5e-f924-4a69-a061-4b586d177086"
+            },
+            {
+              "id": "7cb4537e-8e8f-4784-af3b-7f6bf1e97494",
+              "name": "Invalid request parameters",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/?LoadBalancerArn=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    ""
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) The Amazon Resource Name (ARN) of the load balancer",
+                      "key": "LoadBalancerArn",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": "text",
+              "header": [],
+              "cookie": [],
+              "responseTime": null,
+              "body": null,
+              "createdAt": "2026-06-05T15:03:39.000Z",
+              "updatedAt": "2026-06-05T15:03:39.000Z",
+              "uid": "35240-7cb4537e-8e8f-4784-af3b-7f6bf1e97494"
+            },
+            {
+              "id": "151e9220-6391-41c7-a6f1-8ef9ac34c851",
+              "name": "Authentication failure",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/?LoadBalancerArn=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    ""
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) The Amazon Resource Name (ARN) of the load balancer",
+                      "key": "LoadBalancerArn",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "_postman_previewlanguage": "text",
+              "header": [],
+              "cookie": [],
+              "responseTime": null,
+              "body": null,
+              "createdAt": "2026-06-05T15:03:39.000Z",
+              "updatedAt": "2026-06-05T15:03:39.000Z",
+              "uid": "35240-151e9220-6391-41c7-a6f1-8ef9ac34c851"
+            }
+          ],
+          "createdAt": "2026-06-05T15:03:39.000Z",
+          "updatedAt": "2026-06-05T15:03:39.000Z",
+          "uid": "35240-73820648-fe38-4cbd-841b-7a2f02b52ecf"
+        }
+      ],
+      "id": "ae3b6a5a-8422-4182-9200-118bca7383ce",
+      "createdAt": "2026-06-05T15:03:39.000Z",
+      "updatedAt": "2026-06-05T15:03:39.000Z",
+      "uid": "35240-ae3b6a5a-8422-4182-9200-118bca7383ce"
+    },
+    {
+      "name": "?Action=ModifyLoadBalancerAttributes",
+      "item": [
+        {
+          "name": "Amazon Elastic Load Balancing Modify Load Balancer Attributes",
+          "id": "c73fc63a-8f48-40b2-af41-aabcea7b22ac",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/?Action=ModifyLoadBalancerAttributes&LoadBalancerArn=<string>&Attributes.member.1.Key=<string>&Attributes.member.1.Value=<string>",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                ""
+              ],
+              "query": [
+                {
+                  "key": "Action",
+                  "value": "ModifyLoadBalancerAttributes"
+                },
+                {
+                  "description": "(Required) The Amazon Resource Name (ARN) of the load balancer",
+                  "key": "LoadBalancerArn",
+                  "value": "<string>"
+                },
+                {
+                  "description": "The name of the attribute",
+                  "key": "Attributes.member.1.Key",
+                  "value": "<string>"
+                },
+                {
+                  "description": "The value of the attribute",
+                  "key": "Attributes.member.1.Value",
+                  "value": "<string>"
+                }
+              ]
+            },
+            "description": "Modifies the specified attributes of the specified Application Load Balancer, Network Load Balancer, or Gateway Load Balancer."
+          },
+          "response": [
+            {
+              "id": "0ff0acfb-f41e-49c0-8b7c-3657ae9477de",
+              "name": "Successfully modified load balancer attributes",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/?LoadBalancerArn=<string>&Attributes.member.1.Key=<string>&Attributes.member.1.Value=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    ""
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) The Amazon Resource Name (ARN) of the load balancer",
+                      "key": "LoadBalancerArn",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "The name of the attribute",
+                      "key": "Attributes.member.1.Key",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "The value of the attribute",
+                      "key": "Attributes.member.1.Value",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "text",
+              "header": [],
+              "cookie": [],
+              "responseTime": null,
+              "body": null,
+              "createdAt": "2026-06-05T15:03:39.000Z",
+              "updatedAt": "2026-06-05T15:03:39.000Z",
+              "uid": "35240-0ff0acfb-f41e-49c0-8b7c-3657ae9477de"
+            },
+            {
+              "id": "798fa963-2ac2-40a2-90c3-0648d2ca87ad",
+              "name": "Invalid request parameters",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/?LoadBalancerArn=<string>&Attributes.member.1.Key=<string>&Attributes.member.1.Value=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    ""
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) The Amazon Resource Name (ARN) of the load balancer",
+                      "key": "LoadBalancerArn",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "The name of the attribute",
+                      "key": "Attributes.member.1.Key",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "The value of the attribute",
+                      "key": "Attributes.member.1.Value",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": "text",
+              "header": [],
+              "cookie": [],
+              "responseTime": null,
+              "body": null,
+              "createdAt": "2026-06-05T15:03:39.000Z",
+              "updatedAt": "2026-06-05T15:03:39.000Z",
+              "uid": "35240-798fa963-2ac2-40a2-90c3-0648d2ca87ad"
+            },
+            {
+              "id": "9688d265-8e40-4ab0-91dc-4cd3e14d442b",
+              "name": "Authentication failure",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/?LoadBalancerArn=<string>&Attributes.member.1.Key=<string>&Attributes.member.1.Value=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    ""
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) The Amazon Resource Name (ARN) of the load balancer",
+                      "key": "LoadBalancerArn",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "The name of the attribute",
+                      "key": "Attributes.member.1.Key",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "The value of the attribute",
+                      "key": "Attributes.member.1.Value",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "_postman_previewlanguage": "text",
+              "header": [],
+              "cookie": [],
+              "responseTime": null,
+              "body": null,
+              "createdAt": "2026-06-05T15:03:39.000Z",
+              "updatedAt": "2026-06-05T15:03:39.000Z",
+              "uid": "35240-9688d265-8e40-4ab0-91dc-4cd3e14d442b"
+            }
+          ],
+          "createdAt": "2026-06-05T15:03:39.000Z",
+          "updatedAt": "2026-06-05T15:03:39.000Z",
+          "uid": "35240-c73fc63a-8f48-40b2-af41-aabcea7b22ac"
+        }
+      ],
+      "id": "688a9d70-d710-49f2-ba8d-29376375b932",
+      "createdAt": "2026-06-05T15:03:39.000Z",
+      "updatedAt": "2026-06-05T15:03:39.000Z",
+      "uid": "35240-688a9d70-d710-49f2-ba8d-29376375b932"
+    },
+    {
+      "name": "?Action=CreateTargetGroup",
+      "item": [
+        {
+          "name": "Amazon Elastic Load Balancing Create a Target Group",
+          "id": "2b1e25fb-d3ba-4229-b2d2-6cd3ba7de9b5",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/xml"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/?Action=CreateTargetGroup&Name=<string>&Protocol=HTTP&Port=<integer>&VpcId=<string>&HealthCheckProtocol=TLS&HealthCheckPort=<string>&HealthCheckPath=<string>&TargetType=lambda",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                ""
+              ],
+              "query": [
+                {
+                  "key": "Action",
+                  "value": "CreateTargetGroup"
+                },
+                {
+                  "description": "(Required) The name of the target group. Must be unique per region per account.",
+                  "key": "Name",
+                  "value": "<string>"
+                },
+                {
+                  "description": "The protocol to use for routing traffic to the targets",
+                  "key": "Protocol",
+                  "value": "HTTP"
+                },
+                {
+                  "description": "The port on which the targets receive traffic",
+                  "key": "Port",
+                  "value": "<integer>"
+                },
+                {
+                  "description": "The identifier of the VPC for the targets",
+                  "key": "VpcId",
+                  "value": "<string>"
+                },
+                {
+                  "description": "The protocol to use for health checks",
+                  "key": "HealthCheckProtocol",
+                  "value": "TLS"
+                },
+                {
+                  "description": "The port to use for health checks",
+                  "key": "HealthCheckPort",
+                  "value": "<string>"
+                },
+                {
+                  "description": "The destination for health checks on the targets",
+                  "key": "HealthCheckPath",
+                  "value": "<string>"
+                },
+                {
+                  "description": "The type of target to register with the target group",
+                  "key": "TargetType",
+                  "value": "lambda"
+                }
+              ]
+            },
+            "description": "Creates a target group. Target groups are used to route requests to one or more registered targets. After creating a target group, you can register targets and create listeners or rules to route traffic to the target group."
+          },
+          "response": [
+            {
+              "id": "fb2bd10b-317f-4ceb-a290-e5dcc091b7af",
+              "name": "Successfully created target group",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/xml"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/?Name=<string>&Protocol=HTTP&Port=<integer>&VpcId=<string>&HealthCheckProtocol=TLS&HealthCheckPort=<string>&HealthCheckPath=<string>&TargetType=lambda",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    ""
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) The name of the target group. Must be unique per region per account.",
+                      "key": "Name",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "The protocol to use for routing traffic to the targets",
+                      "key": "Protocol",
+                      "value": "HTTP"
+                    },
+                    {
+                      "description": "The port on which the targets receive traffic",
+                      "key": "Port",
+                      "value": "<integer>"
+                    },
+                    {
+                      "description": "The identifier of the VPC for the targets",
+                      "key": "VpcId",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "The protocol to use for health checks",
+                      "key": "HealthCheckProtocol",
+                      "value": "TLS"
+                    },
+                    {
+                      "description": "The port to use for health checks",
+                      "key": "HealthCheckPort",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "The destination for health checks on the targets",
+                      "key": "HealthCheckPath",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "The type of target to register with the target group",
+                      "key": "TargetType",
+                      "value": "lambda"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "xml",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/xml"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<element>\n  <targetGroups>\n    <targetGroupArn>(string)</targetGroupArn>\n    <targetGroupName>(string)</targetGroupName>\n    <protocol>(string)</protocol>\n    <port>(integer)</port>\n    <vpcId>(string)</vpcId>\n    <healthCheckProtocol>(string)</healthCheckProtocol>\n    <healthCheckPort>(string)</healthCheckPort>\n    <healthCheckEnabled>(boolean)</healthCheckEnabled>\n    <healthCheckIntervalSeconds>(integer)</healthCheckIntervalSeconds>\n    <healthCheckTimeoutSeconds>(integer)</healthCheckTimeoutSeconds>\n    <healthyThresholdCount>(integer)</healthyThresholdCount>\n    <unhealthyThresholdCount>(integer)</unhealthyThresholdCount>\n    <healthCheckPath>(string)</healthCheckPath>\n    <targetType>(string)</targetType>\n    <loadBalancerArns>(string)</loadBalancerArns>\n    <loadBalancerArns>(string)</loadBalancerArns>\n  </targetGroups>\n  <targetGroups>\n    <targetGroupArn>(string)</targetGroupArn>\n    <targetGroupName>(string)</targetGroupName>\n    <protocol>(string)</protocol>\n    <port>(integer)</port>\n    <vpcId>(string)</vpcId>\n    <healthCheckProtocol>(string)</healthCheckProtocol>\n    <healthCheckPort>(string)</healthCheckPort>\n    <healthCheckEnabled>(boolean)</healthCheckEnabled>\n    <healthCheckIntervalSeconds>(integer)</healthCheckIntervalSeconds>\n    <healthCheckTimeoutSeconds>(integer)</healthCheckTimeoutSeconds>\n    <healthyThresholdCount>(integer)</healthyThresholdCount>\n    <unhealthyThresholdCount>(integer)</unhealthyThresholdCount>\n    <healthCheckPath>(string)</healthCheckPath>\n    <targetType>(string)</targetType>\n    <loadBalancerArns>(string)</loadBalancerArns>\n    <loadBalancerArns>(string)</loadBalancerArns>\n  </targetGroups>\n</element>",
+              "createdAt": "2026-06-05T15:03:39.000Z",
+              "updatedAt": "2026-06-05T15:03:39.000Z",
+              "uid": "35240-fb2bd10b-317f-4ceb-a290-e5dcc091b7af"
+            },
+            {
+              "id": "65c138da-c207-4284-9a5d-cc7e10bde33d",
+              "name": "Invalid request parameters",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/?Name=<string>&Protocol=HTTP&Port=<integer>&VpcId=<string>&HealthCheckProtocol=TLS&HealthCheckPort=<string>&HealthCheckPath=<string>&TargetType=lambda",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    ""
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) The name of the target group. Must be unique per region per account.",
+                      "key": "Name",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "The protocol to use for routing traffic to the targets",
+                      "key": "Protocol",
+                      "value": "HTTP"
+                    },
+                    {
+                      "description": "The port on which the targets receive traffic",
+                      "key": "Port",
+                      "value": "<integer>"
+                    },
+                    {
+                      "description": "The identifier of the VPC for the targets",
+                      "key": "VpcId",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "The protocol to use for health checks",
+                      "key": "HealthCheckProtocol",
+                      "value": "TLS"
+                    },
+                    {
+                      "description": "The port to use for health checks",
+                      "key": "HealthCheckPort",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "The destination for health checks on the targets",
+                      "key": "HealthCheckPath",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "The type of target to register with the target group",
+                      "key": "TargetType",
+                      "value": "lambda"
+                    }
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": "text",
+              "header": [],
+              "cookie": [],
+              "responseTime": null,
+              "body": null,
+              "createdAt": "2026-06-05T15:03:39.000Z",
+              "updatedAt": "2026-06-05T15:03:39.000Z",
+              "uid": "35240-65c138da-c207-4284-9a5d-cc7e10bde33d"
+            },
+            {
+              "id": "fccd9e6f-9476-4c75-a078-073664c05978",
+              "name": "Authentication failure",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/?Name=<string>&Protocol=HTTP&Port=<integer>&VpcId=<string>&HealthCheckProtocol=TLS&HealthCheckPort=<string>&HealthCheckPath=<string>&TargetType=lambda",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    ""
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) The name of the target group. Must be unique per region per account.",
+                      "key": "Name",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "The protocol to use for routing traffic to the targets",
+                      "key": "Protocol",
+                      "value": "HTTP"
+                    },
+                    {
+                      "description": "The port on which the targets receive traffic",
+                      "key": "Port",
+                      "value": "<integer>"
+                    },
+                    {
+                      "description": "The identifier of the VPC for the targets",
+                      "key": "VpcId",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "The protocol to use for health checks",
+                      "key": "HealthCheckProtocol",
+                      "value": "TLS"
+                    },
+                    {
+                      "description": "The port to use for health checks",
+                      "key": "HealthCheckPort",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "The destination for health checks on the targets",
+                      "key": "HealthCheckPath",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "The type of target to register with the target group",
+                      "key": "TargetType",
+                      "value": "lambda"
+                    }
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "_postman_previewlanguage": "text",
+              "header": [],
+              "cookie": [],
+              "responseTime": null,
+              "body": null,
+              "createdAt": "2026-06-05T15:03:39.000Z",
+              "updatedAt": "2026-06-05T15:03:39.000Z",
+              "uid": "35240-fccd9e6f-9476-4c75-a078-073664c05978"
+            }
+          ],
+          "createdAt": "2026-06-05T15:03:39.000Z",
+          "updatedAt": "2026-06-05T15:03:39.000Z",
+          "uid": "35240-2b1e25fb-d3ba-4229-b2d2-6cd3ba7de9b5"
+        }
+      ],
+      "id": "d3fdce5b-115e-4113-8e5a-2bcf7b580cd1",
+      "createdAt": "2026-06-05T15:03:39.000Z",
+      "updatedAt": "2026-06-05T15:03:39.000Z",
+      "uid": "35240-d3fdce5b-115e-4113-8e5a-2bcf7b580cd1"
+    },
+    {
+      "name": "?Action=DescribeTargetGroups",
+      "item": [
+        {
+          "name": "Amazon Elastic Load Balancing Describe Target Groups",
+          "id": "f586700e-942a-4ebc-95c3-1eb650d90f34",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/xml"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/?Action=DescribeTargetGroups&LoadBalancerArn=<string>&TargetGroupArns=<string>&TargetGroupArns=<string>&Names=<string>&Names=<string>&Marker=<string>&PageSize=<integer>",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                ""
+              ],
+              "query": [
+                {
+                  "key": "Action",
+                  "value": "DescribeTargetGroups"
+                },
+                {
+                  "description": "The ARN of the load balancer",
+                  "key": "LoadBalancerArn",
+                  "value": "<string>"
+                },
+                {
+                  "description": "The ARNs of the target groups",
+                  "key": "TargetGroupArns",
+                  "value": "<string>"
+                },
+                {
+                  "description": "The ARNs of the target groups",
+                  "key": "TargetGroupArns",
+                  "value": "<string>"
+                },
+                {
+                  "description": "The names of the target groups",
+                  "key": "Names",
+                  "value": "<string>"
+                },
+                {
+                  "description": "The names of the target groups",
+                  "key": "Names",
+                  "value": "<string>"
+                },
+                {
+                  "description": "The marker for the next set of results",
+                  "key": "Marker",
+                  "value": "<string>"
+                },
+                {
+                  "description": "The maximum number of results to return",
+                  "key": "PageSize",
+                  "value": "<integer>"
+                }
+              ]
+            },
+            "description": "Describes the specified target groups or all of your target groups. By default, all target groups are described. Alternatively, you can specify target group ARNs or names."
+          },
+          "response": [
+            {
+              "id": "39f5a142-9322-4c64-a12b-09f210ee73e3",
+              "name": "Successfully described target groups",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/xml"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/?LoadBalancerArn=<string>&TargetGroupArns=<string>&Names=<string>&Marker=<string>&PageSize=<integer>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    ""
+                  ],
+                  "query": [
+                    {
+                      "description": "The ARN of the load balancer",
+                      "key": "LoadBalancerArn",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "The ARNs of the target groups",
+                      "key": "TargetGroupArns",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "The names of the target groups",
+                      "key": "Names",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "The marker for the next set of results",
+                      "key": "Marker",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "The maximum number of results to return",
+                      "key": "PageSize",
+                      "value": "<integer>"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "xml",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/xml"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<element>\n  <targetGroups>\n    <targetGroupArn>(string)</targetGroupArn>\n    <targetGroupName>(string)</targetGroupName>\n    <protocol>(string)</protocol>\n    <port>(integer)</port>\n    <vpcId>(string)</vpcId>\n    <healthCheckProtocol>(string)</healthCheckProtocol>\n    <healthCheckPort>(string)</healthCheckPort>\n    <healthCheckEnabled>(boolean)</healthCheckEnabled>\n    <healthCheckIntervalSeconds>(integer)</healthCheckIntervalSeconds>\n    <healthCheckTimeoutSeconds>(integer)</healthCheckTimeoutSeconds>\n    <healthyThresholdCount>(integer)</healthyThresholdCount>\n    <unhealthyThresholdCount>(integer)</unhealthyThresholdCount>\n    <healthCheckPath>(string)</healthCheckPath>\n    <targetType>(string)</targetType>\n    <loadBalancerArns>(string)</loadBalancerArns>\n    <loadBalancerArns>(string)</loadBalancerArns>\n  </targetGroups>\n  <targetGroups>\n    <targetGroupArn>(string)</targetGroupArn>\n    <targetGroupName>(string)</targetGroupName>\n    <protocol>(string)</protocol>\n    <port>(integer)</port>\n    <vpcId>(string)</vpcId>\n    <healthCheckProtocol>(string)</healthCheckProtocol>\n    <healthCheckPort>(string)</healthCheckPort>\n    <healthCheckEnabled>(boolean)</healthCheckEnabled>\n    <healthCheckIntervalSeconds>(integer)</healthCheckIntervalSeconds>\n    <healthCheckTimeoutSeconds>(integer)</healthCheckTimeoutSeconds>\n    <healthyThresholdCount>(integer)</healthyThresholdCount>\n    <unhealthyThresholdCount>(integer)</unhealthyThresholdCount>\n    <healthCheckPath>(string)</healthCheckPath>\n    <targetType>(string)</targetType>\n    <loadBalancerArns>(string)</loadBalancerArns>\n    <loadBalancerArns>(string)</loadBalancerArns>\n  </targetGroups>\n  <nextMarker>(string)</nextMarker>\n</element>",
+              "createdAt": "2026-06-05T15:03:39.000Z",
+              "updatedAt": "2026-06-05T15:03:39.000Z",
+              "uid": "35240-39f5a142-9322-4c64-a12b-09f210ee73e3"
+            },
+            {
+              "id": "ef0976df-b0d3-48f8-9f84-0ba921512c35",
+              "name": "Invalid request parameters",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/?LoadBalancerArn=<string>&TargetGroupArns=<string>&Names=<string>&Marker=<string>&PageSize=<integer>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    ""
+                  ],
+                  "query": [
+                    {
+                      "description": "The ARN of the load balancer",
+                      "key": "LoadBalancerArn",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "The ARNs of the target groups",
+                      "key": "TargetGroupArns",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "The names of the target groups",
+                      "key": "Names",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "The marker for the next set of results",
+                      "key": "Marker",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "The maximum number of results to return",
+                      "key": "PageSize",
+                      "value": "<integer>"
+                    }
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": "text",
+              "header": [],
+              "cookie": [],
+              "responseTime": null,
+              "body": null,
+              "createdAt": "2026-06-05T15:03:39.000Z",
+              "updatedAt": "2026-06-05T15:03:39.000Z",
+              "uid": "35240-ef0976df-b0d3-48f8-9f84-0ba921512c35"
+            },
+            {
+              "id": "c3eaea39-4a83-436f-879c-f521e99fa2c3",
+              "name": "Authentication failure",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/?LoadBalancerArn=<string>&TargetGroupArns=<string>&Names=<string>&Marker=<string>&PageSize=<integer>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    ""
+                  ],
+                  "query": [
+                    {
+                      "description": "The ARN of the load balancer",
+                      "key": "LoadBalancerArn",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "The ARNs of the target groups",
+                      "key": "TargetGroupArns",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "The names of the target groups",
+                      "key": "Names",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "The marker for the next set of results",
+                      "key": "Marker",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "The maximum number of results to return",
+                      "key": "PageSize",
+                      "value": "<integer>"
+                    }
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "_postman_previewlanguage": "text",
+              "header": [],
+              "cookie": [],
+              "responseTime": null,
+              "body": null,
+              "createdAt": "2026-06-05T15:03:39.000Z",
+              "updatedAt": "2026-06-05T15:03:39.000Z",
+              "uid": "35240-c3eaea39-4a83-436f-879c-f521e99fa2c3"
+            }
+          ],
+          "createdAt": "2026-06-05T15:03:39.000Z",
+          "updatedAt": "2026-06-05T15:03:39.000Z",
+          "uid": "35240-f586700e-942a-4ebc-95c3-1eb650d90f34"
+        }
+      ],
+      "id": "f76f5256-ccad-42a4-b9d0-4a5eef383a14",
+      "createdAt": "2026-06-05T15:03:39.000Z",
+      "updatedAt": "2026-06-05T15:03:39.000Z",
+      "uid": "35240-f76f5256-ccad-42a4-b9d0-4a5eef383a14"
+    },
+    {
+      "name": "?Action=RegisterTargets",
+      "item": [
+        {
+          "name": "Amazon Elastic Load Balancing Register Targets with a Target Group",
+          "id": "75c7f01a-9105-4102-b249-92fa673ba794",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/?Action=RegisterTargets&TargetGroupArn=<string>&Targets.member.1.Id=<string>&Targets.member.1.Port=<integer>&Targets.member.1.AvailabilityZone=<string>",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                ""
+              ],
+              "query": [
+                {
+                  "key": "Action",
+                  "value": "RegisterTargets"
+                },
+                {
+                  "description": "(Required) The ARN of the target group",
+                  "key": "TargetGroupArn",
+                  "value": "<string>"
+                },
+                {
+                  "description": "(Required) The ID of the target (instance ID, IP address, or Lambda ARN)",
+                  "key": "Targets.member.1.Id",
+                  "value": "<string>"
+                },
+                {
+                  "description": "The port on which the target is listening",
+                  "key": "Targets.member.1.Port",
+                  "value": "<integer>"
+                },
+                {
+                  "description": "The Availability Zone where the target is located",
+                  "key": "Targets.member.1.AvailabilityZone",
+                  "value": "<string>"
+                }
+              ]
+            },
+            "description": "Registers the specified targets with the specified target group. If the target is an EC2 instance, it must be in the running state when you register it."
+          },
+          "response": [
+            {
+              "id": "9c261141-08fc-4165-bfbb-17e14bd43ba0",
+              "name": "Successfully registered targets",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/?TargetGroupArn=<string>&Targets.member.1.Id=<string>&Targets.member.1.Port=<integer>&Targets.member.1.AvailabilityZone=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    ""
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) The ARN of the target group",
+                      "key": "TargetGroupArn",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "(Required) The ID of the target (instance ID, IP address, or Lambda ARN)",
+                      "key": "Targets.member.1.Id",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "The port on which the target is listening",
+                      "key": "Targets.member.1.Port",
+                      "value": "<integer>"
+                    },
+                    {
+                      "description": "The Availability Zone where the target is located",
+                      "key": "Targets.member.1.AvailabilityZone",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "text",
+              "header": [],
+              "cookie": [],
+              "responseTime": null,
+              "body": null,
+              "createdAt": "2026-06-05T15:03:39.000Z",
+              "updatedAt": "2026-06-05T15:03:39.000Z",
+              "uid": "35240-9c261141-08fc-4165-bfbb-17e14bd43ba0"
+            },
+            {
+              "id": "fb0b2dac-f5d7-488f-8f5a-cd7247399d1c",
+              "name": "Invalid request parameters",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/?TargetGroupArn=<string>&Targets.member.1.Id=<string>&Targets.member.1.Port=<integer>&Targets.member.1.AvailabilityZone=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    ""
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) The ARN of the target group",
+                      "key": "TargetGroupArn",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "(Required) The ID of the target (instance ID, IP address, or Lambda ARN)",
+                      "key": "Targets.member.1.Id",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "The port on which the target is listening",
+                      "key": "Targets.member.1.Port",
+                      "value": "<integer>"
+                    },
+                    {
+                      "description": "The Availability Zone where the target is located",
+                      "key": "Targets.member.1.AvailabilityZone",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": "text",
+              "header": [],
+              "cookie": [],
+              "responseTime": null,
+              "body": null,
+              "createdAt": "2026-06-05T15:03:39.000Z",
+              "updatedAt": "2026-06-05T15:03:39.000Z",
+              "uid": "35240-fb0b2dac-f5d7-488f-8f5a-cd7247399d1c"
+            },
+            {
+              "id": "dc0645d6-933d-464c-a412-b3ae3e6e4ca2",
+              "name": "Authentication failure",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/?TargetGroupArn=<string>&Targets.member.1.Id=<string>&Targets.member.1.Port=<integer>&Targets.member.1.AvailabilityZone=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    ""
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) The ARN of the target group",
+                      "key": "TargetGroupArn",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "(Required) The ID of the target (instance ID, IP address, or Lambda ARN)",
+                      "key": "Targets.member.1.Id",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "The port on which the target is listening",
+                      "key": "Targets.member.1.Port",
+                      "value": "<integer>"
+                    },
+                    {
+                      "description": "The Availability Zone where the target is located",
+                      "key": "Targets.member.1.AvailabilityZone",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "_postman_previewlanguage": "text",
+              "header": [],
+              "cookie": [],
+              "responseTime": null,
+              "body": null,
+              "createdAt": "2026-06-05T15:03:39.000Z",
+              "updatedAt": "2026-06-05T15:03:39.000Z",
+              "uid": "35240-dc0645d6-933d-464c-a412-b3ae3e6e4ca2"
+            }
+          ],
+          "createdAt": "2026-06-05T15:03:39.000Z",
+          "updatedAt": "2026-06-05T15:03:39.000Z",
+          "uid": "35240-75c7f01a-9105-4102-b249-92fa673ba794"
+        }
+      ],
+      "id": "7453c530-bfd9-4ea5-909f-466a0f1b8390",
+      "createdAt": "2026-06-05T15:03:39.000Z",
+      "updatedAt": "2026-06-05T15:03:39.000Z",
+      "uid": "35240-7453c530-bfd9-4ea5-909f-466a0f1b8390"
+    },
+    {
+      "name": "?Action=DeregisterTargets",
+      "item": [
+        {
+          "name": "Amazon Elastic Load Balancing Deregister Targets from a Target Group",
+          "id": "18fab1f0-ac67-485c-bb9a-3a0bd7b30e14",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/?Action=DeregisterTargets&TargetGroupArn=<string>&Targets.member.1.Id=<string>&Targets.member.1.Port=<integer>",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                ""
+              ],
+              "query": [
+                {
+                  "key": "Action",
+                  "value": "DeregisterTargets"
+                },
+                {
+                  "description": "(Required) The ARN of the target group",
+                  "key": "TargetGroupArn",
+                  "value": "<string>"
+                },
+                {
+                  "description": "(Required) The ID of the target",
+                  "key": "Targets.member.1.Id",
+                  "value": "<string>"
+                },
+                {
+                  "description": "The port on which the target is listening",
+                  "key": "Targets.member.1.Port",
+                  "value": "<integer>"
+                }
+              ]
+            },
+            "description": "Deregisters the specified targets from the specified target group. After the targets are deregistered, they no longer receive traffic from the load balancer."
+          },
+          "response": [
+            {
+              "id": "e4f33edd-0bdb-4890-804a-84d5659f2541",
+              "name": "Successfully deregistered targets",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/?TargetGroupArn=<string>&Targets.member.1.Id=<string>&Targets.member.1.Port=<integer>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    ""
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) The ARN of the target group",
+                      "key": "TargetGroupArn",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "(Required) The ID of the target",
+                      "key": "Targets.member.1.Id",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "The port on which the target is listening",
+                      "key": "Targets.member.1.Port",
+                      "value": "<integer>"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "text",
+              "header": [],
+              "cookie": [],
+              "responseTime": null,
+              "body": null,
+              "createdAt": "2026-06-05T15:03:39.000Z",
+              "updatedAt": "2026-06-05T15:03:39.000Z",
+              "uid": "35240-e4f33edd-0bdb-4890-804a-84d5659f2541"
+            },
+            {
+              "id": "08f07b2d-8584-46ef-9368-8910b42d0d60",
+              "name": "Invalid request parameters",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/?TargetGroupArn=<string>&Targets.member.1.Id=<string>&Targets.member.1.Port=<integer>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    ""
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) The ARN of the target group",
+                      "key": "TargetGroupArn",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "(Required) The ID of the target",
+                      "key": "Targets.member.1.Id",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "The port on which the target is listening",
+                      "key": "Targets.member.1.Port",
+                      "value": "<integer>"
+                    }
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": "text",
+              "header": [],
+              "cookie": [],
+              "responseTime": null,
+              "body": null,
+              "createdAt": "2026-06-05T15:03:39.000Z",
+              "updatedAt": "2026-06-05T15:03:39.000Z",
+              "uid": "35240-08f07b2d-8584-46ef-9368-8910b42d0d60"
+            },
+            {
+              "id": "ffdf4500-eb52-47a5-9246-e0e69cb0354f",
+              "name": "Authentication failure",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/?TargetGroupArn=<string>&Targets.member.1.Id=<string>&Targets.member.1.Port=<integer>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    ""
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) The ARN of the target group",
+                      "key": "TargetGroupArn",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "(Required) The ID of the target",
+                      "key": "Targets.member.1.Id",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "The port on which the target is listening",
+                      "key": "Targets.member.1.Port",
+                      "value": "<integer>"
+                    }
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "_postman_previewlanguage": "text",
+              "header": [],
+              "cookie": [],
+              "responseTime": null,
+              "body": null,
+              "createdAt": "2026-06-05T15:03:39.000Z",
+              "updatedAt": "2026-06-05T15:03:39.000Z",
+              "uid": "35240-ffdf4500-eb52-47a5-9246-e0e69cb0354f"
+            }
+          ],
+          "createdAt": "2026-06-05T15:03:39.000Z",
+          "updatedAt": "2026-06-05T15:03:39.000Z",
+          "uid": "35240-18fab1f0-ac67-485c-bb9a-3a0bd7b30e14"
+        }
+      ],
+      "id": "b202fe8b-92f7-4f00-b726-2986950e3c11",
+      "createdAt": "2026-06-05T15:03:39.000Z",
+      "updatedAt": "2026-06-05T15:03:39.000Z",
+      "uid": "35240-b202fe8b-92f7-4f00-b726-2986950e3c11"
+    },
+    {
+      "name": "?Action=DescribeTargetHealth",
+      "item": [
+        {
+          "name": "Amazon Elastic Load Balancing Describe Target Health",
+          "id": "5cfccc4b-9fde-4789-8319-07560af34cf3",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/xml"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/?Action=DescribeTargetHealth&TargetGroupArn=<string>&Targets.member.1.Id=<string>&Targets.member.1.Port=<integer>",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                ""
+              ],
+              "query": [
+                {
+                  "key": "Action",
+                  "value": "DescribeTargetHealth"
+                },
+                {
+                  "description": "(Required) The ARN of the target group",
+                  "key": "TargetGroupArn",
+                  "value": "<string>"
+                },
+                {
+                  "description": "The ID of the target",
+                  "key": "Targets.member.1.Id",
+                  "value": "<string>"
+                },
+                {
+                  "description": "The port on which the target is listening",
+                  "key": "Targets.member.1.Port",
+                  "value": "<integer>"
+                }
+              ]
+            },
+            "description": "Describes the health of the specified targets or all of your targets registered with the specified target group."
+          },
+          "response": [
+            {
+              "id": "e9e84a89-b81c-4133-baf2-8188003f6c69",
+              "name": "Successfully described target health",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/xml"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/?TargetGroupArn=<string>&Targets.member.1.Id=<string>&Targets.member.1.Port=<integer>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    ""
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) The ARN of the target group",
+                      "key": "TargetGroupArn",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "The ID of the target",
+                      "key": "Targets.member.1.Id",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "The port on which the target is listening",
+                      "key": "Targets.member.1.Port",
+                      "value": "<integer>"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "xml",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/xml"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<element>\n  <targetHealthDescriptions>\n    <target>\n      <id>(string)</id>\n      <port>(integer)</port>\n    </target>\n    <targetHealth>\n      <state>(string)</state>\n      <reason>(string)</reason>\n      <description>(string)</description>\n    </targetHealth>\n  </targetHealthDescriptions>\n  <targetHealthDescriptions>\n    <target>\n      <id>(string)</id>\n      <port>(integer)</port>\n    </target>\n    <targetHealth>\n      <state>(string)</state>\n      <reason>(string)</reason>\n      <description>(string)</description>\n    </targetHealth>\n  </targetHealthDescriptions>\n</element>",
+              "createdAt": "2026-06-05T15:03:39.000Z",
+              "updatedAt": "2026-06-05T15:03:39.000Z",
+              "uid": "35240-e9e84a89-b81c-4133-baf2-8188003f6c69"
+            },
+            {
+              "id": "bf902cf2-c09b-4e1e-b05b-cce3c147aeeb",
+              "name": "Invalid request parameters",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/?TargetGroupArn=<string>&Targets.member.1.Id=<string>&Targets.member.1.Port=<integer>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    ""
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) The ARN of the target group",
+                      "key": "TargetGroupArn",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "The ID of the target",
+                      "key": "Targets.member.1.Id",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "The port on which the target is listening",
+                      "key": "Targets.member.1.Port",
+                      "value": "<integer>"
+                    }
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": "text",
+              "header": [],
+              "cookie": [],
+              "responseTime": null,
+              "body": null,
+              "createdAt": "2026-06-05T15:03:39.000Z",
+              "updatedAt": "2026-06-05T15:03:39.000Z",
+              "uid": "35240-bf902cf2-c09b-4e1e-b05b-cce3c147aeeb"
+            },
+            {
+              "id": "7b2700f0-bd36-47c4-9dfc-58aebe85337b",
+              "name": "Authentication failure",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/?TargetGroupArn=<string>&Targets.member.1.Id=<string>&Targets.member.1.Port=<integer>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    ""
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) The ARN of the target group",
+                      "key": "TargetGroupArn",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "The ID of the target",
+                      "key": "Targets.member.1.Id",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "The port on which the target is listening",
+                      "key": "Targets.member.1.Port",
+                      "value": "<integer>"
+                    }
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "_postman_previewlanguage": "text",
+              "header": [],
+              "cookie": [],
+              "responseTime": null,
+              "body": null,
+              "createdAt": "2026-06-05T15:03:39.000Z",
+              "updatedAt": "2026-06-05T15:03:39.000Z",
+              "uid": "35240-7b2700f0-bd36-47c4-9dfc-58aebe85337b"
+            }
+          ],
+          "createdAt": "2026-06-05T15:03:39.000Z",
+          "updatedAt": "2026-06-05T15:03:39.000Z",
+          "uid": "35240-5cfccc4b-9fde-4789-8319-07560af34cf3"
+        }
+      ],
+      "id": "cb1c3f20-7008-4f1b-a0d5-4c86db68db39",
+      "createdAt": "2026-06-05T15:03:39.000Z",
+      "updatedAt": "2026-06-05T15:03:39.000Z",
+      "uid": "35240-cb1c3f20-7008-4f1b-a0d5-4c86db68db39"
+    },
+    {
+      "name": "?Action=CreateListener",
+      "item": [
+        {
+          "name": "Amazon Elastic Load Balancing Create a Listener",
+          "id": "01806389-e5ee-436e-9c94-ec7b548e5d8d",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/xml"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/?Action=CreateListener&LoadBalancerArn=<string>&Protocol=HTTP&Port=<integer>&SslPolicy=<string>&DefaultActions.member.1.Type=forward&DefaultActions.member.1.TargetGroupArn=<string>",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                ""
+              ],
+              "query": [
+                {
+                  "key": "Action",
+                  "value": "CreateListener"
+                },
+                {
+                  "description": "(Required) The ARN of the load balancer",
+                  "key": "LoadBalancerArn",
+                  "value": "<string>"
+                },
+                {
+                  "description": "The protocol for connections from clients to the load balancer",
+                  "key": "Protocol",
+                  "value": "HTTP"
+                },
+                {
+                  "description": "(Required) The port on which the load balancer is listening",
+                  "key": "Port",
+                  "value": "<integer>"
+                },
+                {
+                  "description": "The security policy that defines which protocols and ciphers are supported",
+                  "key": "SslPolicy",
+                  "value": "<string>"
+                },
+                {
+                  "description": "(Required) The type of action",
+                  "key": "DefaultActions.member.1.Type",
+                  "value": "forward"
+                },
+                {
+                  "description": "The ARN of the target group for forward actions",
+                  "key": "DefaultActions.member.1.TargetGroupArn",
+                  "value": "<string>"
+                }
+              ]
+            },
+            "description": "Creates a listener for the specified Application Load Balancer, Network Load Balancer, or Gateway Load Balancer. Listeners check for connection requests from clients using the protocol and port that you configure."
+          },
+          "response": [
+            {
+              "id": "2e29fc24-8cc6-4a72-949e-8042e0f48975",
+              "name": "Successfully created listener",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/xml"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/?LoadBalancerArn=<string>&Protocol=HTTP&Port=<integer>&SslPolicy=<string>&DefaultActions.member.1.Type=forward&DefaultActions.member.1.TargetGroupArn=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    ""
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) The ARN of the load balancer",
+                      "key": "LoadBalancerArn",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "The protocol for connections from clients to the load balancer",
+                      "key": "Protocol",
+                      "value": "HTTP"
+                    },
+                    {
+                      "description": "(Required) The port on which the load balancer is listening",
+                      "key": "Port",
+                      "value": "<integer>"
+                    },
+                    {
+                      "description": "The security policy that defines which protocols and ciphers are supported",
+                      "key": "SslPolicy",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "(Required) The type of action",
+                      "key": "DefaultActions.member.1.Type",
+                      "value": "forward"
+                    },
+                    {
+                      "description": "The ARN of the target group for forward actions",
+                      "key": "DefaultActions.member.1.TargetGroupArn",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "xml",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/xml"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<element>\n  <listeners>\n    <listenerArn>(string)</listenerArn>\n    <loadBalancerArn>(string)</loadBalancerArn>\n    <port>(integer)</port>\n    <protocol>(string)</protocol>\n    <certificates>\n      <certificateArn>(string)</certificateArn>\n    </certificates>\n    <certificates>\n      <certificateArn>(string)</certificateArn>\n    </certificates>\n    <sslPolicy>(string)</sslPolicy>\n    <defaultActions>\n      <type>(string)</type>\n      <targetGroupArn>(string)</targetGroupArn>\n      <order>(integer)</order>\n      <redirectConfig>\n        <protocol>(string)</protocol>\n        <port>(string)</port>\n        <host>(string)</host>\n        <path>(string)</path>\n        <query>(string)</query>\n        <statusCode>(string)</statusCode>\n      </redirectConfig>\n      <fixedResponseConfig>\n        <messageBody>(string)</messageBody>\n        <statusCode>(string)</statusCode>\n        <contentType>(string)</contentType>\n      </fixedResponseConfig>\n    </defaultActions>\n    <defaultActions>\n      <type>(string)</type>\n      <targetGroupArn>(string)</targetGroupArn>\n      <order>(integer)</order>\n      <redirectConfig>\n        <protocol>(string)</protocol>\n        <port>(string)</port>\n        <host>(string)</host>\n        <path>(string)</path>\n        <query>(string)</query>\n        <statusCode>(string)</statusCode>\n      </redirectConfig>\n      <fixedResponseConfig>\n        <messageBody>(string)</messageBody>\n        <statusCode>(string)</statusCode>\n        <contentType>(string)</contentType>\n      </fixedResponseConfig>\n    </defaultActions>\n  </listeners>\n  <listeners>\n    <listenerArn>(string)</listenerArn>\n    <loadBalancerArn>(string)</loadBalancerArn>\n    <port>(integer)</port>\n    <protocol>(string)</protocol>\n    <certificates>\n      <certificateArn>(string)</certificateArn>\n    </certificates>\n    <certificates>\n      <certificateArn>(string)</certificateArn>\n    </certificates>\n    <sslPolicy>(string)</sslPolicy>\n    <defaultActions>\n      <type>(string)</type>\n      <targetGroupArn>(string)</targetGroupArn>\n      <order>(integer)</order>\n      <redirectConfig>\n        <protocol>(string)</protocol>\n        <port>(string)</port>\n        <host>(string)</host>\n        <path>(string)</path>\n        <query>(string)</query>\n        <statusCode>(string)</statusCode>\n      </redirectConfig>\n      <fixedResponseConfig>\n        <messageBody>(string)</messageBody>\n        <statusCode>(string)</statusCode>\n        <contentType>(string)</contentType>\n      </fixedResponseConfig>\n    </defaultActions>\n    <defaultActions>\n      <type>(string)</type>\n      <targetGroupArn>(string)</targetGroupArn>\n      <order>(integer)</order>\n      <redirectConfig>\n        <protocol>(string)</protocol>\n        <port>(string)</port>\n        <host>(string)</host>\n        <path>(string)</path>\n        <query>(string)</query>\n        <statusCode>(string)</statusCode>\n      </redirectConfig>\n      <fixedResponseConfig>\n        <messageBody>(string)</messageBody>\n        <statusCode>(string)</statusCode>\n        <contentType>(string)</contentType>\n      </fixedResponseConfig>\n    </defaultActions>\n  </listeners>\n</element>",
+              "createdAt": "2026-06-05T15:03:39.000Z",
+              "updatedAt": "2026-06-05T15:03:39.000Z",
+              "uid": "35240-2e29fc24-8cc6-4a72-949e-8042e0f48975"
+            },
+            {
+              "id": "169e9bb4-1a9e-454e-9d9c-588422824ecd",
+              "name": "Invalid request parameters",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/?LoadBalancerArn=<string>&Protocol=HTTP&Port=<integer>&SslPolicy=<string>&DefaultActions.member.1.Type=forward&DefaultActions.member.1.TargetGroupArn=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    ""
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) The ARN of the load balancer",
+                      "key": "LoadBalancerArn",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "The protocol for connections from clients to the load balancer",
+                      "key": "Protocol",
+                      "value": "HTTP"
+                    },
+                    {
+                      "description": "(Required) The port on which the load balancer is listening",
+                      "key": "Port",
+                      "value": "<integer>"
+                    },
+                    {
+                      "description": "The security policy that defines which protocols and ciphers are supported",
+                      "key": "SslPolicy",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "(Required) The type of action",
+                      "key": "DefaultActions.member.1.Type",
+                      "value": "forward"
+                    },
+                    {
+                      "description": "The ARN of the target group for forward actions",
+                      "key": "DefaultActions.member.1.TargetGroupArn",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": "text",
+              "header": [],
+              "cookie": [],
+              "responseTime": null,
+              "body": null,
+              "createdAt": "2026-06-05T15:03:39.000Z",
+              "updatedAt": "2026-06-05T15:03:39.000Z",
+              "uid": "35240-169e9bb4-1a9e-454e-9d9c-588422824ecd"
+            },
+            {
+              "id": "fc1e4eb6-4b15-4c87-bdeb-43c1c9cab293",
+              "name": "Authentication failure",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/?LoadBalancerArn=<string>&Protocol=HTTP&Port=<integer>&SslPolicy=<string>&DefaultActions.member.1.Type=forward&DefaultActions.member.1.TargetGroupArn=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    ""
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) The ARN of the load balancer",
+                      "key": "LoadBalancerArn",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "The protocol for connections from clients to the load balancer",
+                      "key": "Protocol",
+                      "value": "HTTP"
+                    },
+                    {
+                      "description": "(Required) The port on which the load balancer is listening",
+                      "key": "Port",
+                      "value": "<integer>"
+                    },
+                    {
+                      "description": "The security policy that defines which protocols and ciphers are supported",
+                      "key": "SslPolicy",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "(Required) The type of action",
+                      "key": "DefaultActions.member.1.Type",
+                      "value": "forward"
+                    },
+                    {
+                      "description": "The ARN of the target group for forward actions",
+                      "key": "DefaultActions.member.1.TargetGroupArn",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "_postman_previewlanguage": "text",
+              "header": [],
+              "cookie": [],
+              "responseTime": null,
+              "body": null,
+              "createdAt": "2026-06-05T15:03:39.000Z",
+              "updatedAt": "2026-06-05T15:03:39.000Z",
+              "uid": "35240-fc1e4eb6-4b15-4c87-bdeb-43c1c9cab293"
+            }
+          ],
+          "createdAt": "2026-06-05T15:03:39.000Z",
+          "updatedAt": "2026-06-05T15:03:39.000Z",
+          "uid": "35240-01806389-e5ee-436e-9c94-ec7b548e5d8d"
+        }
+      ],
+      "id": "7e4d7661-52b8-4e23-9397-98870d2f6551",
+      "createdAt": "2026-06-05T15:03:39.000Z",
+      "updatedAt": "2026-06-05T15:03:39.000Z",
+      "uid": "35240-7e4d7661-52b8-4e23-9397-98870d2f6551"
+    },
+    {
+      "name": "?Action=DescribeListeners",
+      "item": [
+        {
+          "name": "Amazon Elastic Load Balancing Describe Listeners",
+          "id": "3a2a5620-384a-4bdd-a92e-ffb7f3a5b4e2",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/xml"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/?Action=DescribeListeners&LoadBalancerArn=<string>&ListenerArns=<string>&ListenerArns=<string>&Marker=<string>&PageSize=<integer>",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                ""
+              ],
+              "query": [
+                {
+                  "key": "Action",
+                  "value": "DescribeListeners"
+                },
+                {
+                  "description": "The ARN of the load balancer",
+                  "key": "LoadBalancerArn",
+                  "value": "<string>"
+                },
+                {
+                  "description": "The ARNs of the listeners",
+                  "key": "ListenerArns",
+                  "value": "<string>"
+                },
+                {
+                  "description": "The ARNs of the listeners",
+                  "key": "ListenerArns",
+                  "value": "<string>"
+                },
+                {
+                  "description": "The marker for the next set of results",
+                  "key": "Marker",
+                  "value": "<string>"
+                },
+                {
+                  "description": "The maximum number of results to return",
+                  "key": "PageSize",
+                  "value": "<integer>"
+                }
+              ]
+            },
+            "description": "Describes the specified listeners or the listeners for the specified Application Load Balancer, Network Load Balancer, or Gateway Load Balancer."
+          },
+          "response": [
+            {
+              "id": "5fa62655-4715-4600-8c09-745702b37268",
+              "name": "Successfully described listeners",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/xml"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/?LoadBalancerArn=<string>&ListenerArns=<string>&Marker=<string>&PageSize=<integer>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    ""
+                  ],
+                  "query": [
+                    {
+                      "description": "The ARN of the load balancer",
+                      "key": "LoadBalancerArn",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "The ARNs of the listeners",
+                      "key": "ListenerArns",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "The marker for the next set of results",
+                      "key": "Marker",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "The maximum number of results to return",
+                      "key": "PageSize",
+                      "value": "<integer>"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "xml",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/xml"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<element>\n  <listeners>\n    <listenerArn>(string)</listenerArn>\n    <loadBalancerArn>(string)</loadBalancerArn>\n    <port>(integer)</port>\n    <protocol>(string)</protocol>\n    <certificates>\n      <certificateArn>(string)</certificateArn>\n    </certificates>\n    <certificates>\n      <certificateArn>(string)</certificateArn>\n    </certificates>\n    <sslPolicy>(string)</sslPolicy>\n    <defaultActions>\n      <type>(string)</type>\n      <targetGroupArn>(string)</targetGroupArn>\n      <order>(integer)</order>\n      <redirectConfig>\n        <protocol>(string)</protocol>\n        <port>(string)</port>\n        <host>(string)</host>\n        <path>(string)</path>\n        <query>(string)</query>\n        <statusCode>(string)</statusCode>\n      </redirectConfig>\n      <fixedResponseConfig>\n        <messageBody>(string)</messageBody>\n        <statusCode>(string)</statusCode>\n        <contentType>(string)</contentType>\n      </fixedResponseConfig>\n    </defaultActions>\n    <defaultActions>\n      <type>(string)</type>\n      <targetGroupArn>(string)</targetGroupArn>\n      <order>(integer)</order>\n      <redirectConfig>\n        <protocol>(string)</protocol>\n        <port>(string)</port>\n        <host>(string)</host>\n        <path>(string)</path>\n        <query>(string)</query>\n        <statusCode>(string)</statusCode>\n      </redirectConfig>\n      <fixedResponseConfig>\n        <messageBody>(string)</messageBody>\n        <statusCode>(string)</statusCode>\n        <contentType>(string)</contentType>\n      </fixedResponseConfig>\n    </defaultActions>\n  </listeners>\n  <listeners>\n    <listenerArn>(string)</listenerArn>\n    <loadBalancerArn>(string)</loadBalancerArn>\n    <port>(integer)</port>\n    <protocol>(string)</protocol>\n    <certificates>\n      <certificateArn>(string)</certificateArn>\n    </certificates>\n    <certificates>\n      <certificateArn>(string)</certificateArn>\n    </certificates>\n    <sslPolicy>(string)</sslPolicy>\n    <defaultActions>\n      <type>(string)</type>\n      <targetGroupArn>(string)</targetGroupArn>\n      <order>(integer)</order>\n      <redirectConfig>\n        <protocol>(string)</protocol>\n        <port>(string)</port>\n        <host>(string)</host>\n        <path>(string)</path>\n        <query>(string)</query>\n        <statusCode>(string)</statusCode>\n      </redirectConfig>\n      <fixedResponseConfig>\n        <messageBody>(string)</messageBody>\n        <statusCode>(string)</statusCode>\n        <contentType>(string)</contentType>\n      </fixedResponseConfig>\n    </defaultActions>\n    <defaultActions>\n      <type>(string)</type>\n      <targetGroupArn>(string)</targetGroupArn>\n      <order>(integer)</order>\n      <redirectConfig>\n        <protocol>(string)</protocol>\n        <port>(string)</port>\n        <host>(string)</host>\n        <path>(string)</path>\n        <query>(string)</query>\n        <statusCode>(string)</statusCode>\n      </redirectConfig>\n      <fixedResponseConfig>\n        <messageBody>(string)</messageBody>\n        <statusCode>(string)</statusCode>\n        <contentType>(string)</contentType>\n      </fixedResponseConfig>\n    </defaultActions>\n  </listeners>\n  <nextMarker>(string)</nextMarker>\n</element>",
+              "createdAt": "2026-06-05T15:03:39.000Z",
+              "updatedAt": "2026-06-05T15:03:39.000Z",
+              "uid": "35240-5fa62655-4715-4600-8c09-745702b37268"
+            },
+            {
+              "id": "39f7f8ba-03a7-4873-b9bc-727241cea9b4",
+              "name": "Invalid request parameters",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/?LoadBalancerArn=<string>&ListenerArns=<string>&Marker=<string>&PageSize=<integer>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    ""
+                  ],
+                  "query": [
+                    {
+                      "description": "The ARN of the load balancer",
+                      "key": "LoadBalancerArn",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "The ARNs of the listeners",
+                      "key": "ListenerArns",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "The marker for the next set of results",
+                      "key": "Marker",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "The maximum number of results to return",
+                      "key": "PageSize",
+                      "value": "<integer>"
+                    }
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": "text",
+              "header": [],
+              "cookie": [],
+              "responseTime": null,
+              "body": null,
+              "createdAt": "2026-06-05T15:03:39.000Z",
+              "updatedAt": "2026-06-05T15:03:39.000Z",
+              "uid": "35240-39f7f8ba-03a7-4873-b9bc-727241cea9b4"
+            },
+            {
+              "id": "daf46cdd-c738-4593-b93b-baad2325035d",
+              "name": "Authentication failure",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/?LoadBalancerArn=<string>&ListenerArns=<string>&Marker=<string>&PageSize=<integer>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    ""
+                  ],
+                  "query": [
+                    {
+                      "description": "The ARN of the load balancer",
+                      "key": "LoadBalancerArn",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "The ARNs of the listeners",
+                      "key": "ListenerArns",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "The marker for the next set of results",
+                      "key": "Marker",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "The maximum number of results to return",
+                      "key": "PageSize",
+                      "value": "<integer>"
+                    }
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "_postman_previewlanguage": "text",
+              "header": [],
+              "cookie": [],
+              "responseTime": null,
+              "body": null,
+              "createdAt": "2026-06-05T15:03:39.000Z",
+              "updatedAt": "2026-06-05T15:03:39.000Z",
+              "uid": "35240-daf46cdd-c738-4593-b93b-baad2325035d"
+            }
+          ],
+          "createdAt": "2026-06-05T15:03:39.000Z",
+          "updatedAt": "2026-06-05T15:03:39.000Z",
+          "uid": "35240-3a2a5620-384a-4bdd-a92e-ffb7f3a5b4e2"
+        }
+      ],
+      "id": "958d5f81-2ad8-49ab-8b14-c3485d4a795c",
+      "createdAt": "2026-06-05T15:03:39.000Z",
+      "updatedAt": "2026-06-05T15:03:39.000Z",
+      "uid": "35240-958d5f81-2ad8-49ab-8b14-c3485d4a795c"
+    },
+    {
+      "name": "?Action=CreateRule",
+      "item": [
+        {
+          "name": "Amazon Elastic Load Balancing Create a Listener Rule",
+          "id": "11ece0ad-c262-4dc0-a554-da12cfa643cc",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/xml"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/?Action=CreateRule&ListenerArn=<string>&Priority=<integer>&Conditions.member.1.Field=<string>&Conditions.member.1.Values=<string>&Conditions.member.1.Values=<string>&Actions.member.1.Type=forward&Actions.member.1.TargetGroupArn=<string>",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                ""
+              ],
+              "query": [
+                {
+                  "key": "Action",
+                  "value": "CreateRule"
+                },
+                {
+                  "description": "(Required) The ARN of the listener",
+                  "key": "ListenerArn",
+                  "value": "<string>"
+                },
+                {
+                  "description": "(Required) The rule priority. Must be unique within the listener.",
+                  "key": "Priority",
+                  "value": "<integer>"
+                },
+                {
+                  "description": "The name of the field (host-header, path-pattern, etc.)",
+                  "key": "Conditions.member.1.Field",
+                  "value": "<string>"
+                },
+                {
+                  "description": "The condition values",
+                  "key": "Conditions.member.1.Values",
+                  "value": "<string>"
+                },
+                {
+                  "description": "The condition values",
+                  "key": "Conditions.member.1.Values",
+                  "value": "<string>"
+                },
+                {
+                  "description": "(Required) The type of action",
+                  "key": "Actions.member.1.Type",
+                  "value": "forward"
+                },
+                {
+                  "description": "The ARN of the target group for forward actions",
+                  "key": "Actions.member.1.TargetGroupArn",
+                  "value": "<string>"
+                }
+              ]
+            },
+            "description": "Creates a rule for the specified listener. The listener must be associated with an Application Load Balancer. Rules are evaluated in priority order, from the lowest value to the highest value."
+          },
+          "response": [
+            {
+              "id": "9fa00aaf-a191-4ef5-9f68-ace5c6e9566e",
+              "name": "Successfully created rule",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/xml"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/?ListenerArn=<string>&Priority=<integer>&Conditions.member.1.Field=<string>&Conditions.member.1.Values=<string>&Actions.member.1.Type=forward&Actions.member.1.TargetGroupArn=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    ""
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) The ARN of the listener",
+                      "key": "ListenerArn",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "(Required) The rule priority. Must be unique within the listener.",
+                      "key": "Priority",
+                      "value": "<integer>"
+                    },
+                    {
+                      "description": "The name of the field (host-header, path-pattern, etc.)",
+                      "key": "Conditions.member.1.Field",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "The condition values",
+                      "key": "Conditions.member.1.Values",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "(Required) The type of action",
+                      "key": "Actions.member.1.Type",
+                      "value": "forward"
+                    },
+                    {
+                      "description": "The ARN of the target group for forward actions",
+                      "key": "Actions.member.1.TargetGroupArn",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "xml",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/xml"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<element>\n  <rules>\n    <ruleArn>(string)</ruleArn>\n    <priority>(string)</priority>\n    <conditions>\n      <field>(string)</field>\n      <values>(string)</values>\n      <values>(string)</values>\n    </conditions>\n    <conditions>\n      <field>(string)</field>\n      <values>(string)</values>\n      <values>(string)</values>\n    </conditions>\n    <actions>\n      <type>(string)</type>\n      <targetGroupArn>(string)</targetGroupArn>\n      <order>(integer)</order>\n      <redirectConfig>\n        <protocol>(string)</protocol>\n        <port>(string)</port>\n        <host>(string)</host>\n        <path>(string)</path>\n        <query>(string)</query>\n        <statusCode>(string)</statusCode>\n      </redirectConfig>\n      <fixedResponseConfig>\n        <messageBody>(string)</messageBody>\n        <statusCode>(string)</statusCode>\n        <contentType>(string)</contentType>\n      </fixedResponseConfig>\n    </actions>\n    <actions>\n      <type>(string)</type>\n      <targetGroupArn>(string)</targetGroupArn>\n      <order>(integer)</order>\n      <redirectConfig>\n        <protocol>(string)</protocol>\n        <port>(string)</port>\n        <host>(string)</host>\n        <path>(string)</path>\n        <query>(string)</query>\n        <statusCode>(string)</statusCode>\n      </redirectConfig>\n      <fixedResponseConfig>\n        <messageBody>(string)</messageBody>\n        <statusCode>(string)</statusCode>\n        <contentType>(string)</contentType>\n      </fixedResponseConfig>\n    </actions>\n    <isDefault>(boolean)</isDefault>\n  </rules>\n  <rules>\n    <ruleArn>(string)</ruleArn>\n    <priority>(string)</priority>\n    <conditions>\n      <field>(string)</field>\n      <values>(string)</values>\n      <values>(string)</values>\n    </conditions>\n    <conditions>\n      <field>(string)</field>\n      <values>(string)</values>\n      <values>(string)</values>\n    </conditions>\n    <actions>\n      <type>(string)</type>\n      <targetGroupArn>(string)</targetGroupArn>\n      <order>(integer)</order>\n      <redirectConfig>\n        <protocol>(string)</protocol>\n        <port>(string)</port>\n        <host>(string)</host>\n        <path>(string)</path>\n        <query>(string)</query>\n        <statusCode>(string)</statusCode>\n      </redirectConfig>\n      <fixedResponseConfig>\n        <messageBody>(string)</messageBody>\n        <statusCode>(string)</statusCode>\n        <contentType>(string)</contentType>\n      </fixedResponseConfig>\n    </actions>\n    <actions>\n      <type>(string)</type>\n      <targetGroupArn>(string)</targetGroupArn>\n      <order>(integer)</order>\n      <redirectConfig>\n        <protocol>(string)</protocol>\n        <port>(string)</port>\n        <host>(string)</host>\n        <path>(string)</path>\n        <query>(string)</query>\n        <statusCode>(string)</statusCode>\n      </redirectConfig>\n      <fixedResponseConfig>\n        <messageBody>(string)</messageBody>\n        <statusCode>(string)</statusCode>\n        <contentType>(string)</contentType>\n      </fixedResponseConfig>\n    </actions>\n    <isDefault>(boolean)</isDefault>\n  </rules>\n</element>",
+              "createdAt": "2026-06-05T15:03:39.000Z",
+              "updatedAt": "2026-06-05T15:03:39.000Z",
+              "uid": "35240-9fa00aaf-a191-4ef5-9f68-ace5c6e9566e"
+            },
+            {
+              "id": "a1b40ee6-602a-47df-9194-107f93f029d1",
+              "name": "Invalid request parameters",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/?ListenerArn=<string>&Priority=<integer>&Conditions.member.1.Field=<string>&Conditions.member.1.Values=<string>&Actions.member.1.Type=forward&Actions.member.1.TargetGroupArn=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    ""
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) The ARN of the listener",
+                      "key": "ListenerArn",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "(Required) The rule priority. Must be unique within the listener.",
+                      "key": "Priority",
+                      "value": "<integer>"
+                    },
+                    {
+                      "description": "The name of the field (host-header, path-pattern, etc.)",
+                      "key": "Conditions.member.1.Field",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "The condition values",
+                      "key": "Conditions.member.1.Values",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "(Required) The type of action",
+                      "key": "Actions.member.1.Type",
+                      "value": "forward"
+                    },
+                    {
+                      "description": "The ARN of the target group for forward actions",
+                      "key": "Actions.member.1.TargetGroupArn",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": "text",
+              "header": [],
+              "cookie": [],
+              "responseTime": null,
+              "body": null,
+              "createdAt": "2026-06-05T15:03:39.000Z",
+              "updatedAt": "2026-06-05T15:03:39.000Z",
+              "uid": "35240-a1b40ee6-602a-47df-9194-107f93f029d1"
+            },
+            {
+              "id": "cdf889bb-15cc-46df-86c3-aad6795e15b4",
+              "name": "Authentication failure",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/?ListenerArn=<string>&Priority=<integer>&Conditions.member.1.Field=<string>&Conditions.member.1.Values=<string>&Actions.member.1.Type=forward&Actions.member.1.TargetGroupArn=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    ""
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) The ARN of the listener",
+                      "key": "ListenerArn",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "(Required) The rule priority. Must be unique within the listener.",
+                      "key": "Priority",
+                      "value": "<integer>"
+                    },
+                    {
+                      "description": "The name of the field (host-header, path-pattern, etc.)",
+                      "key": "Conditions.member.1.Field",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "The condition values",
+                      "key": "Conditions.member.1.Values",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "(Required) The type of action",
+                      "key": "Actions.member.1.Type",
+                      "value": "forward"
+                    },
+                    {
+                      "description": "The ARN of the target group for forward actions",
+                      "key": "Actions.member.1.TargetGroupArn",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "_postman_previewlanguage": "text",
+              "header": [],
+              "cookie": [],
+              "responseTime": null,
+              "body": null,
+              "createdAt": "2026-06-05T15:03:39.000Z",
+              "updatedAt": "2026-06-05T15:03:39.000Z",
+              "uid": "35240-cdf889bb-15cc-46df-86c3-aad6795e15b4"
+            }
+          ],
+          "createdAt": "2026-06-05T15:03:39.000Z",
+          "updatedAt": "2026-06-05T15:03:39.000Z",
+          "uid": "35240-11ece0ad-c262-4dc0-a554-da12cfa643cc"
+        }
+      ],
+      "id": "8df480a8-6b91-4d87-a308-90dd6228335f",
+      "createdAt": "2026-06-05T15:03:39.000Z",
+      "updatedAt": "2026-06-05T15:03:39.000Z",
+      "uid": "35240-8df480a8-6b91-4d87-a308-90dd6228335f"
+    },
+    {
+      "name": "?Action=DescribeRules",
+      "item": [
+        {
+          "name": "Amazon Elastic Load Balancing Describe Listener Rules",
+          "id": "c5e79021-0342-4298-8c73-0f600c74c541",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/xml"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/?Action=DescribeRules&ListenerArn=<string>&RuleArns=<string>&RuleArns=<string>&Marker=<string>&PageSize=<integer>",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                ""
+              ],
+              "query": [
+                {
+                  "key": "Action",
+                  "value": "DescribeRules"
+                },
+                {
+                  "description": "The ARN of the listener",
+                  "key": "ListenerArn",
+                  "value": "<string>"
+                },
+                {
+                  "description": "The ARNs of the rules",
+                  "key": "RuleArns",
+                  "value": "<string>"
+                },
+                {
+                  "description": "The ARNs of the rules",
+                  "key": "RuleArns",
+                  "value": "<string>"
+                },
+                {
+                  "description": "The marker for the next set of results",
+                  "key": "Marker",
+                  "value": "<string>"
+                },
+                {
+                  "description": "The maximum number of results to return",
+                  "key": "PageSize",
+                  "value": "<integer>"
+                }
+              ]
+            },
+            "description": "Describes the specified rules or the rules for the specified listener. You must specify either a listener or one or more rules."
+          },
+          "response": [
+            {
+              "id": "c300443f-f3e1-44d0-9ab0-1a7b852af7b0",
+              "name": "Successfully described rules",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/xml"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/?ListenerArn=<string>&RuleArns=<string>&Marker=<string>&PageSize=<integer>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    ""
+                  ],
+                  "query": [
+                    {
+                      "description": "The ARN of the listener",
+                      "key": "ListenerArn",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "The ARNs of the rules",
+                      "key": "RuleArns",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "The marker for the next set of results",
+                      "key": "Marker",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "The maximum number of results to return",
+                      "key": "PageSize",
+                      "value": "<integer>"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "xml",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/xml"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<element>\n  <rules>\n    <ruleArn>(string)</ruleArn>\n    <priority>(string)</priority>\n    <conditions>\n      <field>(string)</field>\n      <values>(string)</values>\n      <values>(string)</values>\n    </conditions>\n    <conditions>\n      <field>(string)</field>\n      <values>(string)</values>\n      <values>(string)</values>\n    </conditions>\n    <actions>\n      <type>(string)</type>\n      <targetGroupArn>(string)</targetGroupArn>\n      <order>(integer)</order>\n      <redirectConfig>\n        <protocol>(string)</protocol>\n        <port>(string)</port>\n        <host>(string)</host>\n        <path>(string)</path>\n        <query>(string)</query>\n        <statusCode>(string)</statusCode>\n      </redirectConfig>\n      <fixedResponseConfig>\n        <messageBody>(string)</messageBody>\n        <statusCode>(string)</statusCode>\n        <contentType>(string)</contentType>\n      </fixedResponseConfig>\n    </actions>\n    <actions>\n      <type>(string)</type>\n      <targetGroupArn>(string)</targetGroupArn>\n      <order>(integer)</order>\n      <redirectConfig>\n        <protocol>(string)</protocol>\n        <port>(string)</port>\n        <host>(string)</host>\n        <path>(string)</path>\n        <query>(string)</query>\n        <statusCode>(string)</statusCode>\n      </redirectConfig>\n      <fixedResponseConfig>\n        <messageBody>(string)</messageBody>\n        <statusCode>(string)</statusCode>\n        <contentType>(string)</contentType>\n      </fixedResponseConfig>\n    </actions>\n    <isDefault>(boolean)</isDefault>\n  </rules>\n  <rules>\n    <ruleArn>(string)</ruleArn>\n    <priority>(string)</priority>\n    <conditions>\n      <field>(string)</field>\n      <values>(string)</values>\n      <values>(string)</values>\n    </conditions>\n    <conditions>\n      <field>(string)</field>\n      <values>(string)</values>\n      <values>(string)</values>\n    </conditions>\n    <actions>\n      <type>(string)</type>\n      <targetGroupArn>(string)</targetGroupArn>\n      <order>(integer)</order>\n      <redirectConfig>\n        <protocol>(string)</protocol>\n        <port>(string)</port>\n        <host>(string)</host>\n        <path>(string)</path>\n        <query>(string)</query>\n        <statusCode>(string)</statusCode>\n      </redirectConfig>\n      <fixedResponseConfig>\n        <messageBody>(string)</messageBody>\n        <statusCode>(string)</statusCode>\n        <contentType>(string)</contentType>\n      </fixedResponseConfig>\n    </actions>\n    <actions>\n      <type>(string)</type>\n      <targetGroupArn>(string)</targetGroupArn>\n      <order>(integer)</order>\n      <redirectConfig>\n        <protocol>(string)</protocol>\n        <port>(string)</port>\n        <host>(string)</host>\n        <path>(string)</path>\n        <query>(string)</query>\n        <statusCode>(string)</statusCode>\n      </redirectConfig>\n      <fixedResponseConfig>\n        <messageBody>(string)</messageBody>\n        <statusCode>(string)</statusCode>\n        <contentType>(string)</contentType>\n      </fixedResponseConfig>\n    </actions>\n    <isDefault>(boolean)</isDefault>\n  </rules>\n  <nextMarker>(string)</nextMarker>\n</element>",
+              "createdAt": "2026-06-05T15:03:39.000Z",
+              "updatedAt": "2026-06-05T15:03:39.000Z",
+              "uid": "35240-c300443f-f3e1-44d0-9ab0-1a7b852af7b0"
+            },
+            {
+              "id": "58af7039-520f-4329-b4f9-5e6e379a6c62",
+              "name": "Invalid request parameters",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/?ListenerArn=<string>&RuleArns=<string>&Marker=<string>&PageSize=<integer>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    ""
+                  ],
+                  "query": [
+                    {
+                      "description": "The ARN of the listener",
+                      "key": "ListenerArn",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "The ARNs of the rules",
+                      "key": "RuleArns",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "The marker for the next set of results",
+                      "key": "Marker",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "The maximum number of results to return",
+                      "key": "PageSize",
+                      "value": "<integer>"
+                    }
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": "text",
+              "header": [],
+              "cookie": [],
+              "responseTime": null,
+              "body": null,
+              "createdAt": "2026-06-05T15:03:39.000Z",
+              "updatedAt": "2026-06-05T15:03:39.000Z",
+              "uid": "35240-58af7039-520f-4329-b4f9-5e6e379a6c62"
+            },
+            {
+              "id": "cc9aee4a-cc2e-4682-8d35-38545a208077",
+              "name": "Authentication failure",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/?ListenerArn=<string>&RuleArns=<string>&Marker=<string>&PageSize=<integer>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    ""
+                  ],
+                  "query": [
+                    {
+                      "description": "The ARN of the listener",
+                      "key": "ListenerArn",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "The ARNs of the rules",
+                      "key": "RuleArns",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "The marker for the next set of results",
+                      "key": "Marker",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "The maximum number of results to return",
+                      "key": "PageSize",
+                      "value": "<integer>"
+                    }
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "_postman_previewlanguage": "text",
+              "header": [],
+              "cookie": [],
+              "responseTime": null,
+              "body": null,
+              "createdAt": "2026-06-05T15:03:39.000Z",
+              "updatedAt": "2026-06-05T15:03:39.000Z",
+              "uid": "35240-cc9aee4a-cc2e-4682-8d35-38545a208077"
+            }
+          ],
+          "createdAt": "2026-06-05T15:03:39.000Z",
+          "updatedAt": "2026-06-05T15:03:39.000Z",
+          "uid": "35240-c5e79021-0342-4298-8c73-0f600c74c541"
+        }
+      ],
+      "id": "bf017a83-c069-4cce-aa4f-6d98ba912b02",
+      "createdAt": "2026-06-05T15:03:39.000Z",
+      "updatedAt": "2026-06-05T15:03:39.000Z",
+      "uid": "35240-bf017a83-c069-4cce-aa4f-6d98ba912b02"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "Authorization",
+        "type": "string"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}",
+        "type": "string"
+      },
+      {
+        "key": "in",
+        "value": "header",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "region",
+      "value": "us-east-1"
+    },
+    {
+      "key": "baseUrl",
+      "value": "https://elasticloadbalancing.{{region}}.amazonaws.com"
+    }
+  ]
+}

@@ -1,0 +1,569 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Amazon Elastic Load Balancing v2 API",
+    "version": "2015-12-01"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Load Balancers",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Amazon Elastic Load Balancing Create a Load Balancer",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://elasticloadbalancing.{region}.amazonaws.com/?Action=CreateLoadBalancer",
+            "params": [
+              {
+                "name": "Name",
+                "value": "",
+                "type": "query",
+                "description": "The name of the load balancer. Must be unique per region per account, can have a maximum of 32 characters."
+              },
+              {
+                "name": "Subnets",
+                "value": "",
+                "type": "query",
+                "description": "The IDs of the subnets. You can specify only one subnet per Availability Zone."
+              },
+              {
+                "name": "SecurityGroups",
+                "value": "",
+                "type": "query",
+                "description": "The IDs of the security groups for the load balancer"
+              },
+              {
+                "name": "Scheme",
+                "value": "",
+                "type": "query",
+                "description": "The scheme for the load balancer. An internet-facing load balancer routes requests from clients to targets over the internet. An internal load balancer routes requests to targets using private IP addresses."
+              },
+              {
+                "name": "Type",
+                "value": "",
+                "type": "query",
+                "description": "The type of load balancer"
+              },
+              {
+                "name": "IpAddressType",
+                "value": "",
+                "type": "query",
+                "description": "The type of IP addresses used by the subnets"
+              }
+            ]
+          },
+          "docs": "Creates an Application Load Balancer, Network Load Balancer, or Gateway Load Balancer. For more information, see the User Guide for the specific load balancer type."
+        },
+        {
+          "info": {
+            "name": "Amazon Elastic Load Balancing Describe Load Balancers",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://elasticloadbalancing.{region}.amazonaws.com/?Action=DescribeLoadBalancers",
+            "params": [
+              {
+                "name": "LoadBalancerArns",
+                "value": "",
+                "type": "query",
+                "description": "The Amazon Resource Names (ARN) of the load balancers"
+              },
+              {
+                "name": "Names",
+                "value": "",
+                "type": "query",
+                "description": "The names of the load balancers"
+              },
+              {
+                "name": "Marker",
+                "value": "",
+                "type": "query",
+                "description": "The marker for the next set of results"
+              },
+              {
+                "name": "PageSize",
+                "value": "",
+                "type": "query",
+                "description": "The maximum number of results to return"
+              }
+            ]
+          },
+          "docs": "Describes the specified load balancers or all of your load balancers. Returns information about load balancer ARN, DNS name, scheme, VPC, availability zones, type, and state."
+        },
+        {
+          "info": {
+            "name": "Amazon Elastic Load Balancing Delete a Load Balancer",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://elasticloadbalancing.{region}.amazonaws.com/?Action=DeleteLoadBalancer",
+            "params": [
+              {
+                "name": "LoadBalancerArn",
+                "value": "",
+                "type": "query",
+                "description": "The Amazon Resource Name (ARN) of the load balancer"
+              }
+            ]
+          },
+          "docs": "Deletes the specified Application Load Balancer, Network Load Balancer, or Gateway Load Balancer. Deleting a load balancer also deletes its listeners."
+        },
+        {
+          "info": {
+            "name": "Amazon Elastic Load Balancing Modify Load Balancer Attributes",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://elasticloadbalancing.{region}.amazonaws.com/?Action=ModifyLoadBalancerAttributes",
+            "params": [
+              {
+                "name": "LoadBalancerArn",
+                "value": "",
+                "type": "query",
+                "description": "The Amazon Resource Name (ARN) of the load balancer"
+              },
+              {
+                "name": "Attributes.member.1.Key",
+                "value": "",
+                "type": "query",
+                "description": "The name of the attribute"
+              },
+              {
+                "name": "Attributes.member.1.Value",
+                "value": "",
+                "type": "query",
+                "description": "The value of the attribute"
+              }
+            ]
+          },
+          "docs": "Modifies the specified attributes of the specified Application Load Balancer, Network Load Balancer, or Gateway Load Balancer."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Target Groups",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Amazon Elastic Load Balancing Create a Target Group",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://elasticloadbalancing.{region}.amazonaws.com/?Action=CreateTargetGroup",
+            "params": [
+              {
+                "name": "Name",
+                "value": "",
+                "type": "query",
+                "description": "The name of the target group. Must be unique per region per account."
+              },
+              {
+                "name": "Protocol",
+                "value": "",
+                "type": "query",
+                "description": "The protocol to use for routing traffic to the targets"
+              },
+              {
+                "name": "Port",
+                "value": "",
+                "type": "query",
+                "description": "The port on which the targets receive traffic"
+              },
+              {
+                "name": "VpcId",
+                "value": "",
+                "type": "query",
+                "description": "The identifier of the VPC for the targets"
+              },
+              {
+                "name": "HealthCheckProtocol",
+                "value": "",
+                "type": "query",
+                "description": "The protocol to use for health checks"
+              },
+              {
+                "name": "HealthCheckPort",
+                "value": "",
+                "type": "query",
+                "description": "The port to use for health checks"
+              },
+              {
+                "name": "HealthCheckPath",
+                "value": "",
+                "type": "query",
+                "description": "The destination for health checks on the targets"
+              },
+              {
+                "name": "TargetType",
+                "value": "",
+                "type": "query",
+                "description": "The type of target to register with the target group"
+              }
+            ]
+          },
+          "docs": "Creates a target group. Target groups are used to route requests to one or more registered targets. After creating a target group, you can register targets and create listeners or rules to route traffic to the target group."
+        },
+        {
+          "info": {
+            "name": "Amazon Elastic Load Balancing Describe Target Groups",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://elasticloadbalancing.{region}.amazonaws.com/?Action=DescribeTargetGroups",
+            "params": [
+              {
+                "name": "LoadBalancerArn",
+                "value": "",
+                "type": "query",
+                "description": "The ARN of the load balancer"
+              },
+              {
+                "name": "TargetGroupArns",
+                "value": "",
+                "type": "query",
+                "description": "The ARNs of the target groups"
+              },
+              {
+                "name": "Names",
+                "value": "",
+                "type": "query",
+                "description": "The names of the target groups"
+              },
+              {
+                "name": "Marker",
+                "value": "",
+                "type": "query",
+                "description": "The marker for the next set of results"
+              },
+              {
+                "name": "PageSize",
+                "value": "",
+                "type": "query",
+                "description": "The maximum number of results to return"
+              }
+            ]
+          },
+          "docs": "Describes the specified target groups or all of your target groups. By default, all target groups are described. Alternatively, you can specify target group ARNs or names."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Targets",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Amazon Elastic Load Balancing Register Targets with a Target Group",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://elasticloadbalancing.{region}.amazonaws.com/?Action=RegisterTargets",
+            "params": [
+              {
+                "name": "TargetGroupArn",
+                "value": "",
+                "type": "query",
+                "description": "The ARN of the target group"
+              },
+              {
+                "name": "Targets.member.1.Id",
+                "value": "",
+                "type": "query",
+                "description": "The ID of the target (instance ID, IP address, or Lambda ARN)"
+              },
+              {
+                "name": "Targets.member.1.Port",
+                "value": "",
+                "type": "query",
+                "description": "The port on which the target is listening"
+              },
+              {
+                "name": "Targets.member.1.AvailabilityZone",
+                "value": "",
+                "type": "query",
+                "description": "The Availability Zone where the target is located"
+              }
+            ]
+          },
+          "docs": "Registers the specified targets with the specified target group. If the target is an EC2 instance, it must be in the running state when you register it."
+        },
+        {
+          "info": {
+            "name": "Amazon Elastic Load Balancing Deregister Targets from a Target Group",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://elasticloadbalancing.{region}.amazonaws.com/?Action=DeregisterTargets",
+            "params": [
+              {
+                "name": "TargetGroupArn",
+                "value": "",
+                "type": "query",
+                "description": "The ARN of the target group"
+              },
+              {
+                "name": "Targets.member.1.Id",
+                "value": "",
+                "type": "query",
+                "description": "The ID of the target"
+              },
+              {
+                "name": "Targets.member.1.Port",
+                "value": "",
+                "type": "query",
+                "description": "The port on which the target is listening"
+              }
+            ]
+          },
+          "docs": "Deregisters the specified targets from the specified target group. After the targets are deregistered, they no longer receive traffic from the load balancer."
+        },
+        {
+          "info": {
+            "name": "Amazon Elastic Load Balancing Describe Target Health",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://elasticloadbalancing.{region}.amazonaws.com/?Action=DescribeTargetHealth",
+            "params": [
+              {
+                "name": "TargetGroupArn",
+                "value": "",
+                "type": "query",
+                "description": "The ARN of the target group"
+              },
+              {
+                "name": "Targets.member.1.Id",
+                "value": "",
+                "type": "query",
+                "description": "The ID of the target"
+              },
+              {
+                "name": "Targets.member.1.Port",
+                "value": "",
+                "type": "query",
+                "description": "The port on which the target is listening"
+              }
+            ]
+          },
+          "docs": "Describes the health of the specified targets or all of your targets registered with the specified target group."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Listeners",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Amazon Elastic Load Balancing Create a Listener",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://elasticloadbalancing.{region}.amazonaws.com/?Action=CreateListener",
+            "params": [
+              {
+                "name": "LoadBalancerArn",
+                "value": "",
+                "type": "query",
+                "description": "The ARN of the load balancer"
+              },
+              {
+                "name": "Protocol",
+                "value": "",
+                "type": "query",
+                "description": "The protocol for connections from clients to the load balancer"
+              },
+              {
+                "name": "Port",
+                "value": "",
+                "type": "query",
+                "description": "The port on which the load balancer is listening"
+              },
+              {
+                "name": "SslPolicy",
+                "value": "",
+                "type": "query",
+                "description": "The security policy that defines which protocols and ciphers are supported"
+              },
+              {
+                "name": "DefaultActions.member.1.Type",
+                "value": "",
+                "type": "query",
+                "description": "The type of action"
+              },
+              {
+                "name": "DefaultActions.member.1.TargetGroupArn",
+                "value": "",
+                "type": "query",
+                "description": "The ARN of the target group for forward actions"
+              }
+            ]
+          },
+          "docs": "Creates a listener for the specified Application Load Balancer, Network Load Balancer, or Gateway Load Balancer. Listeners check for connection requests from clients using the protocol and port that you configure."
+        },
+        {
+          "info": {
+            "name": "Amazon Elastic Load Balancing Describe Listeners",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://elasticloadbalancing.{region}.amazonaws.com/?Action=DescribeListeners",
+            "params": [
+              {
+                "name": "LoadBalancerArn",
+                "value": "",
+                "type": "query",
+                "description": "The ARN of the load balancer"
+              },
+              {
+                "name": "ListenerArns",
+                "value": "",
+                "type": "query",
+                "description": "The ARNs of the listeners"
+              },
+              {
+                "name": "Marker",
+                "value": "",
+                "type": "query",
+                "description": "The marker for the next set of results"
+              },
+              {
+                "name": "PageSize",
+                "value": "",
+                "type": "query",
+                "description": "The maximum number of results to return"
+              }
+            ]
+          },
+          "docs": "Describes the specified listeners or the listeners for the specified Application Load Balancer, Network Load Balancer, or Gateway Load Balancer."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Rules",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Amazon Elastic Load Balancing Create a Listener Rule",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://elasticloadbalancing.{region}.amazonaws.com/?Action=CreateRule",
+            "params": [
+              {
+                "name": "ListenerArn",
+                "value": "",
+                "type": "query",
+                "description": "The ARN of the listener"
+              },
+              {
+                "name": "Priority",
+                "value": "",
+                "type": "query",
+                "description": "The rule priority. Must be unique within the listener."
+              },
+              {
+                "name": "Conditions.member.1.Field",
+                "value": "",
+                "type": "query",
+                "description": "The name of the field (host-header, path-pattern, etc.)"
+              },
+              {
+                "name": "Conditions.member.1.Values",
+                "value": "",
+                "type": "query",
+                "description": "The condition values"
+              },
+              {
+                "name": "Actions.member.1.Type",
+                "value": "",
+                "type": "query",
+                "description": "The type of action"
+              },
+              {
+                "name": "Actions.member.1.TargetGroupArn",
+                "value": "",
+                "type": "query",
+                "description": "The ARN of the target group for forward actions"
+              }
+            ]
+          },
+          "docs": "Creates a rule for the specified listener. The listener must be associated with an Application Load Balancer. Rules are evaluated in priority order, from the lowest value to the highest value."
+        },
+        {
+          "info": {
+            "name": "Amazon Elastic Load Balancing Describe Listener Rules",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://elasticloadbalancing.{region}.amazonaws.com/?Action=DescribeRules",
+            "params": [
+              {
+                "name": "ListenerArn",
+                "value": "",
+                "type": "query",
+                "description": "The ARN of the listener"
+              },
+              {
+                "name": "RuleArns",
+                "value": "",
+                "type": "query",
+                "description": "The ARNs of the rules"
+              },
+              {
+                "name": "Marker",
+                "value": "",
+                "type": "query",
+                "description": "The marker for the next set of results"
+              },
+              {
+                "name": "PageSize",
+                "value": "",
+                "type": "query",
+                "description": "The maximum number of results to return"
+              }
+            ]
+          },
+          "docs": "Describes the specified rules or the rules for the specified listener. You must specify either a listener or one or more rules."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
