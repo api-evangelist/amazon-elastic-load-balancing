@@ -50,6 +50,14 @@ apis:
       - type: JSONLD
         url: json-ld/amazon-elastic-load-balancing-context.jsonld
 common:
+  - type: TrustCenter
+    url: security/amazon-elastic-load-balancing-trust-center.yml
+  - type: VulnerabilityDisclosure
+    url: security/amazon-elastic-load-balancing-vulnerability-disclosure.yml
+  - type: DomainSecurity
+    url: security/amazon-elastic-load-balancing-domain-security.yml
+  - type: Authentication
+    url: authentication/amazon-elastic-load-balancing-authentication.yml
   - type: PostmanWorkspace
     url: https://www.postman.com/kinlaneapi/amazon-elastic-load-balancing/overview
   - type: Arazzo
