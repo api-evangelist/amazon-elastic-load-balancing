@@ -1,0 +1,144 @@
+generated: '2026-07-15'
+method: generated
+source: openapi/amazon-elastic-load-balancing-openapi.yml
+description: Recommended x-agentic-access execution contracts, classified heuristically from
+  the OpenAPI. A governance starting point for exposing this API to AI agents — review and bind
+  audience per deployment. See research/curity/agentic-governance/.
+summary:
+  operations: 13
+  by_action_class:
+    connected: 13
+  by_consequence:
+    read: 13
+  human_in_the_loop_required: 0
+operations:
+- path: /?Action=CreateLoadBalancer
+  method: get
+  operationId: createLoadBalancer
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /?Action=DescribeLoadBalancers
+  method: get
+  operationId: describeLoadBalancers
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /?Action=DeleteLoadBalancer
+  method: get
+  operationId: deleteLoadBalancer
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /?Action=ModifyLoadBalancerAttributes
+  method: get
+  operationId: modifyLoadBalancerAttributes
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /?Action=CreateTargetGroup
+  method: get
+  operationId: createTargetGroup
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /?Action=DescribeTargetGroups
+  method: get
+  operationId: describeTargetGroups
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /?Action=RegisterTargets
+  method: get
+  operationId: registerTargets
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /?Action=DeregisterTargets
+  method: get
+  operationId: deregisterTargets
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /?Action=DescribeTargetHealth
+  method: get
+  operationId: describeTargetHealth
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /?Action=CreateListener
+  method: get
+  operationId: createListener
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /?Action=DescribeListeners
+  method: get
+  operationId: describeListeners
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /?Action=CreateRule
+  method: get
+  operationId: createRule
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /?Action=DescribeRules
+  method: get
+  operationId: describeRules
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none

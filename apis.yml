@@ -50,6 +50,8 @@ apis:
       - type: JSONLD
         url: json-ld/amazon-elastic-load-balancing-context.jsonld
 common:
+  - type: AgenticAccess
+    url: agentic-access/amazon-elastic-load-balancing-agentic-access.yml
   - type: TrustCenter
     url: security/amazon-elastic-load-balancing-trust-center.yml
   - type: VulnerabilityDisclosure
