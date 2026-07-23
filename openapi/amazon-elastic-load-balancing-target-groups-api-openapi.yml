@@ -1,0 +1,267 @@
+openapi: 3.1.0
+info:
+  title: Amazon Elastic Load Balancing v2 Listeners Target Groups API
+  description: Amazon Elastic Load Balancing automatically distributes incoming application traffic across multiple targets, such as Amazon EC2 instances, containers, IP addresses, and Lambda functions. It supports Application Load Balancers, Network Load Balancers, and Gateway Load Balancers.
+  version: '2015-12-01'
+  contact:
+    name: Amazon Web Services
+    url: https://aws.amazon.com/contact-us/
+  termsOfService: https://aws.amazon.com/service-terms/
+servers:
+- url: https://elasticloadbalancing.{region}.amazonaws.com
+  description: Amazon Elastic Load Balancing Regional Endpoint
+  variables:
+    region:
+      default: us-east-1
+      description: AWS Region
+security:
+- sigv4Auth: []
+tags:
+- name: Target Groups
+  description: Operations for creating and managing target groups
+paths:
+  /?Action=CreateTargetGroup:
+    get:
+      operationId: createTargetGroup
+      summary: Amazon Elastic Load Balancing Create a Target Group
+      description: Creates a target group. Target groups are used to route requests to one or more registered targets. After creating a target group, you can register targets and create listeners or rules to route traffic to the target group.
+      tags:
+      - Target Groups
+      parameters:
+      - name: Name
+        in: query
+        required: true
+        description: The name of the target group. Must be unique per region per account.
+        schema:
+          type: string
+      - name: Protocol
+        in: query
+        description: The protocol to use for routing traffic to the targets
+        schema:
+          type: string
+          enum:
+          - HTTP
+          - HTTPS
+          - TCP
+          - TLS
+          - UDP
+          - TCP_UDP
+          - GENEVE
+      - name: Port
+        in: query
+        description: The port on which the targets receive traffic
+        schema:
+          type: integer
+          minimum: 1
+          maximum: 65535
+      - name: VpcId
+        in: query
+        description: The identifier of the VPC for the targets
+        schema:
+          type: string
+      - name: HealthCheckProtocol
+        in: query
+        description: The protocol to use for health checks
+        schema:
+          type: string
+          enum:
+          - HTTP
+          - HTTPS
+          - TCP
+          - TLS
+      - name: HealthCheckPort
+        in: query
+        description: The port to use for health checks
+        schema:
+          type: string
+      - name: HealthCheckPath
+        in: query
+        description: The destination for health checks on the targets
+        schema:
+          type: string
+      - name: TargetType
+        in: query
+        description: The type of target to register with the target group
+        schema:
+          type: string
+          enum:
+          - instance
+          - ip
+          - lambda
+          - alb
+      responses:
+        '200':
+          description: Successfully created target group
+          content:
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/CreateTargetGroupResponse'
+              examples:
+                createTargetGroup200Example:
+                  summary: Default createTargetGroup 200 response
+                  x-microcks-default: true
+                  value:
+                    targetGroups: []
+        '400':
+          description: Invalid request parameters
+        '401':
+          description: Authentication failure
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /?Action=DescribeTargetGroups:
+    get:
+      operationId: describeTargetGroups
+      summary: Amazon Elastic Load Balancing Describe Target Groups
+      description: Describes the specified target groups or all of your target groups. By default, all target groups are described. Alternatively, you can specify target group ARNs or names.
+      tags:
+      - Target Groups
+      parameters:
+      - name: LoadBalancerArn
+        in: query
+        description: The ARN of the load balancer
+        schema:
+          type: string
+      - name: TargetGroupArns
+        in: query
+        description: The ARNs of the target groups
+        schema:
+          type: array
+          items:
+            type: string
+      - name: Names
+        in: query
+        description: The names of the target groups
+        schema:
+          type: array
+          items:
+            type: string
+      - name: Marker
+        in: query
+        description: The marker for the next set of results
+        schema:
+          type: string
+      - name: PageSize
+        in: query
+        description: The maximum number of results to return
+        schema:
+          type: integer
+          minimum: 1
+          maximum: 400
+      responses:
+        '200':
+          description: Successfully described target groups
+          content:
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/DescribeTargetGroupsResponse'
+              examples:
+                describeTargetGroups200Example:
+                  summary: Default describeTargetGroups 200 response
+                  x-microcks-default: true
+                  value:
+                    targetGroups: []
+                    nextMarker: example
+        '400':
+          description: Invalid request parameters
+        '401':
+          description: Authentication failure
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  schemas:
+    TargetGroup:
+      type: object
+      description: Describes a target group
+      properties:
+        targetGroupArn:
+          type: string
+          description: The Amazon Resource Name (ARN) of the target group
+        targetGroupName:
+          type: string
+          description: The name of the target group
+        protocol:
+          type: string
+          description: The protocol to use for routing traffic to the targets
+          enum:
+          - HTTP
+          - HTTPS
+          - TCP
+          - TLS
+          - UDP
+          - TCP_UDP
+          - GENEVE
+        port:
+          type: integer
+          description: The port on which the targets are listening
+        vpcId:
+          type: string
+          description: The ID of the VPC for the targets
+        healthCheckProtocol:
+          type: string
+          description: The protocol to use for health checks
+        healthCheckPort:
+          type: string
+          description: The port to use for health checks
+        healthCheckEnabled:
+          type: boolean
+          description: Whether health checks are enabled
+        healthCheckIntervalSeconds:
+          type: integer
+          description: The approximate interval between health checks
+        healthCheckTimeoutSeconds:
+          type: integer
+          description: The amount of time to wait for a health check response
+        healthyThresholdCount:
+          type: integer
+          description: The number of consecutive health checks required to consider a target healthy
+        unhealthyThresholdCount:
+          type: integer
+          description: The number of consecutive health check failures required to consider a target unhealthy
+        healthCheckPath:
+          type: string
+          description: The destination for health checks on the targets
+        targetType:
+          type: string
+          description: The type of target
+          enum:
+          - instance
+          - ip
+          - lambda
+          - alb
+        loadBalancerArns:
+          type: array
+          description: The ARNs of the load balancers that route traffic to this target group
+          items:
+            type: string
+    CreateTargetGroupResponse:
+      type: object
+      description: Response from the CreateTargetGroup action
+      properties:
+        targetGroups:
+          type: array
+          description: Information about the target group
+          items:
+            $ref: '#/components/schemas/TargetGroup'
+    DescribeTargetGroupsResponse:
+      type: object
+      description: Response from the DescribeTargetGroups action
+      properties:
+        targetGroups:
+          type: array
+          description: Information about the target groups
+          items:
+            $ref: '#/components/schemas/TargetGroup'
+        nextMarker:
+          type: string
+          description: The marker to use for the next set of results
+  securitySchemes:
+    sigv4Auth:
+      type: apiKey
+      name: Authorization
+      in: header
+      description: AWS Signature Version 4 authentication
+externalDocs:
+  description: Amazon Elastic Load Balancing API Reference
+  url: https://docs.aws.amazon.com/elasticloadbalancing/latest/APIReference/

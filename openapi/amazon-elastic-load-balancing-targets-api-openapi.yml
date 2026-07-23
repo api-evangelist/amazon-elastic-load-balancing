@@ -1,0 +1,192 @@
+openapi: 3.1.0
+info:
+  title: Amazon Elastic Load Balancing v2 Listeners Targets API
+  description: Amazon Elastic Load Balancing automatically distributes incoming application traffic across multiple targets, such as Amazon EC2 instances, containers, IP addresses, and Lambda functions. It supports Application Load Balancers, Network Load Balancers, and Gateway Load Balancers.
+  version: '2015-12-01'
+  contact:
+    name: Amazon Web Services
+    url: https://aws.amazon.com/contact-us/
+  termsOfService: https://aws.amazon.com/service-terms/
+servers:
+- url: https://elasticloadbalancing.{region}.amazonaws.com
+  description: Amazon Elastic Load Balancing Regional Endpoint
+  variables:
+    region:
+      default: us-east-1
+      description: AWS Region
+security:
+- sigv4Auth: []
+tags:
+- name: Targets
+  description: Operations for registering and deregistering targets
+paths:
+  /?Action=RegisterTargets:
+    get:
+      operationId: registerTargets
+      summary: Amazon Elastic Load Balancing Register Targets with a Target Group
+      description: Registers the specified targets with the specified target group. If the target is an EC2 instance, it must be in the running state when you register it.
+      tags:
+      - Targets
+      parameters:
+      - name: TargetGroupArn
+        in: query
+        required: true
+        description: The ARN of the target group
+        schema:
+          type: string
+      - name: Targets.member.1.Id
+        in: query
+        required: true
+        description: The ID of the target (instance ID, IP address, or Lambda ARN)
+        schema:
+          type: string
+      - name: Targets.member.1.Port
+        in: query
+        description: The port on which the target is listening
+        schema:
+          type: integer
+          minimum: 1
+          maximum: 65535
+      - name: Targets.member.1.AvailabilityZone
+        in: query
+        description: The Availability Zone where the target is located
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Successfully registered targets
+        '400':
+          description: Invalid request parameters
+        '401':
+          description: Authentication failure
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /?Action=DeregisterTargets:
+    get:
+      operationId: deregisterTargets
+      summary: Amazon Elastic Load Balancing Deregister Targets from a Target Group
+      description: Deregisters the specified targets from the specified target group. After the targets are deregistered, they no longer receive traffic from the load balancer.
+      tags:
+      - Targets
+      parameters:
+      - name: TargetGroupArn
+        in: query
+        required: true
+        description: The ARN of the target group
+        schema:
+          type: string
+      - name: Targets.member.1.Id
+        in: query
+        required: true
+        description: The ID of the target
+        schema:
+          type: string
+      - name: Targets.member.1.Port
+        in: query
+        description: The port on which the target is listening
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: Successfully deregistered targets
+        '400':
+          description: Invalid request parameters
+        '401':
+          description: Authentication failure
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /?Action=DescribeTargetHealth:
+    get:
+      operationId: describeTargetHealth
+      summary: Amazon Elastic Load Balancing Describe Target Health
+      description: Describes the health of the specified targets or all of your targets registered with the specified target group.
+      tags:
+      - Targets
+      parameters:
+      - name: TargetGroupArn
+        in: query
+        required: true
+        description: The ARN of the target group
+        schema:
+          type: string
+      - name: Targets.member.1.Id
+        in: query
+        description: The ID of the target
+        schema:
+          type: string
+      - name: Targets.member.1.Port
+        in: query
+        description: The port on which the target is listening
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: Successfully described target health
+          content:
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/DescribeTargetHealthResponse'
+              examples:
+                describeTargetHealth200Example:
+                  summary: Default describeTargetHealth 200 response
+                  x-microcks-default: true
+                  value:
+                    targetHealthDescriptions: []
+        '400':
+          description: Invalid request parameters
+        '401':
+          description: Authentication failure
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  schemas:
+    DescribeTargetHealthResponse:
+      type: object
+      description: Response from the DescribeTargetHealth action
+      properties:
+        targetHealthDescriptions:
+          type: array
+          description: Information about the health of the targets
+          items:
+            type: object
+            properties:
+              target:
+                type: object
+                properties:
+                  id:
+                    type: string
+                    description: The ID of the target
+                  port:
+                    type: integer
+                    description: The port on which the target is listening
+              targetHealth:
+                type: object
+                properties:
+                  state:
+                    type: string
+                    description: The state of the target
+                    enum:
+                    - initial
+                    - healthy
+                    - unhealthy
+                    - unused
+                    - draining
+                    - unavailable
+                  reason:
+                    type: string
+                    description: The reason code
+                  description:
+                    type: string
+                    description: A description of the target health
+  securitySchemes:
+    sigv4Auth:
+      type: apiKey
+      name: Authorization
+      in: header
+      description: AWS Signature Version 4 authentication
+externalDocs:
+  description: Amazon Elastic Load Balancing API Reference
+  url: https://docs.aws.amazon.com/elasticloadbalancing/latest/APIReference/

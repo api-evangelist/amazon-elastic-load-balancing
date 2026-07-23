@@ -1,0 +1,282 @@
+openapi: 3.1.0
+info:
+  title: Amazon Elastic Load Balancing v2 Listeners API
+  description: Amazon Elastic Load Balancing automatically distributes incoming application traffic across multiple targets, such as Amazon EC2 instances, containers, IP addresses, and Lambda functions. It supports Application Load Balancers, Network Load Balancers, and Gateway Load Balancers.
+  version: '2015-12-01'
+  contact:
+    name: Amazon Web Services
+    url: https://aws.amazon.com/contact-us/
+  termsOfService: https://aws.amazon.com/service-terms/
+servers:
+- url: https://elasticloadbalancing.{region}.amazonaws.com
+  description: Amazon Elastic Load Balancing Regional Endpoint
+  variables:
+    region:
+      default: us-east-1
+      description: AWS Region
+security:
+- sigv4Auth: []
+tags:
+- name: Listeners
+  description: Operations for creating and managing listeners
+paths:
+  /?Action=CreateListener:
+    get:
+      operationId: createListener
+      summary: Amazon Elastic Load Balancing Create a Listener
+      description: Creates a listener for the specified Application Load Balancer, Network Load Balancer, or Gateway Load Balancer. Listeners check for connection requests from clients using the protocol and port that you configure.
+      tags:
+      - Listeners
+      parameters:
+      - name: LoadBalancerArn
+        in: query
+        required: true
+        description: The ARN of the load balancer
+        schema:
+          type: string
+      - name: Protocol
+        in: query
+        description: The protocol for connections from clients to the load balancer
+        schema:
+          type: string
+          enum:
+          - HTTP
+          - HTTPS
+          - TCP
+          - TLS
+          - UDP
+          - TCP_UDP
+          - GENEVE
+      - name: Port
+        in: query
+        required: true
+        description: The port on which the load balancer is listening
+        schema:
+          type: integer
+          minimum: 1
+          maximum: 65535
+      - name: SslPolicy
+        in: query
+        description: The security policy that defines which protocols and ciphers are supported
+        schema:
+          type: string
+      - name: DefaultActions.member.1.Type
+        in: query
+        required: true
+        description: The type of action
+        schema:
+          type: string
+          enum:
+          - forward
+          - authenticate-oidc
+          - authenticate-cognito
+          - redirect
+          - fixed-response
+      - name: DefaultActions.member.1.TargetGroupArn
+        in: query
+        description: The ARN of the target group for forward actions
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Successfully created listener
+          content:
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/CreateListenerResponse'
+              examples:
+                createListener200Example:
+                  summary: Default createListener 200 response
+                  x-microcks-default: true
+                  value:
+                    listeners: []
+        '400':
+          description: Invalid request parameters
+        '401':
+          description: Authentication failure
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /?Action=DescribeListeners:
+    get:
+      operationId: describeListeners
+      summary: Amazon Elastic Load Balancing Describe Listeners
+      description: Describes the specified listeners or the listeners for the specified Application Load Balancer, Network Load Balancer, or Gateway Load Balancer.
+      tags:
+      - Listeners
+      parameters:
+      - name: LoadBalancerArn
+        in: query
+        description: The ARN of the load balancer
+        schema:
+          type: string
+      - name: ListenerArns
+        in: query
+        description: The ARNs of the listeners
+        schema:
+          type: array
+          items:
+            type: string
+      - name: Marker
+        in: query
+        description: The marker for the next set of results
+        schema:
+          type: string
+      - name: PageSize
+        in: query
+        description: The maximum number of results to return
+        schema:
+          type: integer
+          minimum: 1
+          maximum: 400
+      responses:
+        '200':
+          description: Successfully described listeners
+          content:
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/DescribeListenersResponse'
+              examples:
+                describeListeners200Example:
+                  summary: Default describeListeners 200 response
+                  x-microcks-default: true
+                  value:
+                    listeners: []
+                    nextMarker: example
+        '400':
+          description: Invalid request parameters
+        '401':
+          description: Authentication failure
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  schemas:
+    Listener:
+      type: object
+      description: Describes a listener
+      properties:
+        listenerArn:
+          type: string
+          description: The Amazon Resource Name (ARN) of the listener
+        loadBalancerArn:
+          type: string
+          description: The ARN of the load balancer
+        port:
+          type: integer
+          description: The port on which the load balancer is listening
+        protocol:
+          type: string
+          description: The protocol for connections from clients to the load balancer
+          enum:
+          - HTTP
+          - HTTPS
+          - TCP
+          - TLS
+          - UDP
+          - TCP_UDP
+          - GENEVE
+        certificates:
+          type: array
+          description: The default SSL server certificate
+          items:
+            type: object
+            properties:
+              certificateArn:
+                type: string
+                description: The ARN of the certificate
+        sslPolicy:
+          type: string
+          description: The security policy that defines supported protocols and ciphers
+        defaultActions:
+          type: array
+          description: The default actions for the listener
+          items:
+            $ref: '#/components/schemas/Action'
+    DescribeListenersResponse:
+      type: object
+      description: Response from the DescribeListeners action
+      properties:
+        listeners:
+          type: array
+          description: Information about the listeners
+          items:
+            $ref: '#/components/schemas/Listener'
+        nextMarker:
+          type: string
+          description: The marker to use for the next set of results
+    CreateListenerResponse:
+      type: object
+      description: Response from the CreateListener action
+      properties:
+        listeners:
+          type: array
+          description: Information about the listener
+          items:
+            $ref: '#/components/schemas/Listener'
+    Action:
+      type: object
+      description: Describes an action for a listener or rule
+      properties:
+        type:
+          type: string
+          description: The type of action
+          enum:
+          - forward
+          - authenticate-oidc
+          - authenticate-cognito
+          - redirect
+          - fixed-response
+        targetGroupArn:
+          type: string
+          description: The ARN of the target group for forward actions
+        order:
+          type: integer
+          description: The order for the action
+        redirectConfig:
+          type: object
+          description: Configuration for redirect actions
+          properties:
+            protocol:
+              type: string
+              description: The protocol
+            port:
+              type: string
+              description: The port
+            host:
+              type: string
+              description: The hostname
+            path:
+              type: string
+              description: The absolute path
+            query:
+              type: string
+              description: The query parameters
+            statusCode:
+              type: string
+              description: The HTTP redirect code
+              enum:
+              - HTTP_301
+              - HTTP_302
+        fixedResponseConfig:
+          type: object
+          description: Configuration for fixed-response actions
+          properties:
+            messageBody:
+              type: string
+              description: The message body
+            statusCode:
+              type: string
+              description: The HTTP response code
+            contentType:
+              type: string
+              description: The content type
+  securitySchemes:
+    sigv4Auth:
+      type: apiKey
+      name: Authorization
+      in: header
+      description: AWS Signature Version 4 authentication
+externalDocs:
+  description: Amazon Elastic Load Balancing API Reference
+  url: https://docs.aws.amazon.com/elasticloadbalancing/latest/APIReference/

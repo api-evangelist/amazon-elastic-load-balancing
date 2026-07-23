@@ -1,0 +1,316 @@
+openapi: 3.1.0
+info:
+  title: Amazon Elastic Load Balancing v2 Listeners Load Balancers API
+  description: Amazon Elastic Load Balancing automatically distributes incoming application traffic across multiple targets, such as Amazon EC2 instances, containers, IP addresses, and Lambda functions. It supports Application Load Balancers, Network Load Balancers, and Gateway Load Balancers.
+  version: '2015-12-01'
+  contact:
+    name: Amazon Web Services
+    url: https://aws.amazon.com/contact-us/
+  termsOfService: https://aws.amazon.com/service-terms/
+servers:
+- url: https://elasticloadbalancing.{region}.amazonaws.com
+  description: Amazon Elastic Load Balancing Regional Endpoint
+  variables:
+    region:
+      default: us-east-1
+      description: AWS Region
+security:
+- sigv4Auth: []
+tags:
+- name: Load Balancers
+  description: Operations for creating and managing load balancers
+paths:
+  /?Action=CreateLoadBalancer:
+    get:
+      operationId: createLoadBalancer
+      summary: Amazon Elastic Load Balancing Create a Load Balancer
+      description: Creates an Application Load Balancer, Network Load Balancer, or Gateway Load Balancer. For more information, see the User Guide for the specific load balancer type.
+      tags:
+      - Load Balancers
+      parameters:
+      - name: Name
+        in: query
+        required: true
+        description: The name of the load balancer. Must be unique per region per account, can have a maximum of 32 characters.
+        schema:
+          type: string
+      - name: Subnets
+        in: query
+        description: The IDs of the subnets. You can specify only one subnet per Availability Zone.
+        schema:
+          type: array
+          items:
+            type: string
+      - name: SecurityGroups
+        in: query
+        description: The IDs of the security groups for the load balancer
+        schema:
+          type: array
+          items:
+            type: string
+      - name: Scheme
+        in: query
+        description: The scheme for the load balancer. An internet-facing load balancer routes requests from clients to targets over the internet. An internal load balancer routes requests to targets using private IP addresses.
+        schema:
+          type: string
+          enum:
+          - internet-facing
+          - internal
+      - name: Type
+        in: query
+        description: The type of load balancer
+        schema:
+          type: string
+          enum:
+          - application
+          - network
+          - gateway
+      - name: IpAddressType
+        in: query
+        description: The type of IP addresses used by the subnets
+        schema:
+          type: string
+          enum:
+          - ipv4
+          - dualstack
+      responses:
+        '200':
+          description: Successfully created load balancer
+          content:
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/CreateLoadBalancerResponse'
+              examples:
+                createLoadBalancer200Example:
+                  summary: Default createLoadBalancer 200 response
+                  x-microcks-default: true
+                  value:
+                    loadBalancers: []
+        '400':
+          description: Invalid request parameters
+        '401':
+          description: Authentication failure
+        '403':
+          description: Authorization failure
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /?Action=DescribeLoadBalancers:
+    get:
+      operationId: describeLoadBalancers
+      summary: Amazon Elastic Load Balancing Describe Load Balancers
+      description: Describes the specified load balancers or all of your load balancers. Returns information about load balancer ARN, DNS name, scheme, VPC, availability zones, type, and state.
+      tags:
+      - Load Balancers
+      parameters:
+      - name: LoadBalancerArns
+        in: query
+        description: The Amazon Resource Names (ARN) of the load balancers
+        schema:
+          type: array
+          items:
+            type: string
+      - name: Names
+        in: query
+        description: The names of the load balancers
+        schema:
+          type: array
+          items:
+            type: string
+      - name: Marker
+        in: query
+        description: The marker for the next set of results
+        schema:
+          type: string
+      - name: PageSize
+        in: query
+        description: The maximum number of results to return
+        schema:
+          type: integer
+          minimum: 1
+          maximum: 400
+      responses:
+        '200':
+          description: Successfully described load balancers
+          content:
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/DescribeLoadBalancersResponse'
+              examples:
+                describeLoadBalancers200Example:
+                  summary: Default describeLoadBalancers 200 response
+                  x-microcks-default: true
+                  value:
+                    loadBalancers: []
+                    nextMarker: example
+        '400':
+          description: Invalid request parameters
+        '401':
+          description: Authentication failure
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /?Action=DeleteLoadBalancer:
+    get:
+      operationId: deleteLoadBalancer
+      summary: Amazon Elastic Load Balancing Delete a Load Balancer
+      description: Deletes the specified Application Load Balancer, Network Load Balancer, or Gateway Load Balancer. Deleting a load balancer also deletes its listeners.
+      tags:
+      - Load Balancers
+      parameters:
+      - name: LoadBalancerArn
+        in: query
+        required: true
+        description: The Amazon Resource Name (ARN) of the load balancer
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Successfully deleted load balancer
+        '400':
+          description: Invalid request parameters
+        '401':
+          description: Authentication failure
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /?Action=ModifyLoadBalancerAttributes:
+    get:
+      operationId: modifyLoadBalancerAttributes
+      summary: Amazon Elastic Load Balancing Modify Load Balancer Attributes
+      description: Modifies the specified attributes of the specified Application Load Balancer, Network Load Balancer, or Gateway Load Balancer.
+      tags:
+      - Load Balancers
+      parameters:
+      - name: LoadBalancerArn
+        in: query
+        required: true
+        description: The Amazon Resource Name (ARN) of the load balancer
+        schema:
+          type: string
+      - name: Attributes.member.1.Key
+        in: query
+        description: The name of the attribute
+        schema:
+          type: string
+      - name: Attributes.member.1.Value
+        in: query
+        description: The value of the attribute
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Successfully modified load balancer attributes
+        '400':
+          description: Invalid request parameters
+        '401':
+          description: Authentication failure
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  schemas:
+    LoadBalancer:
+      type: object
+      description: Describes a load balancer
+      properties:
+        loadBalancerArn:
+          type: string
+          description: The Amazon Resource Name (ARN) of the load balancer
+        dnsName:
+          type: string
+          description: The public DNS name of the load balancer
+        canonicalHostedZoneId:
+          type: string
+          description: The ID of the Amazon Route 53 hosted zone for the load balancer
+        createdTime:
+          type: string
+          format: date-time
+          description: The date and time the load balancer was created
+        loadBalancerName:
+          type: string
+          description: The name of the load balancer
+        scheme:
+          type: string
+          description: The scheme of the load balancer
+          enum:
+          - internet-facing
+          - internal
+        vpcId:
+          type: string
+          description: The ID of the VPC for the load balancer
+        state:
+          type: object
+          description: The state of the load balancer
+          properties:
+            code:
+              type: string
+              description: The state code
+              enum:
+              - active
+              - provisioning
+              - active_impaired
+              - failed
+            reason:
+              type: string
+              description: A description of the state
+        type:
+          type: string
+          description: The type of load balancer
+          enum:
+          - application
+          - network
+          - gateway
+        availabilityZones:
+          type: array
+          description: The subnets for the load balancer
+          items:
+            type: object
+            properties:
+              zoneName:
+                type: string
+                description: The name of the Availability Zone
+              subnetId:
+                type: string
+                description: The ID of the subnet
+        securityGroups:
+          type: array
+          description: The IDs of the security groups for the load balancer
+          items:
+            type: string
+        ipAddressType:
+          type: string
+          description: The type of IP addresses used by the subnets
+          enum:
+          - ipv4
+          - dualstack
+    DescribeLoadBalancersResponse:
+      type: object
+      description: Response from the DescribeLoadBalancers action
+      properties:
+        loadBalancers:
+          type: array
+          description: Information about the load balancers
+          items:
+            $ref: '#/components/schemas/LoadBalancer'
+        nextMarker:
+          type: string
+          description: The marker to use for the next set of results
+    CreateLoadBalancerResponse:
+      type: object
+      description: Response from the CreateLoadBalancer action
+      properties:
+        loadBalancers:
+          type: array
+          description: Information about the load balancer
+          items:
+            $ref: '#/components/schemas/LoadBalancer'
+  securitySchemes:
+    sigv4Auth:
+      type: apiKey
+      name: Authorization
+      in: header
+      description: AWS Signature Version 4 authentication
+externalDocs:
+  description: Amazon Elastic Load Balancing API Reference
+  url: https://docs.aws.amazon.com/elasticloadbalancing/latest/APIReference/

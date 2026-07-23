@@ -1,0 +1,267 @@
+openapi: 3.1.0
+info:
+  title: Amazon Elastic Load Balancing v2 Listeners Rules API
+  description: Amazon Elastic Load Balancing automatically distributes incoming application traffic across multiple targets, such as Amazon EC2 instances, containers, IP addresses, and Lambda functions. It supports Application Load Balancers, Network Load Balancers, and Gateway Load Balancers.
+  version: '2015-12-01'
+  contact:
+    name: Amazon Web Services
+    url: https://aws.amazon.com/contact-us/
+  termsOfService: https://aws.amazon.com/service-terms/
+servers:
+- url: https://elasticloadbalancing.{region}.amazonaws.com
+  description: Amazon Elastic Load Balancing Regional Endpoint
+  variables:
+    region:
+      default: us-east-1
+      description: AWS Region
+security:
+- sigv4Auth: []
+tags:
+- name: Rules
+  description: Operations for creating and managing listener rules
+paths:
+  /?Action=CreateRule:
+    get:
+      operationId: createRule
+      summary: Amazon Elastic Load Balancing Create a Listener Rule
+      description: Creates a rule for the specified listener. The listener must be associated with an Application Load Balancer. Rules are evaluated in priority order, from the lowest value to the highest value.
+      tags:
+      - Rules
+      parameters:
+      - name: ListenerArn
+        in: query
+        required: true
+        description: The ARN of the listener
+        schema:
+          type: string
+      - name: Priority
+        in: query
+        required: true
+        description: The rule priority. Must be unique within the listener.
+        schema:
+          type: integer
+          minimum: 1
+          maximum: 50000
+      - name: Conditions.member.1.Field
+        in: query
+        description: The name of the field (host-header, path-pattern, etc.)
+        schema:
+          type: string
+      - name: Conditions.member.1.Values
+        in: query
+        description: The condition values
+        schema:
+          type: array
+          items:
+            type: string
+      - name: Actions.member.1.Type
+        in: query
+        required: true
+        description: The type of action
+        schema:
+          type: string
+          enum:
+          - forward
+          - authenticate-oidc
+          - authenticate-cognito
+          - redirect
+          - fixed-response
+      - name: Actions.member.1.TargetGroupArn
+        in: query
+        description: The ARN of the target group for forward actions
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Successfully created rule
+          content:
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/CreateRuleResponse'
+              examples:
+                createRule200Example:
+                  summary: Default createRule 200 response
+                  x-microcks-default: true
+                  value:
+                    rules: []
+        '400':
+          description: Invalid request parameters
+        '401':
+          description: Authentication failure
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /?Action=DescribeRules:
+    get:
+      operationId: describeRules
+      summary: Amazon Elastic Load Balancing Describe Listener Rules
+      description: Describes the specified rules or the rules for the specified listener. You must specify either a listener or one or more rules.
+      tags:
+      - Rules
+      parameters:
+      - name: ListenerArn
+        in: query
+        description: The ARN of the listener
+        schema:
+          type: string
+      - name: RuleArns
+        in: query
+        description: The ARNs of the rules
+        schema:
+          type: array
+          items:
+            type: string
+      - name: Marker
+        in: query
+        description: The marker for the next set of results
+        schema:
+          type: string
+      - name: PageSize
+        in: query
+        description: The maximum number of results to return
+        schema:
+          type: integer
+          minimum: 1
+          maximum: 400
+      responses:
+        '200':
+          description: Successfully described rules
+          content:
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/DescribeRulesResponse'
+              examples:
+                describeRules200Example:
+                  summary: Default describeRules 200 response
+                  x-microcks-default: true
+                  value:
+                    rules: []
+                    nextMarker: example
+        '400':
+          description: Invalid request parameters
+        '401':
+          description: Authentication failure
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  schemas:
+    DescribeRulesResponse:
+      type: object
+      description: Response from the DescribeRules action
+      properties:
+        rules:
+          type: array
+          description: Information about the rules
+          items:
+            $ref: '#/components/schemas/Rule'
+        nextMarker:
+          type: string
+          description: The marker to use for the next set of results
+    CreateRuleResponse:
+      type: object
+      description: Response from the CreateRule action
+      properties:
+        rules:
+          type: array
+          description: Information about the rule
+          items:
+            $ref: '#/components/schemas/Rule'
+    Rule:
+      type: object
+      description: Describes a rule
+      properties:
+        ruleArn:
+          type: string
+          description: The Amazon Resource Name (ARN) of the rule
+        priority:
+          type: string
+          description: The priority of the rule
+        conditions:
+          type: array
+          description: The conditions for the rule
+          items:
+            type: object
+            properties:
+              field:
+                type: string
+                description: The name of the field
+              values:
+                type: array
+                description: The condition values
+                items:
+                  type: string
+        actions:
+          type: array
+          description: The actions for the rule
+          items:
+            $ref: '#/components/schemas/Action'
+        isDefault:
+          type: boolean
+          description: Whether this is the default rule
+    Action:
+      type: object
+      description: Describes an action for a listener or rule
+      properties:
+        type:
+          type: string
+          description: The type of action
+          enum:
+          - forward
+          - authenticate-oidc
+          - authenticate-cognito
+          - redirect
+          - fixed-response
+        targetGroupArn:
+          type: string
+          description: The ARN of the target group for forward actions
+        order:
+          type: integer
+          description: The order for the action
+        redirectConfig:
+          type: object
+          description: Configuration for redirect actions
+          properties:
+            protocol:
+              type: string
+              description: The protocol
+            port:
+              type: string
+              description: The port
+            host:
+              type: string
+              description: The hostname
+            path:
+              type: string
+              description: The absolute path
+            query:
+              type: string
+              description: The query parameters
+            statusCode:
+              type: string
+              description: The HTTP redirect code
+              enum:
+              - HTTP_301
+              - HTTP_302
+        fixedResponseConfig:
+          type: object
+          description: Configuration for fixed-response actions
+          properties:
+            messageBody:
+              type: string
+              description: The message body
+            statusCode:
+              type: string
+              description: The HTTP response code
+            contentType:
+              type: string
+              description: The content type
+  securitySchemes:
+    sigv4Auth:
+      type: apiKey
+      name: Authorization
+      in: header
+      description: AWS Signature Version 4 authentication
+externalDocs:
+  description: Amazon Elastic Load Balancing API Reference
+  url: https://docs.aws.amazon.com/elasticloadbalancing/latest/APIReference/
