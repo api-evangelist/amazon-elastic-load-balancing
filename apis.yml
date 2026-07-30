@@ -3,6 +3,19 @@ description: >-
   Amazon Elastic Load Balancing automatically distributes incoming application traffic across multiple targets, such as
   Amazon EC2 instances, containers, IP addresses, and Lambda functions, ensuring high availability and fault tolerance
   for your applications.
+accessModel:
+  pricing: freemium
+  onboarding: self-serve
+  trial: false
+  try_now: true
+  public: false
+  label: Freemium · Self-serve signup
+  confidence: high
+  source:
+  - plans
+  - authentication
+  generated: '2026-07-22'
+  method: derived
 image: https://a0.awsstatic.com/libra-css/images/logos/aws_logo_smile_1200x630.png
 url: https://aws.amazon.com/elasticloadbalancing/
 created: '2024-01-15'
@@ -16,39 +29,146 @@ tags:
   - Networking
   - Scalability
 apis:
-  - name: Elastic Load Balancing v2 API
-    description: >-
-      API for managing Application Load Balancers (ALB), Network Load Balancers (NLB), and Gateway Load Balancers (GLB)
-      with advanced routing and target group management.
-    humanURL: https://aws.amazon.com/elasticloadbalancing/
-    baseURL: https://elasticloadbalancing.amazonaws.com
-    tags:
-      - ALB
-      - GLB
-      - Load Balancing
-      - Networking
-      - NLB
-    properties:
-      - type: Documentation
-        url: https://docs.aws.amazon.com/elasticloadbalancing/latest/userguide/
-      - type: OpenAPI
-        url: openapi/amazon-elastic-load-balancing-openapi.yml
-      - type: APIReference
-        url: https://docs.aws.amazon.com/elasticloadbalancing/latest/APIReference/
-      - type: GettingStarted
-        url: https://aws.amazon.com/elasticloadbalancing/getting-started/
-      - type: Pricing
-        url: https://aws.amazon.com/elasticloadbalancing/pricing/
-      - type: FAQ
-        url: https://aws.amazon.com/elasticloadbalancing/faqs/
-      - type: JSONSchema
-        url: json-schema/amazon-elastic-load-balancing-action-schema.json
-      - type: JSONSchema
-        url: json-schema/amazon-elastic-load-balancing-create-listener-response-schema.json
-      - type: JSONSchema
-        url: json-schema/amazon-elastic-load-balancing-create-load-balancer-response-schema.json
-      - type: JSONLD
-        url: json-ld/amazon-elastic-load-balancing-context.jsonld
+- aid: amazon-elastic-load-balancing:amazon-elastic-load-balancing-listeners-api
+  name: Amazon Elastic Load Balancing Listeners API
+  description: Operations for creating and managing listeners
+  humanURL: https://aws.amazon.com/elasticloadbalancing/
+  baseURL: https://elasticloadbalancing.amazonaws.com
+  tags:
+  - Listeners
+  properties:
+  - type: OpenAPI
+    url: openapi/amazon-elastic-load-balancing-listeners-api-openapi.yml
+  - type: Documentation
+    url: https://docs.aws.amazon.com/elasticloadbalancing/latest/userguide/
+  - type: APIReference
+    url: https://docs.aws.amazon.com/elasticloadbalancing/latest/APIReference/
+  - type: GettingStarted
+    url: https://aws.amazon.com/elasticloadbalancing/getting-started/
+  - type: Pricing
+    url: https://aws.amazon.com/elasticloadbalancing/pricing/
+  - type: FAQ
+    url: https://aws.amazon.com/elasticloadbalancing/faqs/
+  - type: JSONSchema
+    url: json-schema/amazon-elastic-load-balancing-action-schema.json
+  - type: JSONSchema
+    url: json-schema/amazon-elastic-load-balancing-create-listener-response-schema.json
+  - type: JSONSchema
+    url: json-schema/amazon-elastic-load-balancing-create-load-balancer-response-schema.json
+  - type: JSONLD
+    url: json-ld/amazon-elastic-load-balancing-context.jsonld
+- aid: amazon-elastic-load-balancing:amazon-elastic-load-balancing-load-balancers-api
+  name: Amazon Elastic Load Balancing Load Balancers API
+  description: Operations for creating and managing load balancers
+  humanURL: https://aws.amazon.com/elasticloadbalancing/
+  baseURL: https://elasticloadbalancing.amazonaws.com
+  tags:
+  - Load Balancers
+  properties:
+  - type: OpenAPI
+    url: openapi/amazon-elastic-load-balancing-load-balancers-api-openapi.yml
+  - type: Documentation
+    url: https://docs.aws.amazon.com/elasticloadbalancing/latest/userguide/
+  - type: APIReference
+    url: https://docs.aws.amazon.com/elasticloadbalancing/latest/APIReference/
+  - type: GettingStarted
+    url: https://aws.amazon.com/elasticloadbalancing/getting-started/
+  - type: Pricing
+    url: https://aws.amazon.com/elasticloadbalancing/pricing/
+  - type: FAQ
+    url: https://aws.amazon.com/elasticloadbalancing/faqs/
+  - type: JSONSchema
+    url: json-schema/amazon-elastic-load-balancing-action-schema.json
+  - type: JSONSchema
+    url: json-schema/amazon-elastic-load-balancing-create-listener-response-schema.json
+  - type: JSONSchema
+    url: json-schema/amazon-elastic-load-balancing-create-load-balancer-response-schema.json
+  - type: JSONLD
+    url: json-ld/amazon-elastic-load-balancing-context.jsonld
+- aid: amazon-elastic-load-balancing:amazon-elastic-load-balancing-rules-api
+  name: Amazon Elastic Load Balancing Rules API
+  description: Operations for creating and managing listener rules
+  humanURL: https://aws.amazon.com/elasticloadbalancing/
+  baseURL: https://elasticloadbalancing.amazonaws.com
+  tags:
+  - Rules
+  properties:
+  - type: OpenAPI
+    url: openapi/amazon-elastic-load-balancing-rules-api-openapi.yml
+  - type: Documentation
+    url: https://docs.aws.amazon.com/elasticloadbalancing/latest/userguide/
+  - type: APIReference
+    url: https://docs.aws.amazon.com/elasticloadbalancing/latest/APIReference/
+  - type: GettingStarted
+    url: https://aws.amazon.com/elasticloadbalancing/getting-started/
+  - type: Pricing
+    url: https://aws.amazon.com/elasticloadbalancing/pricing/
+  - type: FAQ
+    url: https://aws.amazon.com/elasticloadbalancing/faqs/
+  - type: JSONSchema
+    url: json-schema/amazon-elastic-load-balancing-action-schema.json
+  - type: JSONSchema
+    url: json-schema/amazon-elastic-load-balancing-create-listener-response-schema.json
+  - type: JSONSchema
+    url: json-schema/amazon-elastic-load-balancing-create-load-balancer-response-schema.json
+  - type: JSONLD
+    url: json-ld/amazon-elastic-load-balancing-context.jsonld
+- aid: amazon-elastic-load-balancing:amazon-elastic-load-balancing-target-groups-api
+  name: Amazon Elastic Load Balancing Target Groups API
+  description: Operations for creating and managing target groups
+  humanURL: https://aws.amazon.com/elasticloadbalancing/
+  baseURL: https://elasticloadbalancing.amazonaws.com
+  tags:
+  - Target Groups
+  properties:
+  - type: OpenAPI
+    url: openapi/amazon-elastic-load-balancing-target-groups-api-openapi.yml
+  - type: Documentation
+    url: https://docs.aws.amazon.com/elasticloadbalancing/latest/userguide/
+  - type: APIReference
+    url: https://docs.aws.amazon.com/elasticloadbalancing/latest/APIReference/
+  - type: GettingStarted
+    url: https://aws.amazon.com/elasticloadbalancing/getting-started/
+  - type: Pricing
+    url: https://aws.amazon.com/elasticloadbalancing/pricing/
+  - type: FAQ
+    url: https://aws.amazon.com/elasticloadbalancing/faqs/
+  - type: JSONSchema
+    url: json-schema/amazon-elastic-load-balancing-action-schema.json
+  - type: JSONSchema
+    url: json-schema/amazon-elastic-load-balancing-create-listener-response-schema.json
+  - type: JSONSchema
+    url: json-schema/amazon-elastic-load-balancing-create-load-balancer-response-schema.json
+  - type: JSONLD
+    url: json-ld/amazon-elastic-load-balancing-context.jsonld
+- aid: amazon-elastic-load-balancing:amazon-elastic-load-balancing-targets-api
+  name: Amazon Elastic Load Balancing Targets API
+  description: Operations for registering and deregistering targets
+  humanURL: https://aws.amazon.com/elasticloadbalancing/
+  baseURL: https://elasticloadbalancing.amazonaws.com
+  tags:
+  - Targets
+  properties:
+  - type: OpenAPI
+    url: openapi/amazon-elastic-load-balancing-targets-api-openapi.yml
+  - type: Documentation
+    url: https://docs.aws.amazon.com/elasticloadbalancing/latest/userguide/
+  - type: APIReference
+    url: https://docs.aws.amazon.com/elasticloadbalancing/latest/APIReference/
+  - type: GettingStarted
+    url: https://aws.amazon.com/elasticloadbalancing/getting-started/
+  - type: Pricing
+    url: https://aws.amazon.com/elasticloadbalancing/pricing/
+  - type: FAQ
+    url: https://aws.amazon.com/elasticloadbalancing/faqs/
+  - type: JSONSchema
+    url: json-schema/amazon-elastic-load-balancing-action-schema.json
+  - type: JSONSchema
+    url: json-schema/amazon-elastic-load-balancing-create-listener-response-schema.json
+  - type: JSONSchema
+    url: json-schema/amazon-elastic-load-balancing-create-load-balancer-response-schema.json
+  - type: JSONLD
+    url: json-ld/amazon-elastic-load-balancing-context.jsonld
 common:
   - type: AgenticAccess
     url: agentic-access/amazon-elastic-load-balancing-agentic-access.yml
