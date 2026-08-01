@@ -1,0 +1,22 @@
+{
+  "provider": "amazon-elastic-load-balancing",
+  "sources": [
+    "amazon-elastic-load-balancing-listeners-api-openapi.yml",
+    "amazon-elastic-load-balancing-load-balancers-api-openapi.yml",
+    "amazon-elastic-load-balancing-rules-api-openapi.yml",
+    "amazon-elastic-load-balancing-target-groups-api-openapi.yml",
+    "amazon-elastic-load-balancing-targets-api-openapi.yml"
+  ],
+  "outputs": [
+    "amazon-elastic-load-balancing-listeners-api-openapi.yml",
+    "amazon-elastic-load-balancing-load-balancers-api-openapi.yml",
+    "amazon-elastic-load-balancing-rules-api-openapi.yml",
+    "amazon-elastic-load-balancing-target-groups-api-openapi.yml",
+    "amazon-elastic-load-balancing-targets-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}
