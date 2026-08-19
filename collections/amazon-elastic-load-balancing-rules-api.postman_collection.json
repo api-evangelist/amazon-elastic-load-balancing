@@ -1,0 +1,658 @@
+{
+  "item": [
+    {
+      "id": "93425368-5075-4de0-bd44-227dca0e2a2a",
+      "name": "Rules",
+      "description": {
+        "content": "Operations for creating and managing listener rules",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "ea977cec-0970-498a-ad8d-7adcc1304d41",
+          "name": "Amazon Elastic Load Balancing Create a Listener Rule",
+          "request": {
+            "name": "Amazon Elastic Load Balancing Create a Listener Rule",
+            "description": {
+              "content": "Creates a rule for the specified listener. The listener must be associated with an Application Load Balancer. Rules are evaluated in priority order, from the lowest value to the highest value.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "key": "Action",
+                  "value": "CreateRule"
+                },
+                {
+                  "disabled": false,
+                  "key": "ListenerArn",
+                  "value": "<string>",
+                  "description": "(Required) The ARN of the listener"
+                },
+                {
+                  "disabled": false,
+                  "key": "Priority",
+                  "value": "<integer>",
+                  "description": "(Required) The rule priority. Must be unique within the listener."
+                },
+                {
+                  "disabled": false,
+                  "key": "Conditions.member.1.Field",
+                  "value": "<string>",
+                  "description": "The name of the field (host-header, path-pattern, etc.)"
+                },
+                {
+                  "disabled": false,
+                  "key": "Conditions.member.1.Values",
+                  "value": "<string>",
+                  "description": "The condition values"
+                },
+                {
+                  "disabled": false,
+                  "key": "Conditions.member.1.Values",
+                  "value": "<string>",
+                  "description": "The condition values"
+                },
+                {
+                  "disabled": false,
+                  "key": "Actions.member.1.Type",
+                  "value": "<string>",
+                  "description": "(Required) The type of action"
+                },
+                {
+                  "disabled": false,
+                  "key": "Actions.member.1.TargetGroupArn",
+                  "value": "<string>",
+                  "description": "The ARN of the target group for forward actions"
+                }
+              ],
+              "variable": [
+                {
+                  "description": "AWS Region",
+                  "type": "any",
+                  "value": "{{region}}",
+                  "key": "region"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/xml"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "55301746-f81e-4c4d-b70e-1003ade19a2d",
+              "name": "Successfully created rule",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "ListenerArn",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "Priority",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "Conditions.member.1.Field",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "Conditions.member.1.Values",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "Conditions.member.1.Values",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "Actions.member.1.Type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "Actions.member.1.TargetGroupArn",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "AWS Region",
+                      "type": "any",
+                      "value": "{{region}}",
+                      "key": "region"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/xml"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/xml"
+                }
+              ],
+              "body": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n",
+              "cookie": [],
+              "_postman_previewlanguage": "xml"
+            },
+            {
+              "id": "40fa2fad-7cc1-4f87-90bb-3a619758204e",
+              "name": "Invalid request parameters",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "ListenerArn",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "Priority",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "Conditions.member.1.Field",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "Conditions.member.1.Values",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "Conditions.member.1.Values",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "Actions.member.1.Type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "Actions.member.1.TargetGroupArn",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "AWS Region",
+                      "type": "any",
+                      "value": "{{region}}",
+                      "key": "region"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "329f2419-a650-446e-9c90-fbd1f5e2911a",
+              "name": "Authentication failure",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "ListenerArn",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "Priority",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "Conditions.member.1.Field",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "Conditions.member.1.Values",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "Conditions.member.1.Values",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "Actions.member.1.Type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "Actions.member.1.TargetGroupArn",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "AWS Region",
+                      "type": "any",
+                      "value": "{{region}}",
+                      "key": "region"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "52fe000d-def3-43ff-af5a-acc2725729f9",
+          "name": "Amazon Elastic Load Balancing Describe Listener Rules",
+          "request": {
+            "name": "Amazon Elastic Load Balancing Describe Listener Rules",
+            "description": {
+              "content": "Describes the specified rules or the rules for the specified listener. You must specify either a listener or one or more rules.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "key": "Action",
+                  "value": "DescribeRules"
+                },
+                {
+                  "disabled": false,
+                  "key": "ListenerArn",
+                  "value": "<string>",
+                  "description": "The ARN of the listener"
+                },
+                {
+                  "disabled": false,
+                  "key": "RuleArns",
+                  "value": "<string>",
+                  "description": "The ARNs of the rules"
+                },
+                {
+                  "disabled": false,
+                  "key": "RuleArns",
+                  "value": "<string>",
+                  "description": "The ARNs of the rules"
+                },
+                {
+                  "disabled": false,
+                  "key": "Marker",
+                  "value": "<string>",
+                  "description": "The marker for the next set of results"
+                },
+                {
+                  "disabled": false,
+                  "key": "PageSize",
+                  "value": "<integer>",
+                  "description": "The maximum number of results to return"
+                }
+              ],
+              "variable": [
+                {
+                  "description": "AWS Region",
+                  "type": "any",
+                  "value": "{{region}}",
+                  "key": "region"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/xml"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "36b83f6d-7123-48d4-8002-3fe0b4234c31",
+              "name": "Successfully described rules",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "ListenerArn",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "RuleArns",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "RuleArns",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "Marker",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "PageSize",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "AWS Region",
+                      "type": "any",
+                      "value": "{{region}}",
+                      "key": "region"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/xml"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/xml"
+                }
+              ],
+              "body": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n",
+              "cookie": [],
+              "_postman_previewlanguage": "xml"
+            },
+            {
+              "id": "cb8c0888-9401-4787-bba2-8f15e45c52bc",
+              "name": "Invalid request parameters",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "ListenerArn",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "RuleArns",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "RuleArns",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "Marker",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "PageSize",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "AWS Region",
+                      "type": "any",
+                      "value": "{{region}}",
+                      "key": "region"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "613a8cde-3898-4e64-8f5d-17e9b9d3cb59",
+              "name": "Authentication failure",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "ListenerArn",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "RuleArns",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "RuleArns",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "Marker",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "PageSize",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "AWS Region",
+                      "type": "any",
+                      "value": "{{region}}",
+                      "key": "region"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "description": {
+        "content": "AWS Region",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "us-east-1",
+      "key": "region"
+    },
+    {
+      "type": "string",
+      "value": "https://elasticloadbalancing.{{region}}.amazonaws.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "Authorization"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "af989462-13c5-4140-9f3f-e4b71700531d",
+    "name": "Amazon Elastic Load Balancing v2 Listeners Rules API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Amazon Elastic Load Balancing automatically distributes incoming application traffic across multiple targets, such as Amazon EC2 instances, containers, IP addresses, and Lambda functions. It supports Application Load Balancers, Network Load Balancers, and Gateway Load Balancers.\n\nContact Support:\n Name: Amazon Web Services",
+      "type": "text/plain"
+    }
+  }
+}

@@ -1,0 +1,125 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Amazon Elastic Load Balancing v2 Listeners Targets API",
+    "version": "2015-12-01"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Targets",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Amazon Elastic Load Balancing Register Targets with a Target Group",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://elasticloadbalancing.{region}.amazonaws.com/?Action=RegisterTargets",
+            "params": [
+              {
+                "name": "TargetGroupArn",
+                "value": "",
+                "type": "query",
+                "description": "The ARN of the target group"
+              },
+              {
+                "name": "Targets.member.1.Id",
+                "value": "",
+                "type": "query",
+                "description": "The ID of the target (instance ID, IP address, or Lambda ARN)"
+              },
+              {
+                "name": "Targets.member.1.Port",
+                "value": "",
+                "type": "query",
+                "description": "The port on which the target is listening"
+              },
+              {
+                "name": "Targets.member.1.AvailabilityZone",
+                "value": "",
+                "type": "query",
+                "description": "The Availability Zone where the target is located"
+              }
+            ]
+          },
+          "docs": "Registers the specified targets with the specified target group. If the target is an EC2 instance, it must be in the running state when you register it."
+        },
+        {
+          "info": {
+            "name": "Amazon Elastic Load Balancing Deregister Targets from a Target Group",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://elasticloadbalancing.{region}.amazonaws.com/?Action=DeregisterTargets",
+            "params": [
+              {
+                "name": "TargetGroupArn",
+                "value": "",
+                "type": "query",
+                "description": "The ARN of the target group"
+              },
+              {
+                "name": "Targets.member.1.Id",
+                "value": "",
+                "type": "query",
+                "description": "The ID of the target"
+              },
+              {
+                "name": "Targets.member.1.Port",
+                "value": "",
+                "type": "query",
+                "description": "The port on which the target is listening"
+              }
+            ]
+          },
+          "docs": "Deregisters the specified targets from the specified target group. After the targets are deregistered, they no longer receive traffic from the load balancer."
+        },
+        {
+          "info": {
+            "name": "Amazon Elastic Load Balancing Describe Target Health",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://elasticloadbalancing.{region}.amazonaws.com/?Action=DescribeTargetHealth",
+            "params": [
+              {
+                "name": "TargetGroupArn",
+                "value": "",
+                "type": "query",
+                "description": "The ARN of the target group"
+              },
+              {
+                "name": "Targets.member.1.Id",
+                "value": "",
+                "type": "query",
+                "description": "The ID of the target"
+              },
+              {
+                "name": "Targets.member.1.Port",
+                "value": "",
+                "type": "query",
+                "description": "The port on which the target is listening"
+              }
+            ]
+          },
+          "docs": "Describes the health of the specified targets or all of your targets registered with the specified target group."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,794 @@
+{
+  "item": [
+    {
+      "id": "8df53afb-b66c-433c-818a-dd8e44a25f3a",
+      "name": "Targets",
+      "description": {
+        "content": "Operations for registering and deregistering targets",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "e43fb618-6258-4500-a1de-e36549fd1bf1",
+          "name": "Amazon Elastic Load Balancing Register Targets with a Target Group",
+          "request": {
+            "name": "Amazon Elastic Load Balancing Register Targets with a Target Group",
+            "description": {
+              "content": "Registers the specified targets with the specified target group. If the target is an EC2 instance, it must be in the running state when you register it.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "key": "Action",
+                  "value": "RegisterTargets"
+                },
+                {
+                  "disabled": false,
+                  "key": "TargetGroupArn",
+                  "value": "<string>",
+                  "description": "(Required) The ARN of the target group"
+                },
+                {
+                  "disabled": false,
+                  "key": "Targets.member.1.Id",
+                  "value": "<string>",
+                  "description": "(Required) The ID of the target (instance ID, IP address, or Lambda ARN)"
+                },
+                {
+                  "disabled": false,
+                  "key": "Targets.member.1.Port",
+                  "value": "<integer>",
+                  "description": "The port on which the target is listening"
+                },
+                {
+                  "disabled": false,
+                  "key": "Targets.member.1.AvailabilityZone",
+                  "value": "<string>",
+                  "description": "The Availability Zone where the target is located"
+                }
+              ],
+              "variable": [
+                {
+                  "description": "AWS Region",
+                  "type": "any",
+                  "value": "{{region}}",
+                  "key": "region"
+                }
+              ]
+            },
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "36ffe975-156c-41d8-8b40-dde2e49b3c75",
+              "name": "Successfully registered targets",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "TargetGroupArn",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "Targets.member.1.Id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "Targets.member.1.Port",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "Targets.member.1.AvailabilityZone",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "AWS Region",
+                      "type": "any",
+                      "value": "{{region}}",
+                      "key": "region"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "707155f6-913b-4039-baaa-ecba31096299",
+              "name": "Invalid request parameters",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "TargetGroupArn",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "Targets.member.1.Id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "Targets.member.1.Port",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "Targets.member.1.AvailabilityZone",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "AWS Region",
+                      "type": "any",
+                      "value": "{{region}}",
+                      "key": "region"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "85c46149-09f2-446d-a315-00687ecda099",
+              "name": "Authentication failure",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "TargetGroupArn",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "Targets.member.1.Id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "Targets.member.1.Port",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "Targets.member.1.AvailabilityZone",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "AWS Region",
+                      "type": "any",
+                      "value": "{{region}}",
+                      "key": "region"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "1e09c485-b34d-47b9-be10-052d8c19dec6",
+          "name": "Amazon Elastic Load Balancing Deregister Targets from a Target Group",
+          "request": {
+            "name": "Amazon Elastic Load Balancing Deregister Targets from a Target Group",
+            "description": {
+              "content": "Deregisters the specified targets from the specified target group. After the targets are deregistered, they no longer receive traffic from the load balancer.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "key": "Action",
+                  "value": "DeregisterTargets"
+                },
+                {
+                  "disabled": false,
+                  "key": "TargetGroupArn",
+                  "value": "<string>",
+                  "description": "(Required) The ARN of the target group"
+                },
+                {
+                  "disabled": false,
+                  "key": "Targets.member.1.Id",
+                  "value": "<string>",
+                  "description": "(Required) The ID of the target"
+                },
+                {
+                  "disabled": false,
+                  "key": "Targets.member.1.Port",
+                  "value": "<integer>",
+                  "description": "The port on which the target is listening"
+                }
+              ],
+              "variable": [
+                {
+                  "description": "AWS Region",
+                  "type": "any",
+                  "value": "{{region}}",
+                  "key": "region"
+                }
+              ]
+            },
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "6eecf84e-0bf3-4827-8b70-a50cb148d928",
+              "name": "Successfully deregistered targets",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "TargetGroupArn",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "Targets.member.1.Id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "Targets.member.1.Port",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "AWS Region",
+                      "type": "any",
+                      "value": "{{region}}",
+                      "key": "region"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "b2e5b79e-a576-4980-96b4-0431eb058cab",
+              "name": "Invalid request parameters",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "TargetGroupArn",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "Targets.member.1.Id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "Targets.member.1.Port",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "AWS Region",
+                      "type": "any",
+                      "value": "{{region}}",
+                      "key": "region"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "6c422cd8-159f-4d4b-b5c0-bae3676316ce",
+              "name": "Authentication failure",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "TargetGroupArn",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "Targets.member.1.Id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "Targets.member.1.Port",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "AWS Region",
+                      "type": "any",
+                      "value": "{{region}}",
+                      "key": "region"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "60f519d6-b8e6-488b-b94d-e238082a7902",
+          "name": "Amazon Elastic Load Balancing Describe Target Health",
+          "request": {
+            "name": "Amazon Elastic Load Balancing Describe Target Health",
+            "description": {
+              "content": "Describes the health of the specified targets or all of your targets registered with the specified target group.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "key": "Action",
+                  "value": "DescribeTargetHealth"
+                },
+                {
+                  "disabled": false,
+                  "key": "TargetGroupArn",
+                  "value": "<string>",
+                  "description": "(Required) The ARN of the target group"
+                },
+                {
+                  "disabled": false,
+                  "key": "Targets.member.1.Id",
+                  "value": "<string>",
+                  "description": "The ID of the target"
+                },
+                {
+                  "disabled": false,
+                  "key": "Targets.member.1.Port",
+                  "value": "<integer>",
+                  "description": "The port on which the target is listening"
+                }
+              ],
+              "variable": [
+                {
+                  "description": "AWS Region",
+                  "type": "any",
+                  "value": "{{region}}",
+                  "key": "region"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/xml"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "c7a73521-4470-40fe-9965-5ffc14118e98",
+              "name": "Successfully described target health",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "TargetGroupArn",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "Targets.member.1.Id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "Targets.member.1.Port",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "AWS Region",
+                      "type": "any",
+                      "value": "{{region}}",
+                      "key": "region"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/xml"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/xml"
+                }
+              ],
+              "body": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n",
+              "cookie": [],
+              "_postman_previewlanguage": "xml"
+            },
+            {
+              "id": "b6cf8344-f177-42d7-8b97-1852416ab4d9",
+              "name": "Invalid request parameters",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "TargetGroupArn",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "Targets.member.1.Id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "Targets.member.1.Port",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "AWS Region",
+                      "type": "any",
+                      "value": "{{region}}",
+                      "key": "region"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "40e8e9e0-dba5-4cf6-b59b-34e61225fe35",
+              "name": "Authentication failure",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "TargetGroupArn",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "Targets.member.1.Id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "Targets.member.1.Port",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "AWS Region",
+                      "type": "any",
+                      "value": "{{region}}",
+                      "key": "region"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "description": {
+        "content": "AWS Region",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "us-east-1",
+      "key": "region"
+    },
+    {
+      "type": "string",
+      "value": "https://elasticloadbalancing.{{region}}.amazonaws.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "Authorization"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "f5e366d3-60bd-4b82-bfe7-ed39e837e00b",
+    "name": "Amazon Elastic Load Balancing v2 Listeners Targets API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Amazon Elastic Load Balancing automatically distributes incoming application traffic across multiple targets, such as Amazon EC2 instances, containers, IP addresses, and Lambda functions. It supports Application Load Balancers, Network Load Balancers, and Gateway Load Balancers.\n\nContact Support:\n Name: Amazon Web Services",
+      "type": "text/plain"
+    }
+  }
+}

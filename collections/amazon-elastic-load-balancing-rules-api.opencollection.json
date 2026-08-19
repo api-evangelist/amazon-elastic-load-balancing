@@ -1,0 +1,112 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Amazon Elastic Load Balancing v2 Listeners Rules API",
+    "version": "2015-12-01"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Rules",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Amazon Elastic Load Balancing Create a Listener Rule",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://elasticloadbalancing.{region}.amazonaws.com/?Action=CreateRule",
+            "params": [
+              {
+                "name": "ListenerArn",
+                "value": "",
+                "type": "query",
+                "description": "The ARN of the listener"
+              },
+              {
+                "name": "Priority",
+                "value": "",
+                "type": "query",
+                "description": "The rule priority. Must be unique within the listener."
+              },
+              {
+                "name": "Conditions.member.1.Field",
+                "value": "",
+                "type": "query",
+                "description": "The name of the field (host-header, path-pattern, etc.)"
+              },
+              {
+                "name": "Conditions.member.1.Values",
+                "value": "",
+                "type": "query",
+                "description": "The condition values"
+              },
+              {
+                "name": "Actions.member.1.Type",
+                "value": "",
+                "type": "query",
+                "description": "The type of action"
+              },
+              {
+                "name": "Actions.member.1.TargetGroupArn",
+                "value": "",
+                "type": "query",
+                "description": "The ARN of the target group for forward actions"
+              }
+            ]
+          },
+          "docs": "Creates a rule for the specified listener. The listener must be associated with an Application Load Balancer. Rules are evaluated in priority order, from the lowest value to the highest value."
+        },
+        {
+          "info": {
+            "name": "Amazon Elastic Load Balancing Describe Listener Rules",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://elasticloadbalancing.{region}.amazonaws.com/?Action=DescribeRules",
+            "params": [
+              {
+                "name": "ListenerArn",
+                "value": "",
+                "type": "query",
+                "description": "The ARN of the listener"
+              },
+              {
+                "name": "RuleArns",
+                "value": "",
+                "type": "query",
+                "description": "The ARNs of the rules"
+              },
+              {
+                "name": "Marker",
+                "value": "",
+                "type": "query",
+                "description": "The marker for the next set of results"
+              },
+              {
+                "name": "PageSize",
+                "value": "",
+                "type": "query",
+                "description": "The maximum number of results to return"
+              }
+            ]
+          },
+          "docs": "Describes the specified rules or the rules for the specified listener. You must specify either a listener or one or more rules."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

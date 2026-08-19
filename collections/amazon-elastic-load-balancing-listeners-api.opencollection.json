@@ -1,0 +1,112 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Amazon Elastic Load Balancing v2 Listeners API",
+    "version": "2015-12-01"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Listeners",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Amazon Elastic Load Balancing Create a Listener",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://elasticloadbalancing.{region}.amazonaws.com/?Action=CreateListener",
+            "params": [
+              {
+                "name": "LoadBalancerArn",
+                "value": "",
+                "type": "query",
+                "description": "The ARN of the load balancer"
+              },
+              {
+                "name": "Protocol",
+                "value": "",
+                "type": "query",
+                "description": "The protocol for connections from clients to the load balancer"
+              },
+              {
+                "name": "Port",
+                "value": "",
+                "type": "query",
+                "description": "The port on which the load balancer is listening"
+              },
+              {
+                "name": "SslPolicy",
+                "value": "",
+                "type": "query",
+                "description": "The security policy that defines which protocols and ciphers are supported"
+              },
+              {
+                "name": "DefaultActions.member.1.Type",
+                "value": "",
+                "type": "query",
+                "description": "The type of action"
+              },
+              {
+                "name": "DefaultActions.member.1.TargetGroupArn",
+                "value": "",
+                "type": "query",
+                "description": "The ARN of the target group for forward actions"
+              }
+            ]
+          },
+          "docs": "Creates a listener for the specified Application Load Balancer, Network Load Balancer, or Gateway Load Balancer. Listeners check for connection requests from clients using the protocol and port that you configure."
+        },
+        {
+          "info": {
+            "name": "Amazon Elastic Load Balancing Describe Listeners",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://elasticloadbalancing.{region}.amazonaws.com/?Action=DescribeListeners",
+            "params": [
+              {
+                "name": "LoadBalancerArn",
+                "value": "",
+                "type": "query",
+                "description": "The ARN of the load balancer"
+              },
+              {
+                "name": "ListenerArns",
+                "value": "",
+                "type": "query",
+                "description": "The ARNs of the listeners"
+              },
+              {
+                "name": "Marker",
+                "value": "",
+                "type": "query",
+                "description": "The marker for the next set of results"
+              },
+              {
+                "name": "PageSize",
+                "value": "",
+                "type": "query",
+                "description": "The maximum number of results to return"
+              }
+            ]
+          },
+          "docs": "Describes the specified listeners or the listeners for the specified Application Load Balancer, Network Load Balancer, or Gateway Load Balancer."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

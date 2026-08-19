@@ -1,0 +1,162 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Amazon Elastic Load Balancing v2 Listeners Load Balancers API",
+    "version": "2015-12-01"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Load Balancers",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Amazon Elastic Load Balancing Create a Load Balancer",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://elasticloadbalancing.{region}.amazonaws.com/?Action=CreateLoadBalancer",
+            "params": [
+              {
+                "name": "Name",
+                "value": "",
+                "type": "query",
+                "description": "The name of the load balancer. Must be unique per region per account, can have a maximum of 32 characters."
+              },
+              {
+                "name": "Subnets",
+                "value": "",
+                "type": "query",
+                "description": "The IDs of the subnets. You can specify only one subnet per Availability Zone."
+              },
+              {
+                "name": "SecurityGroups",
+                "value": "",
+                "type": "query",
+                "description": "The IDs of the security groups for the load balancer"
+              },
+              {
+                "name": "Scheme",
+                "value": "",
+                "type": "query",
+                "description": "The scheme for the load balancer. An internet-facing load balancer routes requests from clients to targets over the internet. An internal load balancer routes requests to targets using private IP addresses."
+              },
+              {
+                "name": "Type",
+                "value": "",
+                "type": "query",
+                "description": "The type of load balancer"
+              },
+              {
+                "name": "IpAddressType",
+                "value": "",
+                "type": "query",
+                "description": "The type of IP addresses used by the subnets"
+              }
+            ]
+          },
+          "docs": "Creates an Application Load Balancer, Network Load Balancer, or Gateway Load Balancer. For more information, see the User Guide for the specific load balancer type."
+        },
+        {
+          "info": {
+            "name": "Amazon Elastic Load Balancing Describe Load Balancers",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://elasticloadbalancing.{region}.amazonaws.com/?Action=DescribeLoadBalancers",
+            "params": [
+              {
+                "name": "LoadBalancerArns",
+                "value": "",
+                "type": "query",
+                "description": "The Amazon Resource Names (ARN) of the load balancers"
+              },
+              {
+                "name": "Names",
+                "value": "",
+                "type": "query",
+                "description": "The names of the load balancers"
+              },
+              {
+                "name": "Marker",
+                "value": "",
+                "type": "query",
+                "description": "The marker for the next set of results"
+              },
+              {
+                "name": "PageSize",
+                "value": "",
+                "type": "query",
+                "description": "The maximum number of results to return"
+              }
+            ]
+          },
+          "docs": "Describes the specified load balancers or all of your load balancers. Returns information about load balancer ARN, DNS name, scheme, VPC, availability zones, type, and state."
+        },
+        {
+          "info": {
+            "name": "Amazon Elastic Load Balancing Delete a Load Balancer",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://elasticloadbalancing.{region}.amazonaws.com/?Action=DeleteLoadBalancer",
+            "params": [
+              {
+                "name": "LoadBalancerArn",
+                "value": "",
+                "type": "query",
+                "description": "The Amazon Resource Name (ARN) of the load balancer"
+              }
+            ]
+          },
+          "docs": "Deletes the specified Application Load Balancer, Network Load Balancer, or Gateway Load Balancer. Deleting a load balancer also deletes its listeners."
+        },
+        {
+          "info": {
+            "name": "Amazon Elastic Load Balancing Modify Load Balancer Attributes",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://elasticloadbalancing.{region}.amazonaws.com/?Action=ModifyLoadBalancerAttributes",
+            "params": [
+              {
+                "name": "LoadBalancerArn",
+                "value": "",
+                "type": "query",
+                "description": "The Amazon Resource Name (ARN) of the load balancer"
+              },
+              {
+                "name": "Attributes.member.1.Key",
+                "value": "",
+                "type": "query",
+                "description": "The name of the attribute"
+              },
+              {
+                "name": "Attributes.member.1.Value",
+                "value": "",
+                "type": "query",
+                "description": "The value of the attribute"
+              }
+            ]
+          },
+          "docs": "Modifies the specified attributes of the specified Application Load Balancer, Network Load Balancer, or Gateway Load Balancer."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
