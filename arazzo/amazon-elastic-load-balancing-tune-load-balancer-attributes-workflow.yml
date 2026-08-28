@@ -12,8 +12,8 @@ info:
     as query parameters rather than a request body.
   version: 1.0.0
 sourceDescriptions:
-- name: elbv2Api
-  url: ../openapi/amazon-elastic-load-balancing-openapi.yml
+- name: loadBalancersApi
+  url: ../openapi/amazon-elastic-load-balancing-load-balancers-api-openapi.yml
   type: openapi
 workflows:
 - workflowId: tune-load-balancer-attributes

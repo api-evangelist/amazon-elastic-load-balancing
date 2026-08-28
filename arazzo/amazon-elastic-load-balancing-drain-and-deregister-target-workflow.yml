@@ -13,8 +13,8 @@ info:
     GET whose inputs are carried as query parameters rather than a request body.
   version: 1.0.0
 sourceDescriptions:
-- name: elbv2Api
-  url: ../openapi/amazon-elastic-load-balancing-openapi.yml
+- name: targetsApi
+  url: ../openapi/amazon-elastic-load-balancing-targets-api-openapi.yml
   type: openapi
 workflows:
 - workflowId: drain-and-deregister-target

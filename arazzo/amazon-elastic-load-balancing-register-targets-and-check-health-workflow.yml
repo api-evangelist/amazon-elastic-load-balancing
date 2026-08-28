@@ -12,8 +12,11 @@ info:
     GET whose inputs are carried as query parameters rather than a request body.
   version: 1.0.0
 sourceDescriptions:
-- name: elbv2Api
-  url: ../openapi/amazon-elastic-load-balancing-openapi.yml
+- name: targetGroupsApi
+  url: ../openapi/amazon-elastic-load-balancing-target-groups-api-openapi.yml
+  type: openapi
+- name: targetsApi
+  url: ../openapi/amazon-elastic-load-balancing-targets-api-openapi.yml
   type: openapi
 workflows:
 - workflowId: register-targets-and-check-health

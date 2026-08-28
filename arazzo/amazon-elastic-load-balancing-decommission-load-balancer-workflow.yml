@@ -12,8 +12,11 @@ info:
     whose inputs are carried as query parameters rather than a request body.
   version: 1.0.0
 sourceDescriptions:
-- name: elbv2Api
-  url: ../openapi/amazon-elastic-load-balancing-openapi.yml
+- name: listenersApi
+  url: ../openapi/amazon-elastic-load-balancing-listeners-api-openapi.yml
+  type: openapi
+- name: loadBalancersApi
+  url: ../openapi/amazon-elastic-load-balancing-load-balancers-api-openapi.yml
   type: openapi
 workflows:
 - workflowId: decommission-load-balancer
