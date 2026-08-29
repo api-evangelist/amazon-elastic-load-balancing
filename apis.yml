@@ -184,6 +184,9 @@ apis:
   - type: JSONLD
     url: json-ld/amazon-elastic-load-balancing-context.jsonld
 common:
+  - type: CapabilityMap
+    url: capabilities/amazon-elastic-load-balancing-capability-edges.yml
+    name: Amazon Elastic Load Balancing Business Capability Map
   - type: AgenticAccess
     url: agentic-access/amazon-elastic-load-balancing-agentic-access.yml
   - type: TrustCenter

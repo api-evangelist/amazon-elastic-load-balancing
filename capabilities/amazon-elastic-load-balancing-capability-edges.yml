@@ -1,0 +1,33 @@
+slug: amazon-elastic-load-balancing
+provider: Amazon Elastic Load Balancing
+generated_by: planning/capability-mapping/scripts/classify_capabilities.py
+model: claude-opus-5
+frame:
+- Telecommunications
+min_confidence: 0.7
+capability_model:
+  source: https://github.com/vincentmakes/turbo-ea-capabilities
+  license: CC-BY-4.0
+  attribution: Turbo EA Capabilities by Vincent Verdet — Turbo EA, https://github.com/vincentmakes/turbo-ea-capabilities,
+    CC BY 4.0
+  notice: NOTICE
+edge_count: 2
+edges:
+- tag: Load Balancers
+  spec_file: amazon-elastic-load-balancing-load-balancers-api-openapi.yml
+  capability_id: BC-600.50
+  capability_id_l1: BC-600
+  capability_name: IT Infrastructure Management
+  confidence: 0.75
+  evidence: Create a Load Balancer / Modify Load Balancer Attributes; 'distributes incoming application
+    traffic across multiple targets'
+  reason: Provisioning and managing load balancers is compute/network cloud infrastructure management.
+- tag: Listeners
+  spec_file: amazon-elastic-load-balancing-listeners-api-openapi.yml
+  capability_id: BC-600.50
+  capability_id_l1: BC-600
+  capability_name: IT Infrastructure Management
+  confidence: 0.7
+  evidence: GET /?Action=CreateListener  Amazon Elastic Load Balancing Create a Listener
+  reason: Configuring load-balancer listeners is cloud network infrastructure administration, not a telecom
+    carrier capability.
