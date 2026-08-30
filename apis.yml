@@ -75,7 +75,7 @@ apis:
   humanURL: https://aws.amazon.com/elasticloadbalancing/
   baseURL: https://elasticloadbalancing.amazonaws.com
   tags:
-  - Load Balancer
+  - Load Balancers
   tags_raw:
   - Load Balancers
   properties:
