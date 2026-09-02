@@ -1,4 +1,4 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
   title: Amazon Elastic Load Balancing v2 Listeners Target Groups API
   description: Amazon Elastic Load Balancing automatically distributes incoming application traffic across multiple targets, such as Amazon EC2 instances, containers, IP addresses, and Lambda functions. It supports Application Load Balancers, Network Load Balancers, and Gateway Load Balancers.
@@ -171,6 +171,27 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
+    CreateTargetGroupResponse:
+      type: object
+      description: Response from the CreateTargetGroup action
+      properties:
+        targetGroups:
+          type: array
+          description: Information about the target group
+          items:
+            $ref: '#/components/schemas/TargetGroup'
+    DescribeTargetGroupsResponse:
+      type: object
+      description: Response from the DescribeTargetGroups action
+      properties:
+        targetGroups:
+          type: array
+          description: Information about the target groups
+          items:
+            $ref: '#/components/schemas/TargetGroup'
+        nextMarker:
+          type: string
+          description: The marker to use for the next set of results
     TargetGroup:
       type: object
       description: Describes a target group
@@ -235,27 +256,6 @@ components:
           description: The ARNs of the load balancers that route traffic to this target group
           items:
             type: string
-    CreateTargetGroupResponse:
-      type: object
-      description: Response from the CreateTargetGroup action
-      properties:
-        targetGroups:
-          type: array
-          description: Information about the target group
-          items:
-            $ref: '#/components/schemas/TargetGroup'
-    DescribeTargetGroupsResponse:
-      type: object
-      description: Response from the DescribeTargetGroups action
-      properties:
-        targetGroups:
-          type: array
-          description: Information about the target groups
-          items:
-            $ref: '#/components/schemas/TargetGroup'
-        nextMarker:
-          type: string
-          description: The marker to use for the next set of results
   securitySchemes:
     sigv4Auth:
       type: apiKey

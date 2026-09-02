@@ -1,4 +1,4 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
   title: Amazon Elastic Load Balancing v2 Listeners API
   description: Amazon Elastic Load Balancing automatically distributes incoming application traffic across multiple targets, such as Amazon EC2 instances, containers, IP addresses, and Lambda functions. It supports Application Load Balancers, Network Load Balancers, and Gateway Load Balancers.
@@ -152,6 +152,15 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
+    CreateListenerResponse:
+      type: object
+      description: Response from the CreateListener action
+      properties:
+        listeners:
+          type: array
+          description: Information about the listener
+          items:
+            $ref: '#/components/schemas/Listener'
     Listener:
       type: object
       description: Describes a listener
@@ -205,15 +214,6 @@ components:
         nextMarker:
           type: string
           description: The marker to use for the next set of results
-    CreateListenerResponse:
-      type: object
-      description: Response from the CreateListener action
-      properties:
-        listeners:
-          type: array
-          description: Information about the listener
-          items:
-            $ref: '#/components/schemas/Listener'
     Action:
       type: object
       description: Describes an action for a listener or rule
