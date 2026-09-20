@@ -10,6 +10,11 @@ provenance:
   grounding: every price_text was found verbatim in the fetched page text
 audience: developer-api
 pricing_basis: usage-other
+delivery:
+  delivery: managed
+  method: page
+  read: '2026-09-20'
+  managed_tier: Application Load Balancer
 published: true
 note: Main regional rate tables render via dynamic pricing tokens (placeholders in text); numeric unit
   prices shown are those stated in the page's pricing examples for US-East-1.
