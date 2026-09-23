@@ -152,15 +152,6 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    CreateListenerResponse:
-      type: object
-      description: Response from the CreateListener action
-      properties:
-        listeners:
-          type: array
-          description: Information about the listener
-          items:
-            $ref: '#/components/schemas/Listener'
     Listener:
       type: object
       description: Describes a listener
@@ -202,18 +193,6 @@ components:
           description: The default actions for the listener
           items:
             $ref: '#/components/schemas/Action'
-    DescribeListenersResponse:
-      type: object
-      description: Response from the DescribeListeners action
-      properties:
-        listeners:
-          type: array
-          description: Information about the listeners
-          items:
-            $ref: '#/components/schemas/Listener'
-        nextMarker:
-          type: string
-          description: The marker to use for the next set of results
     Action:
       type: object
       description: Describes an action for a listener or rule
@@ -271,6 +250,27 @@ components:
             contentType:
               type: string
               description: The content type
+    DescribeListenersResponse:
+      type: object
+      description: Response from the DescribeListeners action
+      properties:
+        listeners:
+          type: array
+          description: Information about the listeners
+          items:
+            $ref: '#/components/schemas/Listener'
+        nextMarker:
+          type: string
+          description: The marker to use for the next set of results
+    CreateListenerResponse:
+      type: object
+      description: Response from the CreateListener action
+      properties:
+        listeners:
+          type: array
+          description: Information about the listener
+          items:
+            $ref: '#/components/schemas/Listener'
   securitySchemes:
     sigv4Auth:
       type: apiKey

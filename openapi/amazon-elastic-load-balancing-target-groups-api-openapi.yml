@@ -1,6 +1,6 @@
 openapi: 3.2.0
 info:
-  title: Amazon Elastic Load Balancing v2 Listeners Target Groups API
+  title: Amazon Elastic Load Balancing v2 Target Groups API
   description: Amazon Elastic Load Balancing automatically distributes incoming application traffic across multiple targets, such as Amazon EC2 instances, containers, IP addresses, and Lambda functions. It supports Application Load Balancers, Network Load Balancers, and Gateway Load Balancers.
   version: '2015-12-01'
   contact:

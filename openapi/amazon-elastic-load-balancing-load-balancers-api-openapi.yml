@@ -1,6 +1,6 @@
 openapi: 3.2.0
 info:
-  title: Amazon Elastic Load Balancing v2 Listeners Load Balancers API
+  title: Amazon Elastic Load Balancing v2 Load Balancers API
   description: Amazon Elastic Load Balancing automatically distributes incoming application traffic across multiple targets, such as Amazon EC2 instances, containers, IP addresses, and Lambda functions. It supports Application Load Balancers, Network Load Balancers, and Gateway Load Balancers.
   version: '2015-12-01'
   contact:
@@ -210,18 +210,6 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    DescribeLoadBalancersResponse:
-      type: object
-      description: Response from the DescribeLoadBalancers action
-      properties:
-        loadBalancers:
-          type: array
-          description: Information about the load balancers
-          items:
-            $ref: '#/components/schemas/LoadBalancer'
-        nextMarker:
-          type: string
-          description: The marker to use for the next set of results
     LoadBalancer:
       type: object
       description: Describes a load balancer
@@ -305,6 +293,18 @@ components:
           description: Information about the load balancer
           items:
             $ref: '#/components/schemas/LoadBalancer'
+    DescribeLoadBalancersResponse:
+      type: object
+      description: Response from the DescribeLoadBalancers action
+      properties:
+        loadBalancers:
+          type: array
+          description: Information about the load balancers
+          items:
+            $ref: '#/components/schemas/LoadBalancer'
+        nextMarker:
+          type: string
+          description: The marker to use for the next set of results
   securitySchemes:
     sigv4Auth:
       type: apiKey
