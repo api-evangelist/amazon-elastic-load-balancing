@@ -180,18 +180,6 @@ components:
           description: Information about the target group
           items:
             $ref: '#/components/schemas/TargetGroup'
-    DescribeTargetGroupsResponse:
-      type: object
-      description: Response from the DescribeTargetGroups action
-      properties:
-        targetGroups:
-          type: array
-          description: Information about the target groups
-          items:
-            $ref: '#/components/schemas/TargetGroup'
-        nextMarker:
-          type: string
-          description: The marker to use for the next set of results
     TargetGroup:
       type: object
       description: Describes a target group
@@ -256,6 +244,18 @@ components:
           description: The ARNs of the load balancers that route traffic to this target group
           items:
             type: string
+    DescribeTargetGroupsResponse:
+      type: object
+      description: Response from the DescribeTargetGroups action
+      properties:
+        targetGroups:
+          type: array
+          description: Information about the target groups
+          items:
+            $ref: '#/components/schemas/TargetGroup'
+        nextMarker:
+          type: string
+          description: The marker to use for the next set of results
   securitySchemes:
     sigv4Auth:
       type: apiKey

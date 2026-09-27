@@ -187,7 +187,7 @@ common:
 - type: Plans
   url: plans/amazon-elastic-load-balancing-plans-pricing.yml
 - type: Website
-  url: https://amazon.com
+  url: https://aws.amazon.com/elasticloadbalancing/
 - type: CapabilityMap
   url: capabilities/amazon-elastic-load-balancing-capability-edges.yml
   name: Amazon Elastic Load Balancing Business Capability Map
@@ -327,5 +327,5 @@ integrations:
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
-x-parent: aws
+x-parent: amazon-web-services
 x-relationship: product
