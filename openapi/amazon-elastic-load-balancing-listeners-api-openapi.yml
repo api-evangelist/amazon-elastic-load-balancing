@@ -164,6 +164,15 @@ components:
         nextMarker:
           type: string
           description: The marker to use for the next set of results
+    CreateListenerResponse:
+      type: object
+      description: Response from the CreateListener action
+      properties:
+        listeners:
+          type: array
+          description: Information about the listener
+          items:
+            $ref: '#/components/schemas/Listener'
     Action:
       type: object
       description: Describes an action for a listener or rule
@@ -262,15 +271,6 @@ components:
           description: The default actions for the listener
           items:
             $ref: '#/components/schemas/Action'
-    CreateListenerResponse:
-      type: object
-      description: Response from the CreateListener action
-      properties:
-        listeners:
-          type: array
-          description: Information about the listener
-          items:
-            $ref: '#/components/schemas/Listener'
   securitySchemes:
     sigv4Auth:
       type: apiKey

@@ -171,15 +171,6 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    CreateTargetGroupResponse:
-      type: object
-      description: Response from the CreateTargetGroup action
-      properties:
-        targetGroups:
-          type: array
-          description: Information about the target group
-          items:
-            $ref: '#/components/schemas/TargetGroup'
     TargetGroup:
       type: object
       description: Describes a target group
@@ -256,6 +247,15 @@ components:
         nextMarker:
           type: string
           description: The marker to use for the next set of results
+    CreateTargetGroupResponse:
+      type: object
+      description: Response from the CreateTargetGroup action
+      properties:
+        targetGroups:
+          type: array
+          description: Information about the target group
+          items:
+            $ref: '#/components/schemas/TargetGroup'
   securitySchemes:
     sigv4Auth:
       type: apiKey
