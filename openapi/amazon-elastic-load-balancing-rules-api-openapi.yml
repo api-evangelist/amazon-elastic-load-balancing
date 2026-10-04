@@ -146,27 +146,6 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    CreateRuleResponse:
-      type: object
-      description: Response from the CreateRule action
-      properties:
-        rules:
-          type: array
-          description: Information about the rule
-          items:
-            $ref: '#/components/schemas/Rule'
-    DescribeRulesResponse:
-      type: object
-      description: Response from the DescribeRules action
-      properties:
-        rules:
-          type: array
-          description: Information about the rules
-          items:
-            $ref: '#/components/schemas/Rule'
-        nextMarker:
-          type: string
-          description: The marker to use for the next set of results
     Action:
       type: object
       description: Describes an action for a listener or rule
@@ -224,6 +203,27 @@ components:
             contentType:
               type: string
               description: The content type
+    CreateRuleResponse:
+      type: object
+      description: Response from the CreateRule action
+      properties:
+        rules:
+          type: array
+          description: Information about the rule
+          items:
+            $ref: '#/components/schemas/Rule'
+    DescribeRulesResponse:
+      type: object
+      description: Response from the DescribeRules action
+      properties:
+        rules:
+          type: array
+          description: Information about the rules
+          items:
+            $ref: '#/components/schemas/Rule'
+        nextMarker:
+          type: string
+          description: The marker to use for the next set of results
     Rule:
       type: object
       description: Describes a rule
