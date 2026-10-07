@@ -184,6 +184,8 @@ apis:
   - type: JSONLD
     url: json-ld/amazon-elastic-load-balancing-context.jsonld
 common:
+- type: Pricing
+  url: https://aws.amazon.com/elasticloadbalancing/pricing/
 - type: Plans
   url: plans/amazon-elastic-load-balancing-plans-pricing.yml
 - type: Website
