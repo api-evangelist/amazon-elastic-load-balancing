@@ -210,27 +210,6 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    DescribeLoadBalancersResponse:
-      type: object
-      description: Response from the DescribeLoadBalancers action
-      properties:
-        loadBalancers:
-          type: array
-          description: Information about the load balancers
-          items:
-            $ref: '#/components/schemas/LoadBalancer'
-        nextMarker:
-          type: string
-          description: The marker to use for the next set of results
-    CreateLoadBalancerResponse:
-      type: object
-      description: Response from the CreateLoadBalancer action
-      properties:
-        loadBalancers:
-          type: array
-          description: Information about the load balancer
-          items:
-            $ref: '#/components/schemas/LoadBalancer'
     LoadBalancer:
       type: object
       description: Describes a load balancer
@@ -305,6 +284,27 @@ components:
           enum:
           - ipv4
           - dualstack
+    DescribeLoadBalancersResponse:
+      type: object
+      description: Response from the DescribeLoadBalancers action
+      properties:
+        loadBalancers:
+          type: array
+          description: Information about the load balancers
+          items:
+            $ref: '#/components/schemas/LoadBalancer'
+        nextMarker:
+          type: string
+          description: The marker to use for the next set of results
+    CreateLoadBalancerResponse:
+      type: object
+      description: Response from the CreateLoadBalancer action
+      properties:
+        loadBalancers:
+          type: array
+          description: Information about the load balancer
+          items:
+            $ref: '#/components/schemas/LoadBalancer'
   securitySchemes:
     sigv4Auth:
       type: apiKey

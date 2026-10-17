@@ -171,6 +171,15 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
+    CreateTargetGroupResponse:
+      type: object
+      description: Response from the CreateTargetGroup action
+      properties:
+        targetGroups:
+          type: array
+          description: Information about the target group
+          items:
+            $ref: '#/components/schemas/TargetGroup'
     DescribeTargetGroupsResponse:
       type: object
       description: Response from the DescribeTargetGroups action
@@ -247,15 +256,6 @@ components:
           description: The ARNs of the load balancers that route traffic to this target group
           items:
             type: string
-    CreateTargetGroupResponse:
-      type: object
-      description: Response from the CreateTargetGroup action
-      properties:
-        targetGroups:
-          type: array
-          description: Information about the target group
-          items:
-            $ref: '#/components/schemas/TargetGroup'
   securitySchemes:
     sigv4Auth:
       type: apiKey
