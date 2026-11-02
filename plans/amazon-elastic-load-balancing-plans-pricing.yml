@@ -1,0 +1,178 @@
+# Pricing transcribed from the provider's own page — see provenance. Numbers are quoted, not derived.
+generated: '2026-09-20'
+method: searched
+source: https://aws.amazon.com/elasticloadbalancing/pricing/
+sources:
+- https://aws.amazon.com/elasticloadbalancing/pricing/
+provenance:
+  tool: planning/api-economics/harvest_pricing.py
+  run: 20260920T120546
+  grounding: every price_text was found verbatim in the fetched page text
+audience: developer-api
+pricing_basis: usage-other
+delivery:
+  delivery: managed
+  method: page
+  read: '2026-09-20'
+  managed_tier: Application Load Balancer
+published: true
+note: Main regional rate tables render via dynamic pricing tokens (placeholders in text); numeric unit
+  prices shown are those stated in the page's pricing examples for US-East-1.
+plan_count: 9
+currency: USD
+plans:
+- name: Application Load Balancer - hourly
+  price_text: $0.0225 hourly charge
+  price: 0.0225
+  currency: USD
+  period: per-use
+  unit: load balancer-hour
+- name: Application Load Balancer - LCU
+  price_text: $0.008 per LCU
+  price: 0.008
+  currency: USD
+  period: per-use
+  unit: LCU-hour
+  included_quota: 'An LCU contains: 25 new connections per second; 3,000 active connections per minute;
+    1 GB per hour for EC2/containers/IP targets, 0.4 GB per hour for Lambda; 1,000 rule evaluations per
+    second'
+- name: Network Load Balancer - NLCU
+  price_text: $0.006 per NLCU
+  price: 0.006
+  currency: USD
+  period: per-use
+  unit: NLCU-hour
+  included_quota: 'TCP: 800 new connections/sec, 100,000 active connections, 1 GB per hour'
+- name: Gateway Load Balancer - GLCU
+  price_text: $0.004 per GLCU
+  price: 0.004
+  currency: USD
+  period: per-use
+  unit: GLCU-hour
+  included_quota: 600 new connections/flows per second; 60,000 active connections/flows; 1 GB per hour
+- name: Gateway Load Balancer - hourly per AZ
+  price_text: $0.0125 hourly charge
+  price: 0.0125
+  currency: USD
+  period: per-use
+  unit: load balancer-hour per AZ
+- name: Gateway Load Balancer Endpoint
+  price_text: $0.01 hourly charge
+  price: 0.01
+  currency: USD
+  period: per-use
+  unit: endpoint-hour, plus $0.0035 per GB
+- name: Classic Load Balancer - hourly
+  price_text: $0.025 per hour
+  price: 0.025
+  currency: USD
+  period: per-use
+  unit: load balancer-hour
+- name: Classic Load Balancer - data
+  price_text: $0.008 per GB
+  price: 0.008
+  currency: USD
+  period: per-use
+  unit: GB of data processed
+- name: AWS Free Tier
+  price_text: up to $200 in AWS Free Tier credits
+  price: 200
+  currency: USD
+  period: none
+  unit: credits
+  included_quota: 750 hours per month shared between Classic and Application load balancers; 15 GB of
+    data processing for Classic load balancers; and 15 LCUs for Application Load Balancers
+rate_limit_statements:
+- 25 new connections per second.
+- 3,000 active connections per minute or 1,500 active connections per minute while using Mutual TLS.
+- 1,000 rule evaluations per second
+- 800 new TCP connections per second.
+- 100,000 active TCP connections (sampled per minute).
+- 400 new UDP flows per second.
+- 50,000 active UDP flows (sampled per minute).
+- 50 new TLS connections or flows per second.
+- 3,000 active TLS connections or flows (sampled per minute).
+- 600 new connections/flows per second.
+- 60,000 active connections/flows (sampled per minute).
+x-canonical:
+  generated: '2026-11-01'
+  vocabulary: engine/economics/plans-canonical.yml
+  models:
+  - hybrid
+  units:
+  - compute
+  - credit
+  - data
+  plans:
+  - name: Application Load Balancer - hourly
+    access: other
+    model: hybrid
+    model_how: derived
+    units:
+    - compute
+    periods:
+    - other
+  - name: Application Load Balancer - LCU
+    access: other
+    model: hybrid
+    model_how: derived
+    units:
+    - compute
+    periods:
+    - other
+  - name: Network Load Balancer - NLCU
+    access: other
+    model: hybrid
+    model_how: derived
+    units:
+    - compute
+    periods:
+    - other
+  - name: Gateway Load Balancer - GLCU
+    access: other
+    model: hybrid
+    model_how: derived
+    units:
+    - compute
+    periods:
+    - other
+  - name: Gateway Load Balancer - hourly per AZ
+    access: other
+    model: hybrid
+    model_how: derived
+    units:
+    - compute
+    periods:
+    - other
+  - name: Gateway Load Balancer Endpoint
+    access: other
+    model: hybrid
+    model_how: derived
+    units:
+    - data
+    periods:
+    - other
+  - name: Classic Load Balancer - hourly
+    access: other
+    model: hybrid
+    model_how: derived
+    units:
+    - compute
+    periods:
+    - other
+  - name: Classic Load Balancer - data
+    access: other
+    model: hybrid
+    model_how: derived
+    units:
+    - data
+    periods:
+    - other
+  - name: AWS Free Tier
+    access: other
+    model: hybrid
+    model_how: derived
+    units:
+    - credit
+    periods:
+    - none
