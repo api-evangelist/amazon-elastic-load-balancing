@@ -95,7 +95,7 @@ rate_limit_statements:
 - 600 new connections/flows per second.
 - 60,000 active connections/flows (sampled per minute).
 x-canonical:
-  generated: '2026-11-02'
+  generated: '2026-11-06'
   vocabulary: engine/economics/plans-canonical.yml
   models:
   - hybrid
